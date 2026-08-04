@@ -1,37 +1,25 @@
-# Galizisches Bahn v0.6.0
+# Galizische Bahn v0.6.1
 
-PWA ferroviaria ficticia y acumulativa para la Bundesrepublik Galizien.
+Parche acumulativo de experiencia de usuario sobre la v0.6.0.
 
-## Novedades principales
+## Correcciones principales
 
-- **In der Stadt** con redes U-Bahn y S-Bahn separadas para 10 áreas metropolitanas.
-- Salidas simuladas, líneas, frecuencias y planificador urbano con transbordos.
-- **Galizien-Ticket** Jugend, Standard, Plus y Business.
-- Boletos urbanos sencillos y diarios.
-- Portal universal de pago de demostración para boletos y suscripciones.
-- Selección gráfica de asiento, cabinas NightJet, extras y datos del pasajero.
-- Motor de rutas nacional basado en un grafo de estaciones y tramos.
-- Estados `Anschluss gesichert`, `gefährdet` y `verpasst`.
-- Centro de operaciones **Betriebslage**.
-- EC International y NightJet a Ciudad de México Buenavista.
-- Avisos de Bundespolizei y controles migratorios en rutas a México.
-- Billetes digitales, suscripciones, historial de compras y seguimiento simulado.
-- Alemán, español e inglés; tema claro, oscuro y automático.
-- PWA offline para GitHub Pages y Netlify.
+- Marca gramaticalmente correcta: **Galizische Bahn**.
+- Cancelar, volver y cerrar disponibles en todos los procesos.
+- Confirmación antes de abandonar compras.
+- Idiomas rediseñados y selección clara.
+- Cálculo estable de suplementos al avanzar y retroceder.
+- Actualización de PWA y conservación de datos de v0.6.
 
 ## Pago de demostración
 
-La aplicación **no procesa pagos reales**. No introduzcas información real.
+No introduzcas datos bancarios reales.
 
-Tarjetas de prueba:
-
-- `4242 4242 4242 4242` — Visa aprobada
-- `5555 5555 5555 4444` — Mastercard aprobada
-- `4000 0027 6000 3184` — simulación 3-D Secure aprobada
-- `4000 0000 0000 0002` — pago rechazado
-
-Usa cualquier fecha futura con formato `MM/AA` y un CVV ficticio de 3 o 4 dígitos.
+- `4242 4242 4242 4242`: aprobado.
+- `5555 5555 5555 4444`: aprobado.
+- `4000 0027 6000 3184`: 3-D Secure simulado.
+- `4000 0000 0000 0002`: rechazado.
 
 ## Publicación
 
-Sube todos los archivos a la raíz del repositorio. GitHub Pages debe publicar desde `main` y `/ (root)`. En Netlify no se necesita comando de compilación y el directorio de publicación es `.`.
+Sustituye los archivos de la raíz del repositorio y la carpeta `icons`, haz commit en `main` y espera a que GitHub Pages termine.

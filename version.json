@@ -1,1 +1,8 @@
-{"name":"Galizisches Bahn","version":"0.6.0","build":"2026.08.04-r2","type":"static-pwa","payment":"simulation-only"}
+{
+  "name": "Galizische Bahn",
+  "version": "0.6.1",
+  "build": "2026.08.04-ux1",
+  "type": "static-pwa",
+  "payment": "simulation-only",
+  "patch": "ux-navigation-language"
+}

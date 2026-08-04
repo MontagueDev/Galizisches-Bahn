@@ -1,7 +1,7 @@
 {
-  "name": "Galizisches Bahn",
+  "name": "Galizische Bahn",
   "short_name": "GBahn",
-  "description": "Fernverkehr, Stadtverkehr, Abonnements und digitale Tickets.",
+  "description": "Fernverkehr, Stadtverkehr, Abonnements und digitale Tickets – UX Patch 0.6.1.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

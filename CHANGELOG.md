@@ -1,34 +1,21 @@
 # Changelog
 
-## v0.6.0 — Stadtverkehr, Abonnements & Buchung
+## v0.6.1 — UX Patch
 
-### Stadtverkehr
-- Nuevo apartado `In der Stadt`.
-- Redes U-Bahn y S-Bahn independientes por zona metropolitana.
-- Flughafen Guadalajara corregido como nombre oficial.
-- Salidas, frecuencias, recorridos y planificador urbano.
-- Boletos sencillos y diarios.
+- Marca corregida en toda la app: **Galizische Bahn**.
+- Botón Cancelar y cierre seguro en todos los flujos de compra.
+- Confirmación antes de descartar una compra en curso.
+- Botones Atrás consistentes en asiento, pasajero, extras y pago.
+- Conservación de asiento, pasajero, extras y campos de pago al retroceder.
+- Corrección del cálculo de extras para evitar cobros duplicados al volver.
+- Selector de idioma completamente rediseñado.
+- Estado seleccionado claro para idioma y apariencia.
+- Textos UX principales traducidos al alemán, español e inglés.
+- Controles de cierre añadidos a boletos, estaciones, líneas urbanas y suscripciones.
+- Mejor gestión del foco, tecla Escape y bloqueo del fondo en modales.
+- Actualización PWA visible y caché renovada.
+- Datos locales de v0.6 preservados.
 
-### Galizien-Ticket
-- Jugend 39 GM, Standard 59 GM, Plus 79 GM y Business 99 GM.
-- Validez nacional en transporte local y regional.
-- Límite hasta Grenzmarkt en viajes hacia México.
-- Suscripción, renovación y cancelación simuladas.
+## v0.6.0
 
-### Compra
-- Flujo por tarifa, asiento, pasajero, extras y pago.
-- Asientos gráficos, cabinas NightJet y suplementos.
-- Portal de pago simulado para todas las compras.
-- Simulación de autorización bancaria y 3-D Secure.
-- Historial de pedidos y método de prueba guardado solo como marca/últimos 4 dígitos.
-
-### Operaciones
-- Motor nacional de rutas basado en un grafo.
-- Conexiones seguras, en riesgo o perdidas.
-- Centro `Betriebslage` e incidencias que añaden demoras.
-- ICE, IC, RE, IR, EC International y NightJet.
-
-### Internacional
-- Ciudad de México Buenavista.
-- Grenzmarkt como estación de control fronterizo.
-- Avisos Bundespolizei, pasaporte y tiempo de control.
+- Transporte urbano, Galizien-Ticket, selección de asiento, pagos simulados y motor de rutas.
