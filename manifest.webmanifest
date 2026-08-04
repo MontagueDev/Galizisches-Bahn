@@ -1,24 +1,37 @@
 {
   "name": "Galizisches Bahn",
   "short_name": "GBahn",
-  "description": "Reiseplanung, digitale Tickets und simulierte Live-Zugverfolgung für die Bundesrepublik Galizien.",
+  "description": "Fernverkehr, Stadtverkehr, Abonnements und digitale Tickets.",
   "id": "./",
-  "start_url": "./#/home",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#f2f3f6",
+  "background_color": "#f3f4f7",
   "theme_color": "#7e1731",
   "lang": "de",
-  "categories": ["travel", "navigation"],
-  "icons": [
-    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "./icons/maskable-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  "categories": [
+    "travel",
+    "navigation"
   ],
-  "shortcuts": [
-    { "name": "Verbindung suchen", "short_name": "Suchen", "url": "./#/search", "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Meine Tickets", "short_name": "Tickets", "url": "./#/tickets", "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Streckennetz", "short_name": "Netz", "url": "./#/network", "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }] }
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/maskable-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

@@ -1,60 +1,34 @@
 # Changelog
 
-## v0.4.0 — reconstrucción completa (build 2026.08.04-r2)
+## v0.6.0 — Stadtverkehr, Abonnements & Buchung
 
-### Arquitectura
+### Stadtverkehr
+- Nuevo apartado `In der Stadt`.
+- Redes U-Bahn y S-Bahn independientes por zona metropolitana.
+- Flughafen Guadalajara corregido como nombre oficial.
+- Salidas, frecuencias, recorridos y planificador urbano.
+- Boletos sencillos y diarios.
 
-- Aplicación reescrita con módulos ES nativos
-- Separación de datos, almacenamiento y lógica de interfaz
-- Estado persistente con validación y migración
-- Navegación por hash compatible con alojamiento estático
-- Service Worker con actualización controlada
+### Galizien-Ticket
+- Jugend 39 GM, Standard 59 GM, Plus 79 GM y Business 99 GM.
+- Validez nacional en transporte local y regional.
+- Límite hasta Grenzmarkt en viajes hacia México.
+- Suscripción, renovación y cancelación simuladas.
 
-### Diseño
+### Compra
+- Flujo por tarifa, asiento, pasajero, extras y pago.
+- Asientos gráficos, cabinas NightJet y suplementos.
+- Portal de pago simulado para todas las compras.
+- Simulación de autorización bancaria y 3-D Secure.
+- Historial de pedidos y método de prueba guardado solo como marca/últimos 4 dígitos.
 
-- Interfaz móvil reconstruida
-- Mejor jerarquía visual y espaciado
-- Barra inferior adaptada a áreas seguras de iPhone
-- Tema claro, oscuro y automático
-- Iconografía SVG propia
-- Mejoras de accesibilidad y teclado
+### Operaciones
+- Motor nacional de rutas basado en un grafo.
+- Conexiones seguras, en riesgo o perdidas.
+- Centro `Betriebslage` e incidencias que añaden demoras.
+- ICE, IC, RE, IR, EC International y NightJet.
 
-### Planificador
-
-- Autocompletado con búsqueda por nombre, ciudad, región y código
-- Validación de origen y destino
-- Seis conexiones generadas por búsqueda
-- Resultados deterministas por ruta, fecha y hora
-- Filtros directo, rápido y económico
-- Paradas intermedias y transbordos
-- Tarifas Flex y Saver
-
-### Billetes
-
-- Reserva persistente
-- Tarjeta digital detallada
-- Código de seguridad visual
-- Compartir y eliminar
-- Viaje activo
-
-### Red
-
-- Más de 60 estaciones
-- Nueve líneas de red
-- Filtros ICE, IC, RE, K y S
-- Fichas con salidas y servicios
-- Seguimiento simulado en mapa
-
-### PWA
-
-- Manifest revisado
-- Iconos 192, 512, maskable y Apple Touch
-- Pantallas de inicio para dos tamaños de iPhone
-- Caché offline
-- Aviso de nueva versión
-- Configuración para Netlify
-
-## v0.2.0
-
-- Primera PWA estática publicable
-- Inicio, búsqueda, billetes y perfil
+### Internacional
+- Ciudad de México Buenavista.
+- Grenzmarkt como estación de control fronterizo.
+- Avisos Bundespolizei, pasaporte y tiempo de control.

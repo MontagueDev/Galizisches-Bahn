@@ -2,61 +2,47 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#7e1731">
-  <meta name="description" content="Galizisches Bahn: Reiseplanung, digitale Tickets und simulierte Live-Zugverfolgung.">
+  <meta name="description" content="Galizisches Bahn – Fernverkehr, Stadtverkehr, Abonnements und digitale Tickets.">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="GBahn">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
-
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
-  <link rel="apple-touch-startup-image" href="./icons/splash-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)">
-  <link rel="apple-touch-startup-image" href="./icons/splash-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)">
+  <link rel="apple-touch-startup-image" href="./icons/splash-1179x2556.png" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)">
+  <link rel="apple-touch-startup-image" href="./icons/splash-1290x2796.png" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)">
   <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
   <link rel="stylesheet" href="./app.css">
   <title>Galizisches Bahn</title>
 </head>
 <body>
-  <div id="app" class="app-shell">
+  <div class="app-shell">
     <header class="app-header">
       <button id="brandButton" class="brand-button" type="button" aria-label="Startseite">
-        <span class="brand-logo" aria-hidden="true">
-          <span class="brand-rail brand-rail-a"></span>
-          <span class="brand-rail brand-rail-b"></span>
-          <span class="brand-sleeper brand-sleeper-a"></span>
-          <span class="brand-sleeper brand-sleeper-b"></span>
-          <span class="brand-sleeper brand-sleeper-c"></span>
-        </span>
-        <span class="brand-copy">
-          <strong>Galizisches Bahn</strong>
-          <small>Bundesrepublik Galizien</small>
-        </span>
+        <span class="brand-logo" aria-hidden="true"><i></i><i></i><b></b><b></b><b></b></span>
+        <span><strong>Galizisches Bahn</strong><small>Bundesrepublik Galizien</small></span>
       </button>
       <div class="header-actions">
-        <span id="networkStatus" class="network-status" role="status" aria-live="polite"></span>
-        <button id="installButton" class="header-button" type="button" hidden aria-label="App installieren"></button>
-        <button id="avatarButton" class="avatar-button" type="button" aria-label="Profil öffnen">DJ</button>
+        <span id="onlineBadge" class="online-badge"></span>
+        <button id="installButton" class="circle-button" type="button" hidden aria-label="Installieren">⇩</button>
+        <button id="avatarButton" class="avatar-button" type="button">DJ</button>
       </div>
     </header>
-
     <main id="mainView" class="main-view" tabindex="-1"></main>
-
     <nav class="bottom-nav" aria-label="Hauptnavigation">
-      <button class="nav-button active" data-route="home" type="button"><span class="nav-icon" data-icon="home"></span><span data-copy="navHome">Start</span></button>
-      <button class="nav-button" data-route="search" type="button"><span class="nav-icon" data-icon="search"></span><span data-copy="navSearch">Reisen</span></button>
-      <button class="nav-button" data-route="network" type="button"><span class="nav-icon" data-icon="network"></span><span data-copy="navNetwork">Netz</span></button>
-      <button class="nav-button" data-route="tickets" type="button"><span class="nav-icon" data-icon="ticket"></span><span data-copy="navTickets">Tickets</span></button>
-      <button class="nav-button" data-route="profile" type="button"><span class="nav-icon" data-icon="profile"></span><span data-copy="navProfile">Profil</span></button>
+      <button class="nav-button active" data-route="home" type="button"><span>⌂</span><small data-copy="navHome">Start</small></button>
+      <button class="nav-button" data-route="travel" type="button"><span>⌕</span><small data-copy="navTravel">Reisen</small></button>
+      <button class="nav-button" data-route="city" type="button"><span>▦</span><small data-copy="navCity">Stadt</small></button>
+      <button class="nav-button" data-route="tickets" type="button"><span>▣</span><small data-copy="navTickets">Tickets</small></button>
+      <button class="nav-button" data-route="profile" type="button"><span>○</span><small data-copy="navProfile">Profil</small></button>
     </nav>
   </div>
-
   <div id="modalRoot"></div>
-  <div id="toastRoot" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+  <div id="toastRoot" class="toast-root" aria-live="polite"></div>
   <div id="updateBanner" class="update-banner" hidden></div>
-
   <noscript>Diese Anwendung benötigt JavaScript.</noscript>
   <script type="module" src="./app.js"></script>
 </body>

@@ -1,221 +1,150 @@
-export const APP_VERSION = '0.4.0';
+export const APP_VERSION = '0.6.0';
 export const APP_BUILD = '2026.08.04-r2';
 
 export const STATIONS = [
-  { id:'GUA', name:'Guadalajara Hbf', city:'Guadalajara', region:'Hauptstadtbezirk', x:308, y:300, tier:'hub', lines:['ICE','IC','RE','S'], platforms:22, amenities:['GB Lounge','Restaurants','Einkaufen','Mietwagen','Barrierefrei'] },
-  { id:'LOW', name:'Löwenstadt Hbf', city:'Löwenstadt', region:'León', x:252, y:106, tier:'hub', lines:['ICE','IC','RE'], platforms:16, amenities:['GB Lounge','Restaurants','Hotel','Fahrradstation'] },
-  { id:'BAD', name:'Badenquellen Hbf', city:'Badenquellen', region:'Aguascalientes', x:367, y:88, tier:'hub', lines:['ICE','IC','RE'], platforms:12, amenities:['Restaurants','Schließfächer','Taxi','Barrierefrei'] },
-  { id:'SIL', name:'Silberstadt Hbf', city:'Silberstadt', region:'Zacatecas', x:443, y:48, tier:'major', lines:['IC','RE'], platforms:9, amenities:['Café','Schließfächer','Busbahnhof'] },
-  { id:'KAR', name:'Karlsburg Hbf', city:'Karlsburg', region:'Querétaro', x:457, y:271, tier:'hub', lines:['ICE','IC','RE','S'], platforms:18, amenities:['GB Lounge','Restaurants','Einkaufen','Barrierefrei'] },
-  { id:'SLU', name:'Sankt Ludwig Hbf', city:'Sankt Ludwig', region:'San Luis Potosí', x:526, y:158, tier:'major', lines:['IC','RE'], platforms:13, amenities:['Restaurants','Hotel','Taxi'] },
-  { id:'GOL', name:'Golfhafen Hbf', city:'Golfhafen', region:'Tampico', x:617, y:211, tier:'hub', lines:['ICE','IC','RE','K'], platforms:11, amenities:['Hafenbus','Restaurants','Hotel','Fähre'] },
-  { id:'PAZ', name:'Pazifikhafen Hbf', city:'Pazifikhafen', region:'Nayarit', x:111, y:283, tier:'major', lines:['IC','RE','K'], platforms:8, amenities:['Hafenbus','Fahrradstation','Café'] },
-  { id:'VUL', name:'Vulkanstadt Hbf', city:'Vulkanstadt', region:'Colima', x:231, y:431, tier:'major', lines:['IC','RE','K'], platforms:7, amenities:['Busbahnhof','Café','Mietwagen'] },
-  { id:'MAN', name:'Manzanillo Hafen', city:'Manzanillo', region:'Pazifikküste', x:157, y:497, tier:'major', lines:['RE','K'], platforms:6, amenities:['Fähre','Hafenbus','Restaurants'] },
-  { id:'KAI', name:'Kaiserstadt Hbf', city:'Kaiserstadt', region:'Michoacán', x:378, y:431, tier:'hub', lines:['ICE','IC','RE'], platforms:13, amenities:['Restaurants','Einkaufen','Taxi','Barrierefrei'] },
-  { id:'SEE', name:'Seeburg Zentrum', city:'Seeburg', region:'Michoacán', x:433, y:491, tier:'local', lines:['RE','S'], platforms:5, amenities:['Busbahnhof','Café'] },
-  { id:'ALT', name:'Altstadt Mitte', city:'Guadalajara', region:'Hauptstadtbezirk', x:332, y:329, tier:'local', lines:['RE','S','U'], platforms:6, amenities:['U-Bahn','Tram','Einkaufen'] },
-  { id:'FLU', name:'Flughafen Galizien', city:'Guadalajara', region:'Hauptstadtbezirk', x:385, y:347, tier:'major', lines:['IC','RE','S'], platforms:8, amenities:['Flughafen','Mietwagen','Hotel'] },
-  { id:'ROS', name:'Rosenfeld', city:'Rosenfeld', region:'Jalisco', x:250, y:365, tier:'local', lines:['RE','S'], platforms:4, amenities:['Busbahnhof','Fahrradstation'] },
-  { id:'BER', name:'Bergheim', city:'Bergheim', region:'Hochland', x:410, y:370, tier:'local', lines:['RE'], platforms:4, amenities:['Wanderbus','Café'] },
-  { id:'SON', name:'Sonnenau', city:'Sonnenau', region:'Jalisco', x:198, y:235, tier:'local', lines:['RE'], platforms:5, amenities:['Busbahnhof','Café'] },
-  { id:'MAR', name:'Marienfeld Hbf', city:'Marienfeld', region:'Guanajuato', x:302, y:187, tier:'major', lines:['IC','RE'], platforms:7, amenities:['Restaurants','Taxi'] },
-  { id:'KRO', name:'Kronental', city:'Kronental', region:'Querétaro', x:407, y:226, tier:'local', lines:['RE','S'], platforms:5, amenities:['Busbahnhof','Café'] },
-  { id:'EIC', name:'Eichenau', city:'Eichenau', region:'San Luis Potosí', x:489, y:209, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof','Fahrradstation'] },
-  { id:'WAL', name:'Waldkirchen', city:'Waldkirchen', region:'Zacatecas', x:400, y:126, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof','Café'] },
-  { id:'KUS', name:'Küstenstadt Hbf', city:'Küstenstadt', region:'Nayarit', x:124, y:368, tier:'major', lines:['IC','RE','K'], platforms:6, amenities:['Hafenbus','Restaurants'] },
-  { id:'PAL', name:'Palmenhafen', city:'Palmenhafen', region:'Colima', x:113, y:451, tier:'local', lines:['RE','K'], platforms:5, amenities:['Fähre','Hotel','Restaurants'] },
-  { id:'NEU', name:'Neustadt Süd', city:'Guadalajara', region:'Hauptstadtbezirk', x:348, y:392, tier:'local', lines:['RE','S'], platforms:6, amenities:['S-Bahn','Busbahnhof'] },
-  { id:'DOM', name:'Domplatz', city:'Karlsburg', region:'Querétaro', x:490, y:307, tier:'local', lines:['RE','S'], platforms:4, amenities:['Tram','Einkaufen'] },
-  { id:'RHE', name:'Rheintal', city:'Rheintal', region:'Golfregion', x:566, y:254, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof','Café'] },
-  { id:'HOF', name:'Kaiserhof', city:'Kaiserstadt', region:'Michoacán', x:410, y:463, tier:'local', lines:['RE','S'], platforms:4, amenities:['Tram','Einkaufen'] },
-  { id:'FRE', name:'Friedrichshöhe', city:'Friedrichshöhe', region:'Hochland', x:449, y:344, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof','Wanderbus'] },
-  { id:'ELB', name:'Elbbrücke', city:'Elbbrücke', region:'Jalisco', x:276, y:260, tier:'local', lines:['RE','S'], platforms:4, amenities:['Busbahnhof','Fahrradstation'] },
-  { id:'WEI', name:'Weinbergen', city:'Weinbergen', region:'Guanajuato', x:332, y:140, tier:'local', lines:['RE'], platforms:4, amenities:['Weinbus','Restaurants'] },
-  { id:'STE', name:'Steinbach', city:'Steinbach', region:'Zacatecas', x:474, y:96, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof'] },
-  { id:'KLA', name:'Klostersee', city:'Klostersee', region:'Michoacán', x:332, y:481, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof','Café'] },
-  { id:'HAF', name:'Hafenviertel', city:'Golfhafen', region:'Tampico', x:635, y:248, tier:'local', lines:['RE','K'], platforms:4, amenities:['Fähre','Hafenbus'] },
-  { id:'NOR', name:'Nordtor', city:'Löwenstadt', region:'León', x:222, y:74, tier:'local', lines:['RE','S'], platforms:4, amenities:['Busbahnhof','Parkhaus'] },
-  { id:'SUD', name:'Südpark', city:'Guadalajara', region:'Hauptstadtbezirk', x:301, y:391, tier:'local', lines:['RE','S'], platforms:5, amenities:['S-Bahn','Parkhaus'] },
-  { id:'FLO', name:'Florianstadt', city:'Florianstadt', region:'Jalisco', x:205, y:331, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof','Café'] },
-  { id:'GRE', name:'Grenzmarkt Hbf', city:'Grenzmarkt', region:'Ostmark', x:580, y:125, tier:'major', lines:['IC','RE'], platforms:7, amenities:['Zollservice','Restaurants'] },
-  { id:'KAS', name:'Kastanienhof', city:'Kastanienhof', region:'Guanajuato', x:278, y:155, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof'] },
-  { id:'LIM', name:'Lindenmarkt', city:'Lindenmarkt', region:'Querétaro', x:425, y:296, tier:'local', lines:['RE','S'], platforms:4, amenities:['Tram','Café'] },
-  { id:'BLA', name:'Blumenau', city:'Blumenau', region:'Jalisco', x:238, y:317, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof','Fahrradstation'] },
-  { id:'ADE', name:'Adlerhöhe', city:'Adlerhöhe', region:'Guanajuato', x:347, y:220, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof','Aussichtspunkt'] },
-  { id:'BRU', name:'Brunnenstadt', city:'Brunnenstadt', region:'Jalisco', x:354, y:271, tier:'local', lines:['RE','S'], platforms:5, amenities:['Tram','Café'] },
-  { id:'MON', name:'Morgenau', city:'Morgenau', region:'Nayarit', x:162, y:306, tier:'local', lines:['RE','K'], platforms:4, amenities:['Busbahnhof','Café'] },
-  { id:'TAN', name:'Tannenberg', city:'Tannenberg', region:'Hochland', x:454, y:397, tier:'local', lines:['RE'], platforms:3, amenities:['Wanderbus'] },
-  { id:'SAL', name:'Salzbrücke', city:'Salzbrücke', region:'San Luis Potosí', x:538, y:199, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof'] },
-  { id:'KON', name:'Königsfeld', city:'Königsfeld', region:'Zacatecas', x:431, y:83, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof','Café'] },
-  { id:'HIM', name:'Himmelgarten', city:'Himmelgarten', region:'Jalisco', x:286, y:344, tier:'local', lines:['S'], platforms:3, amenities:['S-Bahn','Park'] },
-  { id:'AUE', name:'Auenwald', city:'Auenwald', region:'Michoacán', x:292, y:423, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof','Naturpark'] },
-  { id:'MUE', name:'Mühlenhof', city:'Mühlenhof', region:'Querétaro', x:513, y:284, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof'] },
-  { id:'SEI', name:'Seidenstraße', city:'Seidenstraße', region:'Ostmark', x:552, y:164, tier:'local', lines:['RE'], platforms:4, amenities:['Busbahnhof','Markthalle'] },
-  { id:'WES', name:'Westhafen', city:'Pazifikhafen', region:'Nayarit', x:86, y:323, tier:'local', lines:['K'], platforms:3, amenities:['Fähre','Hafenbus'] },
-  { id:'OST', name:'Ostbahnhof', city:'Karlsburg', region:'Querétaro', x:508, y:249, tier:'local', lines:['S'], platforms:4, amenities:['S-Bahn','Parkhaus'] },
-  { id:'ZIT', name:'Zitadelle', city:'Guadalajara', region:'Hauptstadtbezirk', x:286, y:305, tier:'local', lines:['S','U'], platforms:4, amenities:['U-Bahn','Museum'] },
-  { id:'KUR', name:'Kurpark', city:'Badenquellen', region:'Aguascalientes', x:389, y:101, tier:'local', lines:['RE','S'], platforms:4, amenities:['Thermenbus','Hotel'] },
-  { id:'HOC', name:'Hochwald', city:'Hochwald', region:'León', x:269, y:133, tier:'local', lines:['RE'], platforms:3, amenities:['Wanderbus'] },
-  { id:'RAT', name:'Rathausplatz', city:'Sankt Ludwig', region:'San Luis Potosí', x:548, y:176, tier:'local', lines:['S'], platforms:3, amenities:['Tram','Einkaufen'] },
-  { id:'DUE', name:'Dünenhafen', city:'Dünenhafen', region:'Tampico', x:650, y:192, tier:'local', lines:['K'], platforms:3, amenities:['Fähre','Strandbus'] },
-  { id:'GLA', name:'Glashütte', city:'Glashütte', region:'Zacatecas', x:493, y:55, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof'] },
-  { id:'KIR', name:'Kirschental', city:'Kirschental', region:'Michoacán', x:356, y:469, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof','Obstmarkt'] },
-  { id:'GRA', name:'Grafenau', city:'Grafenau', region:'Guanajuato', x:319, y:111, tier:'local', lines:['RE'], platforms:3, amenities:['Busbahnhof'] }
+  {id:'GUA',name:'Guadalajara Hbf',city:'Guadalajara',oldName:'Guadalajara',country:'GL',x:300,y:282,platforms:22,hub:true,amenities:['GB Lounge','U-Bahn','S-Bahn','Restaurants','Einkaufen','Barrierefrei']},
+  {id:'FLU',name:'Flughafen Guadalajara',city:'Guadalajara',oldName:'Aeropuerto de Guadalajara',country:'GL',x:348,y:330,platforms:8,amenities:['Flughafen','S-Bahn','Airport Express','Mietwagen']},
+  {id:'LOW',name:'Löwenstadt Hbf',city:'Löwenstadt',oldName:'León',country:'GL',x:242,y:93,platforms:16,hub:true,amenities:['GB Lounge','U-Bahn','S-Bahn','Restaurants']},
+  {id:'SIL',name:'Silao Zentrum',city:'Löwenstadt',oldName:'Silao',country:'GL',x:270,y:122,platforms:7,amenities:['S-Bahn','Busbahnhof']},
+  {id:'BAD',name:'Badenquellen Hbf',city:'Badenquellen',oldName:'Aguascalientes',country:'GL',x:356,y:72,platforms:12,hub:true,amenities:['U-Bahn','S-Bahn','Thermenbus','Restaurants']},
+  {id:'ZAC',name:'Silberstadt Hbf',city:'Silberstadt',oldName:'Zacatecas',country:'GL',x:424,y:35,platforms:9,amenities:['Stadtbahn','S-Bahn','Café']},
+  {id:'KAR',name:'Karlsburg Hbf',city:'Karlsburg',oldName:'Querétaro',country:'GL',x:442,y:252,platforms:18,hub:true,amenities:['GB Lounge','U-Bahn','S-Bahn','Restaurants']},
+  {id:'SLU',name:'Sankt Ludwig Hbf',city:'Sankt Ludwig',oldName:'San Luis Potosí',country:'GL',x:509,y:139,platforms:13,hub:true,amenities:['U-Bahn','S-Bahn','Restaurants']},
+  {id:'GRE',name:'Grenzmarkt Hbf',city:'Grenzmarkt',oldName:'Grenzmarkt',country:'GL',x:565,y:108,platforms:7,border:true,amenities:['Bundespolizei','Zoll','Dokumentenprüfung','Restaurants']},
+  {id:'GOL',name:'Golfhafen Hbf',city:'Golfhafen',oldName:'Tampico',country:'GL',x:603,y:193,platforms:11,hub:true,amenities:['U-Bahn','S-Bahn','Hafenbus','Fähre']},
+  {id:'PAZ',name:'Pazifikhafen Hbf',city:'Pazifikhafen',oldName:'Tepic',country:'GL',x:102,y:268,platforms:8,hub:true,amenities:['U-Bahn','S-Bahn','Hafenbus']},
+  {id:'VUL',name:'Vulkanstadt Hbf',city:'Vulkanstadt',oldName:'Colima',country:'GL',x:221,y:411,platforms:7,hub:true,amenities:['U-Bahn','S-Bahn','Busbahnhof']},
+  {id:'MAN',name:'Manzanillo Hafen',city:'Manzanillo',oldName:'Manzanillo',country:'GL',x:147,y:472,platforms:6,hub:true,amenities:['U-Bahn','S-Bahn','Fähre','Hafenbus']},
+  {id:'KAI',name:'Kaiserstadt Hbf',city:'Kaiserstadt',oldName:'Morelia',country:'GL',x:368,y:411,platforms:13,hub:true,amenities:['U-Bahn','S-Bahn','Restaurants']},
+  {id:'SEE',name:'Seeburg Hbf',city:'Seeburg',oldName:'Pátzcuaro',country:'GL',x:416,y:464,platforms:7,amenities:['S-Bahn','Tram','Café']},
+  {id:'TEP',name:'Tepatitlan',city:'Tepatitlan',oldName:'Tepatitlán',country:'GL',x:344,y:230,platforms:5,amenities:['RE','Busbahnhof']},
+  {id:'LAG',name:'Seenstadt',city:'Seenstadt',oldName:'Lagos de Moreno',country:'GL',x:292,y:155,platforms:5,amenities:['RE','Busbahnhof']},
+  {id:'SJR',name:'Johannestal',city:'Johannestal',oldName:'San Juan del Río',country:'GL',x:478,y:286,platforms:6,amenities:['RE','Busbahnhof']},
+  {id:'ALT',name:'Altstadt Mitte',city:'Guadalajara',oldName:'Centro Guadalajara',country:'GL',x:316,y:305,platforms:6,amenities:['U-Bahn','S-Bahn','Tram']},
+  {id:'MEX',name:'Ciudad de México Buenavista',city:'Ciudad de México',oldName:'Buenavista',country:'MX',x:640,y:338,platforms:12,international:true,hub:true,amenities:['Migración','Aduana','Metro','Tren Suburbano','Taxi','Restaurants']}
 ];
 
-export const NETWORK_LINES = [
-  { id:'ICE-1', type:'ICE', name:'Nord–Ost Magistrale', color:'#a71938', stationIds:['LOW','MAR','ELB','GUA','BRU','KRO','KAR','MUE','RHE','GOL'] },
-  { id:'ICE-2', type:'ICE', name:'Thermen–Kaiser Linie', color:'#c63a55', stationIds:['BAD','WEI','MAR','ELB','GUA','NEU','KAI'] },
-  { id:'IC-3', type:'IC', name:'Silberlinie', color:'#3b485f', stationIds:['SIL','KON','BAD','WAL','SLU','SEI','GRE'] },
-  { id:'IC-4', type:'IC', name:'Pazifik–Hochland', color:'#556174', stationIds:['PAZ','MON','FLO','GUA','BER','KAI','SEE'] },
-  { id:'RE-5', type:'RE', name:'Vulkan Express', color:'#3d7b58', stationIds:['GUA','HIM','ROS','AUE','VUL','PAL','MAN'] },
-  { id:'RE-6', type:'RE', name:'Karlsburger Ring', color:'#54a06d', stationIds:['GUA','ADE','KRO','KAR','DOM','FRE','BER','NEU','GUA'] },
-  { id:'K-7', type:'K', name:'Küstenbahn', color:'#2e67a1', stationIds:['WES','PAZ','KUS','PAL','MAN'] },
-  { id:'K-8', type:'K', name:'Golfküste', color:'#3c82c4', stationIds:['GRE','SLU','SAL','GOL','HAF','DUE'] },
-  { id:'S-1', type:'S', name:'S-Bahn Hauptstadt', color:'#704bb5', stationIds:['ZIT','GUA','ALT','FLU','NEU','SUD','HIM','ZIT'] }
+export const RAIL_EDGES = [
+  ['GUA','FLU',24,['S','AEX']],['GUA','TEP',38,['RE','IR']],['TEP','LAG',41,['RE','IR']],['LAG','LOW',46,['RE','IC','ICE']],
+  ['LOW','SIL',18,['S','RE']],['SIL','BAD',54,['RE','IC']],['BAD','ZAC',38,['RE','IC']],['ZAC','SLU',66,['RE','IC']],
+  ['GUA','KAR',68,['ICE','IC','RE']],['KAR','SJR',31,['S','RE']],['SJR','MEX',93,['EC','IC']],['KAR','SLU',73,['ICE','IC']],
+  ['SLU','GRE',49,['IC','EC','RE']],['GRE','MEX',104,['EC','NJ']],['SLU','GOL',78,['IC','RE']],
+  ['GUA','PAZ',69,['IC','RE']],['PAZ','MAN',113,['IR','RE']],['GUA','VUL',72,['IC','RE']],['VUL','MAN',84,['IR','RE']],
+  ['GUA','KAI',88,['ICE','IC','RE']],['KAI','SEE',33,['S','RE']],['KAI','KAR',96,['ICE','IC']],['VUL','KAI',61,['RE']],
+  ['GOL','MEX',132,['EC','IC']],['KAR','MEX',151,['EC','ICE']],['GUA','MEX',226,['EC','NJ']]
+];
+
+const city = (id,name,oldName,accent,modes,stops,lines) => ({id,name,oldName,accent,modes,stops,lines});
+export const URBAN_NETWORKS = [
+  city('GDL','Guadalajara','Guadalajara','#8b1735',['U','S'],
+    ['Flughafen Guadalajara','Tlaquepaque','Guadalajara Hbf','Altstadt Mitte','Zapopan Zentrum','Zapopan Nord','Tonalá','El Salto','Tlajomulco','Südpark','Universität','Tesistán','Chapala'],[
+      {id:'U1',mode:'U',color:'#d13b4f',minutes:4,stops:['Zapopan Nord','Zapopan Zentrum','Guadalajara Hbf','Altstadt Mitte','Tlaquepaque','Südpark']},
+      {id:'U2',mode:'U',color:'#2473a6',minutes:5,stops:['Tonalá','Altstadt Mitte','Guadalajara Hbf','Universität','Zapopan Zentrum']},
+      {id:'U3',mode:'U',color:'#8a5aa8',minutes:6,stops:['Tesistán','Zapopan Zentrum','Guadalajara Hbf','Tlaquepaque','El Salto']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:10,stops:['Flughafen Guadalajara','Tlaquepaque','Guadalajara Hbf','Zapopan Zentrum']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:10,stops:['Tonalá','Guadalajara Hbf','Zapopan Nord']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:15,stops:['El Salto','Tlaquepaque','Guadalajara Hbf','Tesistán']},
+      {id:'S4',mode:'S',color:'#a44670',minutes:15,stops:['Tlajomulco','Südpark','Guadalajara Hbf','Zapopan Zentrum']},
+      {id:'S7',mode:'S',color:'#3b8b8b',minutes:30,stops:['Chapala','Flughafen Guadalajara','Guadalajara Hbf']}
+    ]),
+  city('LOW','Löwenstadt','León','#6947a5',['U','S'],['Flughafen Löwenstadt','Silao','Löwenstadt Hbf','Nordtor','Industriezentrum','Universität','San Francisco','Purísima','Romita','Ostpark'],[
+      {id:'U1',mode:'U',color:'#7650b4',minutes:5,stops:['Nordtor','Löwenstadt Hbf','Universität','Industriezentrum']},
+      {id:'U2',mode:'U',color:'#ce4b57',minutes:6,stops:['Ostpark','Löwenstadt Hbf','San Francisco']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Flughafen Löwenstadt','Silao','Löwenstadt Hbf','Nordtor']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:15,stops:['San Francisco','Löwenstadt Hbf','Industriezentrum']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:20,stops:['Purísima','Löwenstadt Hbf','Ostpark']},
+      {id:'S4',mode:'S',color:'#a44670',minutes:30,stops:['Romita','Flughafen Löwenstadt','Silao','Löwenstadt Hbf']}
+    ]),
+  city('KAR','Karlsburg','Querétaro','#286f8e',['U','S'],['Flughafen Karlsburg','El Marqués','Karlsburg Hbf','Corregidora','Zibatá','Industriepark','Apaseo','Juriquilla','Universität','El Pueblito','San Juan del Río'],[
+      {id:'U1',mode:'U',color:'#2879a5',minutes:5,stops:['Juriquilla','Universität','Karlsburg Hbf','El Pueblito']},
+      {id:'U2',mode:'U',color:'#b54a65',minutes:6,stops:['Zibatá','El Marqués','Karlsburg Hbf','Corregidora']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Flughafen Karlsburg','El Marqués','Karlsburg Hbf','Corregidora']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:15,stops:['Zibatá','Karlsburg Hbf','Industriepark','Apaseo']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:20,stops:['Juriquilla','Universität','Karlsburg Hbf','El Pueblito']},
+      {id:'S4',mode:'S',color:'#a44670',minutes:30,stops:['San Juan del Río','Flughafen Karlsburg','Karlsburg Hbf']}
+    ]),
+  city('BAD','Badenquellen','Aguascalientes','#9a6b22',['U','S'],['Jesús María','Badenquellen Hbf','Industriepark Süd','San Francisco de los Romo','Flughafen Badenquellen','Pabellón','Calvillo','Badenquellen West'],[
+      {id:'U1',mode:'U',color:'#b47a1f',minutes:6,stops:['Jesús María','Badenquellen Hbf','Industriepark Süd']},
+      {id:'U2',mode:'U',color:'#4677a7',minutes:7,stops:['Badenquellen West','Badenquellen Hbf','Flughafen Badenquellen']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Jesús María','Badenquellen Hbf','Industriepark Süd']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:20,stops:['San Francisco de los Romo','Badenquellen Hbf','Flughafen Badenquellen']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:30,stops:['Pabellón','Jesús María','Badenquellen Hbf']},
+      {id:'S4',mode:'S',color:'#a44670',minutes:30,stops:['Calvillo','Badenquellen West','Badenquellen Hbf']}
+    ]),
+  city('SLU','Sankt Ludwig','San Luis Potosí','#4a6b9e',['U','S'],['Mexquitic','Sankt Ludwig Hbf','Soledad','Flughafen Sankt Ludwig','Villa de Reyes','Industriepark','Universität','Pozos','Cerro de San Pedro'],[
+      {id:'U1',mode:'U',color:'#4e70a5',minutes:6,stops:['Universität','Sankt Ludwig Hbf','Soledad','Pozos']},
+      {id:'U2',mode:'U',color:'#b34b5b',minutes:7,stops:['Industriepark','Sankt Ludwig Hbf','Cerro de San Pedro']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Mexquitic','Sankt Ludwig Hbf','Soledad','Flughafen Sankt Ludwig']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:20,stops:['Villa de Reyes','Industriepark','Sankt Ludwig Hbf']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:15,stops:['Universität','Sankt Ludwig Hbf','Soledad']},
+      {id:'S4',mode:'S',color:'#a44670',minutes:30,stops:['Cerro de San Pedro','Sankt Ludwig Hbf','Pozos']}
+    ]),
+  city('KAI','Kaiserstadt–Seeburg','Morelia–Pátzcuaro','#7f476d',['U','S'],['Tarímbaro','Kaiserstadt Hbf','Seeburg Hbf','Flughafen Kaiserstadt','Universität','Charo','Quiroga','Kaiserhof','Zinapécuaro'],[
+      {id:'U1',mode:'U',color:'#8c4c73',minutes:6,stops:['Tarímbaro','Kaiserstadt Hbf','Universität','Kaiserhof']},
+      {id:'U2',mode:'U',color:'#4677a7',minutes:7,stops:['Flughafen Kaiserstadt','Kaiserstadt Hbf','Charo']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Tarímbaro','Kaiserstadt Hbf','Seeburg Hbf']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:20,stops:['Flughafen Kaiserstadt','Kaiserstadt Hbf','Universität','Charo']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:30,stops:['Quiroga','Seeburg Hbf','Kaiserstadt Hbf']},
+      {id:'S4',mode:'S',color:'#a44670',minutes:30,stops:['Zinapécuaro','Flughafen Kaiserstadt','Kaiserstadt Hbf']}
+    ]),
+  city('GOL','Golfhafen','Tampico','#277b86',['U','S'],['Altamira','Golfhafen Hbf','Ciudad Madero','Hafenviertel','Flughafen Golfhafen','Hafen','Pánuco','Industriehafen'],[
+      {id:'U1',mode:'U',color:'#25818e',minutes:6,stops:['Altamira','Golfhafen Hbf','Ciudad Madero','Hafenviertel']},
+      {id:'U2',mode:'U',color:'#b34b5b',minutes:7,stops:['Flughafen Golfhafen','Golfhafen Hbf','Hafen']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Altamira','Golfhafen Hbf','Ciudad Madero','Hafenviertel']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:20,stops:['Flughafen Golfhafen','Golfhafen Hbf','Hafen']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:30,stops:['Pánuco','Golfhafen Hbf','Ciudad Madero']},
+      {id:'S4',mode:'S',color:'#a44670',minutes:30,stops:['Industriehafen','Altamira','Flughafen Golfhafen','Ciudad Madero']}
+    ]),
+  city('PAZ','Pazifikhafen','Tepic','#397a57',['U','S'],['Xalisco','Pazifikhafen Hbf','Flughafen Pazifikhafen','Bellavista','Universität','San Blas','Küstenstadt'],[
+      {id:'U1',mode:'U',color:'#397f5b',minutes:7,stops:['Xalisco','Pazifikhafen Hbf','Flughafen Pazifikhafen']},
+      {id:'U2',mode:'U',color:'#4677a7',minutes:8,stops:['Bellavista','Pazifikhafen Hbf','Universität']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Xalisco','Pazifikhafen Hbf','Flughafen Pazifikhafen']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:20,stops:['Bellavista','Pazifikhafen Hbf','Universität']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:30,stops:['San Blas','Küstenstadt','Pazifikhafen Hbf']}
+    ]),
+  city('VUL','Vulkanstadt','Colima','#a14d3e',['U','S'],['Comala','Villa de Álvarez','Vulkanstadt Hbf','Flughafen Vulkanstadt','Cuauhtémoc','Universität','Coquimatlán'],[
+      {id:'U1',mode:'U',color:'#a65141',minutes:7,stops:['Comala','Villa de Álvarez','Vulkanstadt Hbf','Flughafen Vulkanstadt']},
+      {id:'U2',mode:'U',color:'#4677a7',minutes:8,stops:['Universität','Vulkanstadt Hbf','Coquimatlán']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Comala','Villa de Álvarez','Vulkanstadt Hbf','Flughafen Vulkanstadt']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:30,stops:['Cuauhtémoc','Flughafen Vulkanstadt','Vulkanstadt Hbf']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:20,stops:['Coquimatlán','Universität','Vulkanstadt Hbf']}
+    ]),
+  city('MAN','Manzanillo','Manzanillo','#2f6f94',['U','S'],['Flughafen Manzanillo','Santiago','Manzanillo Hbf','Hafen','Brisas','Zentrum','Industriehafen','Cihuatlán'],[
+      {id:'U1',mode:'U',color:'#33769b',minutes:7,stops:['Santiago','Manzanillo Hbf','Hafen']},
+      {id:'U2',mode:'U',color:'#a64b62',minutes:8,stops:['Brisas','Zentrum','Industriehafen']},
+      {id:'S1',mode:'S',color:'#2e7c56',minutes:15,stops:['Flughafen Manzanillo','Santiago','Manzanillo Hbf','Hafen']},
+      {id:'S2',mode:'S',color:'#c7831e',minutes:20,stops:['Brisas','Zentrum','Industriehafen']},
+      {id:'S3',mode:'S',color:'#3f5fa5',minutes:30,stops:['Cihuatlán','Flughafen Manzanillo','Manzanillo Hbf']}
+    ])
+];
+
+export const SUBSCRIPTIONS = [
+  {id:'JUGEND',name:'Galizien-Ticket Jugend',price:39,eligibility:'Bis 27 Jahre oder mit Studiennachweis',features:['Nahverkehr in ganz Galizien','2. Klasse','Monatlich kündbar']},
+  {id:'STANDARD',name:'Galizien-Ticket Standard',price:59,eligibility:'Für alle Reisenden',features:['U-Bahn, S-Bahn, RB, RE, Tram und Bus','2. Klasse','Monatlich kündbar']},
+  {id:'PLUS',name:'Galizien-Ticket Plus',price:79,eligibility:'Für flexible Freizeitmobilität',features:['Alle Standard-Leistungen','Fahrrad inklusive','Eine Begleitperson am Wochenende']},
+  {id:'BUSINESS',name:'Galizien-Ticket Business',price:99,eligibility:'Für berufliche Mobilität',features:['Alle Standard-Leistungen','15 % Rabatt auf IC/ICE','Flexible Rechnungsadresse']}
+];
+
+export const FARES = [
+  {id:'SUPER',name:'Super Sparpreis',factor:.72,refundable:false,changeable:false,seat:false},
+  {id:'SAVER',name:'Sparpreis',factor:.86,refundable:'fee',changeable:'fee',seat:false},
+  {id:'FLEX',name:'Flexpreis',factor:1,refundable:true,changeable:true,seat:false},
+  {id:'BUSINESS',name:'Business Flex',factor:1.32,refundable:true,changeable:true,seat:true},
+  {id:'INTL',name:'International Flex',factor:1.18,refundable:true,changeable:true,seat:true,international:true}
+];
+
+export const SERVICE_ALERTS = [
+  {id:'IC-KAR-SLU',severity:'warning',modes:['IC'],title:'Bauarbeiten Karlsburg–Sankt Ludwig',text:'IC-Züge erhalten 8–12 Minuten zusätzliche Fahrzeit.',delay:10},
+  {id:'RE-WEST',severity:'warning',modes:['RE'],title:'RE West: eingeschränkter Betrieb',text:'Einige Regionalzüge enden vorzeitig in Pazifikhafen.',delay:6},
+  {id:'EC-MEX',severity:'info',modes:['EC','NJ'],title:'Verstärkte Grenzkontrollen nach Mexiko',text:'Bundespolizei und Zoll führen Dokumenten- und Identitätskontrollen durch.',delay:15},
+  {id:'S-GDL',severity:'ok',modes:['S','U'],title:'Stadtverkehr Guadalajara',text:'Normalbetrieb auf allen U- und S-Bahn-Linien.',delay:0}
 ];
 
 export const COPY = {
-  de: {
-    navHome:'Start', navSearch:'Reisen', navNetwork:'Netz', navTickets:'Tickets', navProfile:'Profil',
-    greeting:'Guten Morgen', tagline:'Deine Reise durch die Bundesrepublik Galizien.',
-    nextJourney:'Nächste Reise', searchConnection:'Verbindung suchen', from:'Von', to:'Nach', swap:'Tauschen',
-    date:'Datum', time:'Zeit', passengers:'Reisende', travelClass:'Klasse', search:'Suchen',
-    favorites:'Favoriten', recentSearches:'Letzte Suchen', serviceUpdates:'Verkehrsmeldungen', seeAll:'Alle anzeigen',
-    connections:'Verbindungen', direct:'Direkt', cheapest:'Günstigste', fastest:'Schnellste', all:'Alle',
-    onTime:'Pünktlich', delayed:'Verspätet', platform:'Gleis', changes:'Umstiege', duration:'Dauer',
-    details:'Details', book:'Buchen', fare:'Tarif', flexFare:'Flexpreis', saverFare:'Sparpreis',
-    flexibleFareDesc:'Umbuchung und Erstattung inklusive.', saverFareDesc:'Zugbindung, begrenzte Erstattung.',
-    journeyDetails:'Reisedetails', intermediateStop:'Zwischenhalt', recommendedChange:'Empfohlener Umstieg',
-    ticketBooked:'Ticket wurde gespeichert.', myTickets:'Meine Tickets', upcoming:'Bevorstehend', past:'Vergangen',
-    noTickets:'Noch keine Tickets', noTicketsDesc:'Buche eine Verbindung und dein digitales Ticket erscheint hier.',
-    digitalTicket:'Digitales Ticket', coach:'Wagen', seat:'Platz', price:'Preis', validationCode:'GB Sicherheitscode',
-    liveTracking:'Live-Zugverfolgung', speed:'Geschwindigkeit', nextStop:'Nächster Halt', arrival:'Ankunft', progress:'Fortschritt',
-    simulatedNotice:'Position, Geschwindigkeit und Verspätungen werden in dieser Demonstration simuliert.',
-    railNetwork:'Streckennetz', networkHint:'Tippe auf eine Station für Abfahrten, Services und Verbindungen.',
-    stationInformation:'Bahnhofsinformation', departures:'Nächste Abfahrten', amenities:'Services', favoriteAdded:'Zu Favoriten hinzugefügt.', favoriteRemoved:'Aus Favoriten entfernt.',
-    profile:'Profil', member:'GB Card Gold', journeys:'Reisen', kilometres:'Kilometer', points:'Punkte', settings:'Einstellungen',
-    language:'Sprache', appearance:'Darstellung', notifications:'Benachrichtigungen', installApp:'App installieren',
-    automatic:'Automatisch', light:'Hell', dark:'Dunkel', enabled:'Aktiviert', disabled:'Deaktiviert',
-    installIosTitle:'Zum Home-Bildschirm hinzufügen', installIosText:'Öffne diese Seite in Safari, tippe auf Teilen und dann auf „Zum Home-Bildschirm“.',
-    close:'Schließen', delete:'Löschen', share:'Teilen', copied:'Kopiert', saved:'Gespeichert', resetDemo:'Demodaten zurücksetzen',
-    invalidRoute:'Start und Ziel müssen verschieden sein.', chooseStation:'Bahnhof auswählen', noMatches:'Keine passenden Bahnhöfe.',
-    offlineReady:'Offline bereit', updateAvailable:'Eine neue Version ist verfügbar.', reload:'Neu laden', today:'Heute', tomorrow:'Morgen',
-    onePassenger:'1 Reisender', passengersCount:'{count} Reisende', firstClass:'1. Klasse', secondClass:'2. Klasse',
-    bookFor:'Buchen für {price} GM', connectionFound:'{count} Verbindungen', departureAt:'Abfahrt {time}',
-    demoJourney:'Demofahrt', openTicket:'Ticket öffnen', openLive:'Live ansehen', noActiveTrip:'Keine aktive Reise',
-    notificationPermissionDenied:'Benachrichtigungen wurden nicht erlaubt.', notificationUnsupported:'Benachrichtigungen werden hier nicht unterstützt.',
-    resetConfirm:'Alle gespeicherten Tickets, Favoriten und Einstellungen wirklich zurücksetzen?', resetDone:'Demodaten wurden zurückgesetzt.',
-    shareTicketText:'Mein Ticket {train}: {from} nach {to}, {date} um {time}.',
-    updateTitle:'Aktuelle Hinweise', worksTitle:'Bauarbeiten zwischen Karlsburg und Sankt Ludwig', worksText:'Einige IC-Züge verkehren mit 8–12 Minuten Verspätung. ICE-Verbindungen sind nicht betroffen.',
-    stormTitle:'Küstenbahn: starker Wind', stormText:'Zwischen Palmenhafen und Manzanillo gilt vorübergehend eine reduzierte Geschwindigkeit.',
-    account:'Konto', privacy:'Datenschutz', about:'Über die App', version:'Version', storageLocal:'Daten werden nur auf diesem Gerät gespeichert.',
-    activeTrip:'Aktive Reise', selectLine:'Linie auswählen', stations:'Bahnhöfe', resetFilters:'Filter zurücksetzen'
-  },
-  es: {
-    navHome:'Inicio', navSearch:'Viajes', navNetwork:'Red', navTickets:'Boletos', navProfile:'Perfil',
-    greeting:'Buenos días', tagline:'Tu viaje por la República Federal de Galizia.',
-    nextJourney:'Próximo viaje', searchConnection:'Buscar conexión', from:'Origen', to:'Destino', swap:'Intercambiar',
-    date:'Fecha', time:'Hora', passengers:'Pasajeros', travelClass:'Clase', search:'Buscar',
-    favorites:'Favoritos', recentSearches:'Búsquedas recientes', serviceUpdates:'Avisos de servicio', seeAll:'Ver todo',
-    connections:'Conexiones', direct:'Directos', cheapest:'Más baratos', fastest:'Más rápidos', all:'Todos',
-    onTime:'Puntual', delayed:'Retrasado', platform:'Andén', changes:'Transbordos', duration:'Duración',
-    details:'Detalles', book:'Reservar', fare:'Tarifa', flexFare:'Tarifa flexible', saverFare:'Tarifa ahorro',
-    flexibleFareDesc:'Incluye cambios y reembolso.', saverFareDesc:'Ligada al tren y con reembolso limitado.',
-    journeyDetails:'Detalles del viaje', intermediateStop:'Parada intermedia', recommendedChange:'Transbordo recomendado',
-    ticketBooked:'El boleto quedó guardado.', myTickets:'Mis boletos', upcoming:'Próximos', past:'Anteriores',
-    noTickets:'Todavía no hay boletos', noTicketsDesc:'Reserva una conexión y tu boleto digital aparecerá aquí.',
-    digitalTicket:'Boleto digital', coach:'Coche', seat:'Asiento', price:'Precio', validationCode:'Código de seguridad GB',
-    liveTracking:'Seguimiento en vivo', speed:'Velocidad', nextStop:'Próxima estación', arrival:'Llegada', progress:'Progreso',
-    simulatedNotice:'La posición, velocidad y los retrasos se simulan en esta demostración.',
-    railNetwork:'Red ferroviaria', networkHint:'Toca una estación para ver salidas, servicios y conexiones.',
-    stationInformation:'Información de la estación', departures:'Próximas salidas', amenities:'Servicios', favoriteAdded:'Añadida a favoritos.', favoriteRemoved:'Eliminada de favoritos.',
-    profile:'Perfil', member:'GB Card Gold', journeys:'Viajes', kilometres:'Kilómetros', points:'Puntos', settings:'Configuración',
-    language:'Idioma', appearance:'Apariencia', notifications:'Notificaciones', installApp:'Instalar aplicación',
-    automatic:'Automático', light:'Claro', dark:'Oscuro', enabled:'Activadas', disabled:'Desactivadas',
-    installIosTitle:'Añadir a la pantalla de inicio', installIosText:'Abre esta página en Safari, pulsa Compartir y luego “Añadir a pantalla de inicio”.',
-    close:'Cerrar', delete:'Eliminar', share:'Compartir', copied:'Copiado', saved:'Guardado', resetDemo:'Restablecer datos de prueba',
-    invalidRoute:'El origen y el destino deben ser distintos.', chooseStation:'Seleccionar estación', noMatches:'No hay estaciones coincidentes.',
-    offlineReady:'Lista para usarse sin conexión', updateAvailable:'Hay una nueva versión disponible.', reload:'Recargar', today:'Hoy', tomorrow:'Mañana',
-    onePassenger:'1 pasajero', passengersCount:'{count} pasajeros', firstClass:'1.ª clase', secondClass:'2.ª clase',
-    bookFor:'Reservar por {price} GM', connectionFound:'{count} conexiones', departureAt:'Salida {time}',
-    demoJourney:'Viaje de demostración', openTicket:'Abrir boleto', openLive:'Ver en vivo', noActiveTrip:'No hay un viaje activo',
-    notificationPermissionDenied:'No se concedió permiso para notificaciones.', notificationUnsupported:'Las notificaciones no son compatibles aquí.',
-    resetConfirm:'¿Seguro que quieres borrar boletos, favoritos y ajustes guardados?', resetDone:'Se restablecieron los datos de prueba.',
-    shareTicketText:'Mi boleto {train}: de {from} a {to}, {date} a las {time}.',
-    updateTitle:'Avisos actuales', worksTitle:'Obras entre Karlsburg y Sankt Ludwig', worksText:'Algunos trenes IC circulan con 8–12 minutos de retraso. Los ICE no se ven afectados.',
-    stormTitle:'Línea costera: viento fuerte', stormText:'Entre Palmenhafen y Manzanillo se aplica temporalmente una velocidad reducida.',
-    account:'Cuenta', privacy:'Privacidad', about:'Acerca de la app', version:'Versión', storageLocal:'Los datos se guardan únicamente en este dispositivo.',
-    activeTrip:'Viaje activo', selectLine:'Seleccionar línea', stations:'Estaciones', resetFilters:'Restablecer filtros'
-  },
-  en: {
-    navHome:'Home', navSearch:'Travel', navNetwork:'Network', navTickets:'Tickets', navProfile:'Profile',
-    greeting:'Good morning', tagline:'Your journey across the Federal Republic of Galizia.',
-    nextJourney:'Next journey', searchConnection:'Find a connection', from:'From', to:'To', swap:'Swap',
-    date:'Date', time:'Time', passengers:'Passengers', travelClass:'Class', search:'Search',
-    favorites:'Favorites', recentSearches:'Recent searches', serviceUpdates:'Service updates', seeAll:'See all',
-    connections:'Connections', direct:'Direct', cheapest:'Cheapest', fastest:'Fastest', all:'All',
-    onTime:'On time', delayed:'Delayed', platform:'Platform', changes:'Changes', duration:'Duration',
-    details:'Details', book:'Book', fare:'Fare', flexFare:'Flexible fare', saverFare:'Saver fare',
-    flexibleFareDesc:'Changes and refunds included.', saverFareDesc:'Train-specific with limited refunds.',
-    journeyDetails:'Journey details', intermediateStop:'Intermediate stop', recommendedChange:'Recommended change',
-    ticketBooked:'The ticket was saved.', myTickets:'My tickets', upcoming:'Upcoming', past:'Past',
-    noTickets:'No tickets yet', noTicketsDesc:'Book a connection and your digital ticket will appear here.',
-    digitalTicket:'Digital ticket', coach:'Coach', seat:'Seat', price:'Price', validationCode:'GB security code',
-    liveTracking:'Live train tracking', speed:'Speed', nextStop:'Next stop', arrival:'Arrival', progress:'Progress',
-    simulatedNotice:'Position, speed and delays are simulated in this demonstration.',
-    railNetwork:'Rail network', networkHint:'Tap a station for departures, facilities and connections.',
-    stationInformation:'Station information', departures:'Next departures', amenities:'Facilities', favoriteAdded:'Added to favorites.', favoriteRemoved:'Removed from favorites.',
-    profile:'Profile', member:'GB Card Gold', journeys:'Journeys', kilometres:'Kilometres', points:'Points', settings:'Settings',
-    language:'Language', appearance:'Appearance', notifications:'Notifications', installApp:'Install app',
-    automatic:'Automatic', light:'Light', dark:'Dark', enabled:'Enabled', disabled:'Disabled',
-    installIosTitle:'Add to Home Screen', installIosText:'Open this page in Safari, tap Share, then “Add to Home Screen”.',
-    close:'Close', delete:'Delete', share:'Share', copied:'Copied', saved:'Saved', resetDemo:'Reset demo data',
-    invalidRoute:'Origin and destination must be different.', chooseStation:'Choose station', noMatches:'No matching stations.',
-    offlineReady:'Ready offline', updateAvailable:'A new version is available.', reload:'Reload', today:'Today', tomorrow:'Tomorrow',
-    onePassenger:'1 passenger', passengersCount:'{count} passengers', firstClass:'First class', secondClass:'Second class',
-    bookFor:'Book for {price} GM', connectionFound:'{count} connections', departureAt:'Departure {time}',
-    demoJourney:'Demo journey', openTicket:'Open ticket', openLive:'View live', noActiveTrip:'No active journey',
-    notificationPermissionDenied:'Notification permission was not granted.', notificationUnsupported:'Notifications are not supported here.',
-    resetConfirm:'Are you sure you want to erase saved tickets, favorites and settings?', resetDone:'Demo data was reset.',
-    shareTicketText:'My ticket {train}: {from} to {to}, {date} at {time}.',
-    updateTitle:'Current notices', worksTitle:'Engineering works between Karlsburg and Sankt Ludwig', worksText:'Some IC trains are running 8–12 minutes late. ICE services are not affected.',
-    stormTitle:'Coastal line: strong winds', stormText:'A temporary speed restriction applies between Palmenhafen and Manzanillo.',
-    account:'Account', privacy:'Privacy', about:'About the app', version:'Version', storageLocal:'Data is stored only on this device.',
-    activeTrip:'Active journey', selectLine:'Select line', stations:'Stations', resetFilters:'Reset filters'
-  }
+  de:{navHome:'Start',navTravel:'Reisen',navCity:'Stadt',navTickets:'Tickets',navProfile:'Profil',greeting:'Guten Tag',tagline:'Deine Mobilität in Galizien.',nextTrip:'Nächste Reise',search:'Verbindung suchen',cityTravel:'In der Stadt',network:'Streckennetz',operations:'Betriebslage',tickets:'Meine Tickets',profile:'Profil',from:'Von',to:'Nach',date:'Datum',time:'Zeit',passengers:'Reisende',travelClass:'Klasse',find:'Suchen',connections:'Verbindungen',direct:'Direkt',changes:'Umstiege',platform:'Gleis',duration:'Dauer',onTime:'Pünktlich',delayed:'Verspätet',fare:'Tarif',continue:'Weiter',back:'Zurück',book:'Buchen',seat:'Sitzplatz',traveler:'Reisende',extras:'Extras',payment:'Zahlung',confirm:'Bestätigen',demoPayment:'Demo-Zahlung — keine echten Kartendaten eingeben.',cardholder:'Karteninhaber',cardNumber:'Testkartennummer',expiry:'Gültig bis',cvv:'CVV',billingAddress:'Rechnungsadresse',country:'Land',pay:'Jetzt bezahlen',approved:'Zahlung genehmigt',declined:'Zahlung abgelehnt',processing:'Zahlung wird verarbeitet',contactingBank:'Bank wird kontaktiert',secureCheck:'3-D Secure wird geprüft',saved:'Gespeichert',ticketBooked:'Ticket wurde ausgestellt',urbanTickets:'Stadttickets',subscriptions:'Abonnements',galizienTicket:'Galizien-Ticket',subscribe:'Jetzt abonnieren',activeSubscription:'Aktives Abonnement',monthly:'pro Monat',validLocal:'Gültig in U-Bahn, S-Bahn, RB, RE, Tram und Bus.',notLongDistance:'Nicht gültig in ICE, IC, EC International oder NightJet.',mexicoLimit:'Nur bis Grenzmarkt gültig; für Mexiko ist ein separates internationales Ticket erforderlich.',departures:'Nächste Abfahrten',lines:'Linien',minutes:'Min.',frequency:'Takt',urbanPlanner:'Stadtverbindung planen',noRoute:'Keine Verbindung gefunden',buyTicket:'Ticket kaufen',singleTicket:'Einzelfahrt',dayTicket:'Tageskarte',seatSelection:'Sitzplatz auswählen',window:'Fenster',aisle:'Gang',table:'Tisch',quiet:'Ruhebereich',bike:'Fahrrad',firstClass:'1. Klasse',secondClass:'2. Klasse',international:'International',passportRequired:'Reisepass erforderlich',federalPolice:'Hinweis der Bundespolizei',borderText:'Bei Reisen nach Mexiko finden Grenz- und Identitätskontrollen statt. Reisepass sowie gegebenenfalls Visum oder Einreisegenehmigung bereithalten.',arriveEarly:'Bitte 30 Minuten vor Abfahrt am Bahnhof sein.',connectionSafe:'Anschluss gesichert',connectionRisk:'Anschluss gefährdet',connectionMissed:'Anschluss verpasst',alternative:'Alternative Verbindung',nightTrain:'Nachtzug',cabin:'Kabine',bed:'Liegeplatz',operationsTitle:'Aktuelle Betriebslage',normal:'Normalbetrieb',minor:'Geringe Störungen',disrupted:'Störung',account:'Konto',settings:'Einstellungen',language:'Sprache',appearance:'Darstellung',install:'App installieren',purchaseHistory:'Kaufverlauf',paymentMethods:'Zahlungsmethoden',demoOnly:'Nur Testdaten; keine echten Zahlungsinformationen werden gespeichert.',delete:'Löschen',open:'Öffnen',live:'Live',networkMap:'Netzplan',station:'Bahnhof',service:'Verkehrsmittel',validUntil:'Gültig bis',renewal:'Nächste Verlängerung',cancelSubscription:'Abo kündigen',subscriptionCancelled:'Abonnement gekündigt',noTickets:'Noch keine Tickets',noTicketsText:'Buche eine Verbindung oder ein Abonnement.',all:'Alle',longDistance:'Fernverkehr',urban:'Stadtverkehr',online:'Online',offline:'Offline'},
+  es:{navHome:'Inicio',navTravel:'Viajes',navCity:'Ciudad',navTickets:'Boletos',navProfile:'Perfil',greeting:'Buenas tardes',tagline:'Tu movilidad en Galizia.',nextTrip:'Próximo viaje',search:'Buscar conexión',cityTravel:'En la ciudad',network:'Red ferroviaria',operations:'Estado de operación',tickets:'Mis boletos',profile:'Perfil',from:'Origen',to:'Destino',date:'Fecha',time:'Hora',passengers:'Pasajeros',travelClass:'Clase',find:'Buscar',connections:'Conexiones',direct:'Directo',changes:'Transbordos',platform:'Andén',duration:'Duración',onTime:'Puntual',delayed:'Retrasado',fare:'Tarifa',continue:'Continuar',back:'Atrás',book:'Reservar',seat:'Asiento',traveler:'Pasajero',extras:'Extras',payment:'Pago',confirm:'Confirmar',demoPayment:'Pago de demostración — no introduzcas datos reales de tarjeta.',cardholder:'Titular',cardNumber:'Número de tarjeta de prueba',expiry:'Vencimiento',cvv:'CVV',billingAddress:'Dirección de facturación',country:'País',pay:'Pagar ahora',approved:'Pago autorizado',declined:'Pago rechazado',processing:'Procesando pago',contactingBank:'Contactando al banco',secureCheck:'Verificando 3-D Secure',saved:'Guardado',ticketBooked:'Boleto emitido',urbanTickets:'Boletos urbanos',subscriptions:'Suscripciones',galizienTicket:'Galizien-Ticket',subscribe:'Suscribirse',activeSubscription:'Suscripción activa',monthly:'al mes',validLocal:'Válido en U-Bahn, S-Bahn, RB, RE, tranvía y autobús.',notLongDistance:'No válido en ICE, IC, EC International ni NightJet.',mexicoLimit:'Solo es válido hasta Grenzmarkt; para México se necesita un boleto internacional separado.',departures:'Próximas salidas',lines:'Líneas',minutes:'min',frequency:'Frecuencia',urbanPlanner:'Planear conexión urbana',noRoute:'No se encontró conexión',buyTicket:'Comprar boleto',singleTicket:'Viaje sencillo',dayTicket:'Pase diario',seatSelection:'Seleccionar asiento',window:'Ventana',aisle:'Pasillo',table:'Mesa',quiet:'Zona silenciosa',bike:'Bicicleta',firstClass:'1.ª clase',secondClass:'2.ª clase',international:'Internacional',passportRequired:'Pasaporte obligatorio',federalPolice:'Aviso de la Bundespolizei',borderText:'En viajes hacia México se realizan controles fronterizos y de identidad. Ten disponible el pasaporte y, cuando corresponda, visa o autorización de entrada.',arriveEarly:'Llega 30 minutos antes de la salida.',connectionSafe:'Conexión garantizada',connectionRisk:'Conexión en riesgo',connectionMissed:'Conexión perdida',alternative:'Conexión alternativa',nightTrain:'Tren nocturno',cabin:'Cabina',bed:'Litera',operationsTitle:'Estado actual de la red',normal:'Operación normal',minor:'Incidencias menores',disrupted:'Interrupción',account:'Cuenta',settings:'Configuración',language:'Idioma',appearance:'Apariencia',install:'Instalar app',purchaseHistory:'Historial de compras',paymentMethods:'Métodos de pago',demoOnly:'Solo datos de prueba; no se guardan datos reales de pago.',delete:'Eliminar',open:'Abrir',live:'En vivo',networkMap:'Mapa de red',station:'Estación',service:'Servicio',validUntil:'Válido hasta',renewal:'Próxima renovación',cancelSubscription:'Cancelar suscripción',subscriptionCancelled:'Suscripción cancelada',noTickets:'Todavía no hay boletos',noTicketsText:'Reserva una conexión o suscripción.',all:'Todos',longDistance:'Larga distancia',urban:'Transporte urbano',online:'En línea',offline:'Sin conexión'},
+  en:{navHome:'Home',navTravel:'Travel',navCity:'City',navTickets:'Tickets',navProfile:'Profile',greeting:'Good afternoon',tagline:'Your mobility across Galizia.',nextTrip:'Next trip',search:'Find a connection',cityTravel:'In the city',network:'Rail network',operations:'Operations',tickets:'My tickets',profile:'Profile',from:'From',to:'To',date:'Date',time:'Time',passengers:'Passengers',travelClass:'Class',find:'Search',connections:'Connections',direct:'Direct',changes:'Changes',platform:'Platform',duration:'Duration',onTime:'On time',delayed:'Delayed',fare:'Fare',continue:'Continue',back:'Back',book:'Book',seat:'Seat',traveler:'Traveller',extras:'Extras',payment:'Payment',confirm:'Confirm',demoPayment:'Demo payment — do not enter real card details.',cardholder:'Cardholder',cardNumber:'Test card number',expiry:'Expiry',cvv:'CVV',billingAddress:'Billing address',country:'Country',pay:'Pay now',approved:'Payment approved',declined:'Payment declined',processing:'Processing payment',contactingBank:'Contacting bank',secureCheck:'Checking 3-D Secure',saved:'Saved',ticketBooked:'Ticket issued',urbanTickets:'City tickets',subscriptions:'Subscriptions',galizienTicket:'Galizien-Ticket',subscribe:'Subscribe now',activeSubscription:'Active subscription',monthly:'per month',validLocal:'Valid on U-Bahn, S-Bahn, RB, RE, tram and bus.',notLongDistance:'Not valid on ICE, IC, EC International or NightJet.',mexicoLimit:'Valid only to Grenzmarkt; a separate international ticket is required for Mexico.',departures:'Next departures',lines:'Lines',minutes:'min',frequency:'Frequency',urbanPlanner:'Plan a city journey',noRoute:'No connection found',buyTicket:'Buy ticket',singleTicket:'Single ticket',dayTicket:'Day ticket',seatSelection:'Select a seat',window:'Window',aisle:'Aisle',table:'Table',quiet:'Quiet zone',bike:'Bicycle',firstClass:'First class',secondClass:'Second class',international:'International',passportRequired:'Passport required',federalPolice:'Bundespolizei notice',borderText:'Journeys to Mexico are subject to border and identity checks. Keep your passport and, if required, visa or entry authorisation available.',arriveEarly:'Arrive 30 minutes before departure.',connectionSafe:'Connection secured',connectionRisk:'Connection at risk',connectionMissed:'Connection missed',alternative:'Alternative connection',nightTrain:'Night train',cabin:'Cabin',bed:'Berth',operationsTitle:'Current network status',normal:'Normal service',minor:'Minor disruption',disrupted:'Disruption',account:'Account',settings:'Settings',language:'Language',appearance:'Appearance',install:'Install app',purchaseHistory:'Purchase history',paymentMethods:'Payment methods',demoOnly:'Test data only; real payment information is never stored.',delete:'Delete',open:'Open',live:'Live',networkMap:'Network map',station:'Station',service:'Service',validUntil:'Valid until',renewal:'Next renewal',cancelSubscription:'Cancel subscription',subscriptionCancelled:'Subscription cancelled',noTickets:'No tickets yet',noTicketsText:'Book a journey or subscription.',all:'All',longDistance:'Long distance',urban:'City transport',online:'Online',offline:'Offline'}
 };
 
-export const SERVICE_ALERTS = [
-  { id:'works-kar-slu', severity:'warning', titleKey:'worksTitle', textKey:'worksText', affected:['KAR','SLU'], lines:['IC'] },
-  { id:'coast-wind', severity:'info', titleKey:'stormTitle', textKey:'stormText', affected:['PAL','MAN'], lines:['K'] }
-];
-
-export function getStation(id) {
-  return STATIONS.find(station => station.id === id) || null;
-}
-
-export function findStationByName(name) {
-  const normalized = String(name || '').trim().toLocaleLowerCase();
-  return STATIONS.find(station => station.name.toLocaleLowerCase() === normalized) || null;
-}
-
-export function searchStations(query, limit = 8) {
-  const normalized = String(query || '').trim().toLocaleLowerCase();
-  if (!normalized) return STATIONS.slice(0, limit);
-  return STATIONS
-    .map(station => {
-      const haystack = `${station.name} ${station.city} ${station.region} ${station.id}`.toLocaleLowerCase();
-      let score = 100;
-      if (station.id.toLocaleLowerCase() === normalized) score = 0;
-      else if (station.name.toLocaleLowerCase().startsWith(normalized)) score = 1;
-      else if (station.city.toLocaleLowerCase().startsWith(normalized)) score = 2;
-      else if (haystack.includes(normalized)) score = 3;
-      return { station, score };
-    })
-    .filter(item => item.score < 100)
-    .sort((a,b) => a.score - b.score || a.station.name.localeCompare(b.station.name))
-    .slice(0, limit)
-    .map(item => item.station);
-}
+export const getStation = id => STATIONS.find(s=>s.id===id) || null;
+export const getUrbanNetwork = id => URBAN_NETWORKS.find(n=>n.id===id) || URBAN_NETWORKS[0];
