@@ -1,0 +1,7 @@
+{
+  "name": "Galizisches Bahn",
+  "version": "0.4.0",
+  "build": "2026.08.04-r2",
+  "type": "static-pwa",
+  "repositoryDeployment": "root"
+}
