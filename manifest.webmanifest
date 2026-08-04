@@ -1,7 +1,7 @@
 {
   "name": "Galizische Bahn",
   "short_name": "GBahn",
-  "description": "Fernverkehr, Stadtverkehr, Abonnements und digitale Tickets – UX Patch 0.6.1.",
+  "description": "Reisen, Stadtverkehr, Grenzverbindungen über San Juan del Río und digitale Tickets – Version 0.7.0.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

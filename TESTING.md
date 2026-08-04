@@ -1,14 +1,24 @@
-# Testing v0.6.1
+# Testing v0.7.0
 
-Flujos mínimos que deben comprobarse:
+Tarjetas de prueba:
 
-1. Abrir una conexión y cancelar desde el detalle.
-2. Iniciar compra, seleccionar asiento, volver y confirmar que sigue seleccionado.
-3. Avanzar a Extras, volver y comprobar que el total no se duplica.
-4. Abrir Pago, volver y comprobar que los extras siguen guardados.
-5. Pulsar × durante una compra y elegir “Continuar compra”.
-6. Repetir y elegir “Descartar compra”.
-7. Comprar un boleto urbano y cancelar desde Pago.
-8. Abrir Galizien-Ticket, iniciar pago, volver a suscripciones y cancelar.
-9. Cambiar entre Deutsch, Español y English.
-10. Comprobar que la marca dice “Galizische Bahn”.
+- `4242 4242 4242 4242` — aprobada
+- `5555 5555 5555 4444` — aprobada
+- `4000 0027 6000 3184` — 3-D Secure simulado
+- `4000 0000 0000 0002` — rechazada
+
+Datos auxiliares:
+
+- Vencimiento: `12/30`
+- CVV: `123`
+
+Nunca uses datos bancarios reales.
+
+Pruebas recomendadas en Safari:
+
+1. Buscar Guadalajara → Ciudad de México Buenavista.
+2. Cancelar y volver a abrir la advertencia del Auswärtiges Amt.
+3. Confirmar que el itinerario pasa por San Juan del Río y continúa en RB.
+4. Probar el recorrido inverso desde Buenavista.
+5. Abrir Stadt → Liniennetz y revisar varias ciudades.
+6. Instalar la PWA y comprobar la actualización de caché.

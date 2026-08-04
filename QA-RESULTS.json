@@ -1,0 +1,271 @@
+{
+  "checks": [
+    {
+      "name": "Version 0.7.0 visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Five primary tabs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Primary navigation labels",
+      "passed": true,
+      "detail": "['Start', 'Reisen', 'Stadt', 'Tickets', 'Mehr']"
+    },
+    {
+      "name": "Home search is primary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Border card on home",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "All Mexico journeys use SJR border control",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No direct rail edge to Mexico outside SJR",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Mandatory Auswärtiges Amt warning",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Official warning wording",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Warning cannot close with X",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Warning cancel closes cleanly",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Outbound Mexico results",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "name": "Result shows San Juan del Río",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Result shows RB leg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Result shows occupancy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Result shows mandatory transfer",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Detailed outbound order",
+      "passed": true,
+      "detail": "Internationale Verbindung\n×\nICE 100 + RB 90\n+2 min\nICE 100\nAuslastung: Gering\n09:15\nGuadalajara Hbf\n10:34\nSan Juan del Río Grenzbahnhof\nSJR\n\nGRENZ- UND MIGRATIONSKONTROLLE\n\nGrenzzentrum San Juan del R"
+    },
+    {
+      "name": "Detail shows 45-minute control",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Detail shows train composition",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Detail repeats advisory",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Checkout has cancel",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Checkout has close X",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Traveller step explains SJR",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Bike extra persists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Passenger document persists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Seat persists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Approved payment issues ticket",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Issued ticket is international",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse begins with RB",
+      "passed": true,
+      "detail": "Internationale Verbindung\n×\nICE 100 + RB 90\n+2 min\nRB 90\nAuslastung: Mittel\n09:15\nCiudad de México Buenavista\n10:48\nSan Juan del Río Grenzbahnhof\n\nRB México · Kein ICE fährt direkt"
+    },
+    {
+      "name": "Declined card stays in checkout",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Pay button re-enabled",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Cancel confirmation appears",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Continue purchase returns to payment",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Discard closes checkout",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "All metropolitan networks have schematic maps",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Urban line detail opens",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Local ticket payment has cancel",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Local payment back returns to city",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "More groups four services",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Border centre explains both directions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Border centre contains RB 90",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "National map has one RB Mexico edge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "SJR marked as border hub",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Profile reachable from More",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Language selector has three choices",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Spanish applied globally",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Dark theme applied",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "No horizontal overflow at 320px",
+      "passed": true,
+      "detail": "{'sw': 320, 'cw': 320}"
+    },
+    {
+      "name": "No horizontal overflow at 375px",
+      "passed": true,
+      "detail": "{'sw': 375, 'cw': 375}"
+    },
+    {
+      "name": "No horizontal overflow at 393px",
+      "passed": true,
+      "detail": "{'sw': 393, 'cw': 393}"
+    },
+    {
+      "name": "No horizontal overflow at 430px",
+      "passed": true,
+      "detail": "{'sw': 430, 'cw': 430}"
+    },
+    {
+      "name": "No JavaScript page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No console errors",
+      "passed": true,
+      "detail": "[]"
+    }
+  ],
+  "page_errors": [],
+  "console_errors": []
+}

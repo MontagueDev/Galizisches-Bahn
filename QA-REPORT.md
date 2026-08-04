@@ -1,59 +1,54 @@
-# QA Report — Galizische Bahn v0.6.1
+# QA Report — Galizische Bahn v0.7.0
 
-## Alcance
+## Resultado
 
-Parche de experiencia de usuario sobre la v0.6.0, centrado en:
-- cancelación y navegación en compras;
-- persistencia de selecciones al retroceder;
-- selector de idioma;
-- cambio completo de marca;
-- actualización PWA.
+- **53/53 comprobaciones aprobadas**
+- Errores de JavaScript de página: **0**
+- Errores de consola: **0**
+- Viewports comprobados: **320, 375, 393 y 430 px**
 
-## Verificación técnica
+## Frontera y México
 
-- Sintaxis válida: `app.js`, `data.js`, `store.js`, `routing.js`, `payment.js`.
-- Manifiesto y `version.json` válidos.
-- Todos los recursos declarados por el Service Worker existen.
-- Caché renovada: `galizische-bahn-v0.6.1-ux1`.
-- Se conserva la clave de almacenamiento `gbahn-v060-state` para migrar boletos y preferencias de v0.6.
+- Todas las conexiones ferroviarias entre cualquier estación disponible de Galizia y México pasan por **San Juan del Río Grenzbahnhof**.
+- El único tramo que entra o sale de Ciudad de México Buenavista es **RB México** entre San Juan del Río y Buenavista.
+- No existen enlaces ICE, IC, EC o NightJet directos a México.
+- Se comprobó el orden Galizia → tren nacional → San Juan del Río → control → RB → Buenavista.
+- Se comprobó el orden Buenavista → RB → San Juan del Río → control → tren nacional → Galizia.
+- La advertencia del **Auswärtiges Amt** aparece antes de mostrar resultados y exige cancelar o continuar.
 
-## Flujos automatizados comprobados
+## Navegación y experiencia
 
-1. La marca visible es “Galizische Bahn”.
-2. La aplicación muestra la versión 0.6.1.
-3. El detalle de una conexión incluye Cancelar.
-4. La selección de asiento incluye Cancelar.
-5. Se puede avanzar a datos del pasajero.
-6. El asiento permanece seleccionado al volver.
-7. Se puede avanzar a Pago.
-8. Los suplementos permanecen al volver desde Pago.
-9. El total no se duplica al avanzar y retroceder.
-10. El número de tarjeta de prueba permanece al volver.
-11. La fecha de vencimiento permanece y conserva su formato.
-12. La × durante una compra abre confirmación.
-13. “Continuar compra” devuelve al paso correcto.
-14. “Descartar compra” cierra el proceso.
-15. La compra de boleto urbano incluye Cancelar.
-16. Atrás desde el pago urbano vuelve a In der Stadt.
-17. El pago de una suscripción se abre correctamente.
-18. Atrás desde la suscripción vuelve a los productos.
-19. El selector de idioma presenta tres opciones claras.
-20. Solo un idioma aparece seleccionado.
-21. El cambio a español actualiza Perfil.
-22. Perfil muestra “Español” como idioma activo.
-23. No existe desbordamiento horizontal a 320 px.
-24. Seleccionar México muestra el aviso de Bundespolizei.
-25. Un pago aprobado genera un boleto.
-26. La marca permanece correcta después de comprar.
-27. Una tarjeta rechazada muestra error sin cerrar la compra.
-28. El botón de pago se reactiva tras el rechazo.
-29. El modo oscuro se aplica correctamente.
-30. El modal de compra no se desborda a 320 px.
-31. Los controles de Cancelar y Continuar siguen visibles a 320 px.
-32. No se detectaron errores de JavaScript durante los flujos.
+- Cinco áreas principales: Start, Reisen, Stadt, Tickets y Mehr.
+- Red, operación, frontera, perfil y ajustes agrupados dentro de Mehr.
+- Cancelar, volver y cerrar funcionan durante la compra.
+- Asiento, documento y extras permanecen al retroceder.
+- Compra aprobada genera boleto.
+- Tarjeta rechazada conserva el proceso y reactiva el botón de pago.
+- Descartar compra cierra el proceso correctamente.
+
+## Transporte urbano y mapas
+
+- Los diez sistemas metropolitanos incluidos generan un mapa esquemático U-Bahn/S-Bahn.
+- Los detalles de línea se abren desde el mapa.
+- El mapa nacional contiene una única línea RB México y marca San Juan del Río como nodo fronterizo.
+
+## Idiomas, apariencia y responsive
+
+- Alemán, español e inglés disponibles.
+- Cambio de idioma aplicado a la navegación y pantallas principales.
+- Modo oscuro comprobado.
+- Sin desbordamiento horizontal en 320, 375, 393 ni 430 px.
+
+## Validación técnica
+
+- Sintaxis comprobada en `app.js`, `data.js`, `routing.js`, `store.js`, `payment.js` y `sw.js`.
+- `manifest.webmanifest` y `version.json` son JSON válidos.
+- Todos los recursos declarados en el Service Worker existen.
+- Caché: `galizische-bahn-v0.7.0-border1`.
+- Se mantiene la clave local de v0.6 para conservar boletos y preferencias existentes.
 
 ## Limitaciones
 
-- Pagos, rutas, posiciones y horarios siguen siendo simulados.
-- No deben introducirse datos bancarios reales.
-- La instalación, actualización del Service Worker y pantallas de inicio deben comprobarse finalmente en Safari real.
+- Horarios, ocupación, posición, incidencias y pagos son simulados.
+- No deben utilizarse datos bancarios reales.
+- La instalación y actualización final de la PWA deben comprobarse también en Safari real.

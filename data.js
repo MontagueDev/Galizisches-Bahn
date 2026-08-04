@@ -1,5 +1,5 @@
-export const APP_VERSION = '0.6.1';
-export const APP_BUILD = '2026.08.04-ux1';
+export const APP_VERSION = '0.7.0';
+export const APP_BUILD = '2026.08.04-border1';
 
 export const STATIONS = [
   {id:'GUA',name:'Guadalajara Hbf',city:'Guadalajara',oldName:'Guadalajara',country:'GL',x:300,y:282,platforms:22,hub:true,amenities:['GB Lounge','U-Bahn','S-Bahn','Restaurants','Einkaufen','Barrierefrei']},
@@ -10,7 +10,7 @@ export const STATIONS = [
   {id:'ZAC',name:'Silberstadt Hbf',city:'Silberstadt',oldName:'Zacatecas',country:'GL',x:424,y:35,platforms:9,amenities:['Stadtbahn','S-Bahn','Café']},
   {id:'KAR',name:'Karlsburg Hbf',city:'Karlsburg',oldName:'Querétaro',country:'GL',x:442,y:252,platforms:18,hub:true,amenities:['GB Lounge','U-Bahn','S-Bahn','Restaurants']},
   {id:'SLU',name:'Sankt Ludwig Hbf',city:'Sankt Ludwig',oldName:'San Luis Potosí',country:'GL',x:509,y:139,platforms:13,hub:true,amenities:['U-Bahn','S-Bahn','Restaurants']},
-  {id:'GRE',name:'Grenzmarkt Hbf',city:'Grenzmarkt',oldName:'Grenzmarkt',country:'GL',x:565,y:108,platforms:7,border:true,amenities:['Bundespolizei','Zoll','Dokumentenprüfung','Restaurants']},
+  {id:'GRE',name:'Grenzmarkt Hbf',city:'Grenzmarkt',oldName:'Grenzmarkt',country:'GL',x:565,y:108,platforms:7,amenities:['IC','RE','Restaurants','Barrierefrei']},
   {id:'GOL',name:'Golfhafen Hbf',city:'Golfhafen',oldName:'Tampico',country:'GL',x:603,y:193,platforms:11,hub:true,amenities:['U-Bahn','S-Bahn','Hafenbus','Fähre']},
   {id:'PAZ',name:'Pazifikhafen Hbf',city:'Pazifikhafen',oldName:'Tepic',country:'GL',x:102,y:268,platforms:8,hub:true,amenities:['U-Bahn','S-Bahn','Hafenbus']},
   {id:'VUL',name:'Vulkanstadt Hbf',city:'Vulkanstadt',oldName:'Colima',country:'GL',x:221,y:411,platforms:7,hub:true,amenities:['U-Bahn','S-Bahn','Busbahnhof']},
@@ -19,19 +19,19 @@ export const STATIONS = [
   {id:'SEE',name:'Seeburg Hbf',city:'Seeburg',oldName:'Pátzcuaro',country:'GL',x:416,y:464,platforms:7,amenities:['S-Bahn','Tram','Café']},
   {id:'TEP',name:'Tepatitlan',city:'Tepatitlan',oldName:'Tepatitlán',country:'GL',x:344,y:230,platforms:5,amenities:['RE','Busbahnhof']},
   {id:'LAG',name:'Seenstadt',city:'Seenstadt',oldName:'Lagos de Moreno',country:'GL',x:292,y:155,platforms:5,amenities:['RE','Busbahnhof']},
-  {id:'SJR',name:'Johannestal',city:'Johannestal',oldName:'San Juan del Río',country:'GL',x:478,y:286,platforms:6,amenities:['RE','Busbahnhof']},
+  {id:'SJR',name:'San Juan del Río Grenzbahnhof',city:'San Juan del Río',oldName:'San Juan del Río',country:'GL',x:500,y:300,platforms:10,border:true,international:true,amenities:['Bundespolizei','Zoll','Migración mexicana','ICE','IC','RE','RB México','Dokumentenprüfung']},
   {id:'ALT',name:'Altstadt Mitte',city:'Guadalajara',oldName:'Centro Guadalajara',country:'GL',x:316,y:305,platforms:6,amenities:['U-Bahn','S-Bahn','Tram']},
   {id:'MEX',name:'Ciudad de México Buenavista',city:'Ciudad de México',oldName:'Buenavista',country:'MX',x:640,y:338,platforms:12,international:true,hub:true,amenities:['Migración','Aduana','Metro','Tren Suburbano','Taxi','Restaurants']}
 ];
 
 export const RAIL_EDGES = [
-  ['GUA','FLU',24,['S','AEX']],['GUA','TEP',38,['RE','IR']],['TEP','LAG',41,['RE','IR']],['LAG','LOW',46,['RE','IC','ICE']],
+  ['GUA','FLU',24,['S','AEX']],['GUA','ALT',8,['S','RE']],['GUA','TEP',38,['RE','IR']],['TEP','LAG',41,['RE','IR']],['LAG','LOW',46,['RE','IC','ICE']],
   ['LOW','SIL',18,['S','RE']],['SIL','BAD',54,['RE','IC']],['BAD','ZAC',38,['RE','IC']],['ZAC','SLU',66,['RE','IC']],
-  ['GUA','KAR',68,['ICE','IC','RE']],['KAR','SJR',31,['S','RE']],['SJR','MEX',93,['EC','IC']],['KAR','SLU',73,['ICE','IC']],
-  ['SLU','GRE',49,['IC','EC','RE']],['GRE','MEX',104,['EC','NJ']],['SLU','GOL',78,['IC','RE']],
+  ['GUA','KAR',68,['ICE','IC','RE']],['KAR','SJR',31,['ICE','IC','RE']],['SJR','MEX',93,['RB']],['KAR','SLU',73,['ICE','IC']],
+  ['SLU','GRE',49,['IC','EC','RE']],['SLU','GOL',78,['IC','RE']],['GOL','GRE',64,['RE','IC']],
   ['GUA','PAZ',69,['IC','RE']],['PAZ','MAN',113,['IR','RE']],['GUA','VUL',72,['IC','RE']],['VUL','MAN',84,['IR','RE']],
   ['GUA','KAI',88,['ICE','IC','RE']],['KAI','SEE',33,['S','RE']],['KAI','KAR',96,['ICE','IC']],['VUL','KAI',61,['RE']],
-  ['GOL','MEX',132,['EC','IC']],['KAR','MEX',151,['EC','ICE']],['GUA','MEX',226,['EC','NJ']]
+  ['GOL','KAR',116,['IC','RE']],['GRE','KAR',104,['IC','RE']]
 ];
 
 const city = (id,name,oldName,accent,modes,stops,lines) => ({id,name,oldName,accent,modes,stops,lines});
@@ -136,7 +136,7 @@ export const FARES = [
 export const SERVICE_ALERTS = [
   {id:'IC-KAR-SLU',severity:'warning',modes:['IC'],title:'Bauarbeiten Karlsburg–Sankt Ludwig',text:'IC-Züge erhalten 8–12 Minuten zusätzliche Fahrzeit.',delay:10},
   {id:'RE-WEST',severity:'warning',modes:['RE'],title:'RE West: eingeschränkter Betrieb',text:'Einige Regionalzüge enden vorzeitig in Pazifikhafen.',delay:6},
-  {id:'EC-MEX',severity:'info',modes:['EC','NJ'],title:'Verstärkte Grenzkontrollen nach Mexiko',text:'Bundespolizei und Zoll führen Dokumenten- und Identitätskontrollen durch.',delay:15},
+  {id:'RB-MEX',severity:'warning',modes:['RB'],title:'San Juan del Río: verstärkte Grenzkontrollen',text:'Der Umstieg zwischen Fernverkehr und RB México erfolgt ausschließlich in San Juan del Río. Derzeit rund 45 Minuten Kontrollzeit.',delay:12},
   {id:'S-GDL',severity:'ok',modes:['S','U'],title:'Stadtverkehr Guadalajara',text:'Normalbetrieb auf allen U- und S-Bahn-Linien.',delay:0}
 ];
 
