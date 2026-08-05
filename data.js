@@ -1,5 +1,5 @@
-export const APP_VERSION = '0.7.0';
-export const APP_BUILD = '2026.08.04-border1';
+export const APP_VERSION = '0.7.1';
+export const APP_BUILD = '2026.08.04-journey-quality1';
 
 export const STATIONS = [
   {id:'GUA',name:'Guadalajara Hbf',city:'Guadalajara',oldName:'Guadalajara',country:'GL',x:300,y:282,platforms:22,hub:true,amenities:['GB Lounge','U-Bahn','S-Bahn','Restaurants','Einkaufen','Barrierefrei']},

@@ -1,54 +1,71 @@
-# QA Report — Galizische Bahn v0.7.0
+# QA Report — Galizische Bahn v0.7.1
 
 ## Resultado
 
-- **53/53 comprobaciones aprobadas**
-- Errores de JavaScript de página: **0**
-- Errores de consola: **0**
+- **59/59 comprobaciones aprobadas**
+- Suite principal: **42/42**
+- Suite de regresión: **17/17**
+- Errores de JavaScript detectados durante los recorridos: **0**
 - Viewports comprobados: **320, 375, 393 y 430 px**
+
+## Compra y Primera Clase
+
+- El flujo sigue cinco pasos y añade un resumen antes del pago.
+- La clase, el asiento, los extras y los campos de prueba permanecen al retroceder.
+- Una compra puede guardarse, reanudarse o descartarse.
+- En 1. Klasse se asigna un coche de Primera Clase.
+- El upgrade a Primera Clase no aparece cuando el pasajero ya eligió 1. Klasse.
+- En 2. Klasse el upgrade sí aparece.
+- El precio no se duplica al avanzar y retroceder.
+- Una tarjeta aprobada genera boleto.
+- Una tarjeta rechazada muestra error y vuelve a habilitar el botón de pago.
+
+## Gestión de boletos
+
+- Los boletos nuevos aparecen en Activos con QR válido.
+- El menú de gestión abre correctamente.
+- El cambio de asiento actualiza el boleto cuando la tarifa lo permite.
+- El QR puede abrirse a pantalla completa.
+- La descarga genera un archivo PDF local.
+- La cancelación muestra las condiciones y el reembolso correspondiente.
+- Al cancelar, el boleto cambia de estado, invalida el QR y se mueve a Cancelados.
+- El reembolso simulado aparece en Historial.
+- Los boletos urbanos no reembolsables muestran reembolso de 0 GM.
+- Las suscripciones pueden comprarse y aparecen en su sección.
+
+## Favoritos, estaciones y viaje
+
+- Las rutas favoritas aparecen en Inicio.
+- Las estaciones pueden guardarse como favoritas.
+- Las ciudades pueden guardarse como favoritas.
+- Los paneles de salidas y llegadas cambian correctamente.
+- El control de notificaciones simuladas está disponible.
 
 ## Frontera y México
 
-- Todas las conexiones ferroviarias entre cualquier estación disponible de Galizia y México pasan por **San Juan del Río Grenzbahnhof**.
-- El único tramo que entra o sale de Ciudad de México Buenavista es **RB México** entre San Juan del Río y Buenavista.
-- No existen enlaces ICE, IC, EC o NightJet directos a México.
-- Se comprobó el orden Galizia → tren nacional → San Juan del Río → control → RB → Buenavista.
-- Se comprobó el orden Buenavista → RB → San Juan del Río → control → tren nacional → Galizia.
-- La advertencia del **Auswärtiges Amt** aparece antes de mostrar resultados y exige cancelar o continuar.
+- La advertencia del **Auswärtiges Amt** aparece antes de mostrar resultados hacia o desde México.
+- Galizia → México utiliza tren nacional hasta San Juan del Río y después RB México.
+- México → Galizia comienza en RB México, pasa por San Juan del Río y continúa en tren nacional.
+- No se ofrecen trenes ICE, IC, EC o NightJet directos a Buenavista.
 
-## Navegación y experiencia
+## Transporte urbano, idiomas y apariencia
 
-- Cinco áreas principales: Start, Reisen, Stadt, Tickets y Mehr.
-- Red, operación, frontera, perfil y ajustes agrupados dentro de Mehr.
-- Cancelar, volver y cerrar funcionan durante la compra.
-- Asiento, documento y extras permanecen al retroceder.
-- Compra aprobada genera boleto.
-- Tarjeta rechazada conserva el proceso y reactiva el botón de pago.
-- Descartar compra cierra el proceso correctamente.
-
-## Transporte urbano y mapas
-
-- Los diez sistemas metropolitanos incluidos generan un mapa esquemático U-Bahn/S-Bahn.
-- Los detalles de línea se abren desde el mapa.
-- El mapa nacional contiene una única línea RB México y marca San Juan del Río como nodo fronterizo.
-
-## Idiomas, apariencia y responsive
-
-- Alemán, español e inglés disponibles.
-- Cambio de idioma aplicado a la navegación y pantallas principales.
-- Modo oscuro comprobado.
-- Sin desbordamiento horizontal en 320, 375, 393 ni 430 px.
+- Los diez sistemas metropolitanos incluidos generan sus mapas esquemáticos.
+- Alemán, español e inglés cambian las pantallas comprobadas.
+- El modo oscuro se aplica correctamente.
+- No hay desbordamiento horizontal en 320, 375, 393 ni 430 px.
 
 ## Validación técnica
 
 - Sintaxis comprobada en `app.js`, `data.js`, `routing.js`, `store.js`, `payment.js` y `sw.js`.
 - `manifest.webmanifest` y `version.json` son JSON válidos.
 - Todos los recursos declarados en el Service Worker existen.
-- Caché: `galizische-bahn-v0.7.0-border1`.
-- Se mantiene la clave local de v0.6 para conservar boletos y preferencias existentes.
+- Caché: `galizische-bahn-v0.7.1-quality1`.
+- `netlify.toml` desactiva la caché persistente de los archivos críticos.
+- Se conserva la clave local anterior para migrar boletos y preferencias.
 
 ## Limitaciones
 
-- Horarios, ocupación, posición, incidencias y pagos son simulados.
+- Horarios, ocupación, posición, incidencias, notificaciones, reembolsos y pagos son simulados.
 - No deben utilizarse datos bancarios reales.
-- La instalación y actualización final de la PWA deben comprobarse también en Safari real.
+- La instalación y actualización final de la PWA debe comprobarse también en Safari real después del despliegue.

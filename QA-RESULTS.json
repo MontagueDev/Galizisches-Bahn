@@ -1,271 +1,307 @@
 {
-  "checks": [
+  "version": "0.7.1",
+  "build": "2026.08.04-journey-quality1",
+  "summary": {
+    "passed": 59,
+    "total": 59,
+    "failed": 0
+  },
+  "results": [
     {
-      "name": "Version 0.7.0 visible",
-      "passed": true,
+      "name": "Home loads v0.7.1",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Five primary tabs",
-      "passed": true,
+      "name": "Five main tabs",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Primary navigation labels",
-      "passed": true,
-      "detail": "['Start', 'Reisen', 'Stadt', 'Tickets', 'Mehr']"
-    },
-    {
-      "name": "Home search is primary",
-      "passed": true,
+      "name": "Journey results appear",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Border card on home",
-      "passed": true,
+      "name": "First-class coach shown",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "All Mexico journeys use SJR border control",
-      "passed": true,
-      "detail": "[]"
-    },
-    {
-      "name": "No direct rail edge to Mexico outside SJR",
-      "passed": true,
-      "detail": "[]"
-    },
-    {
-      "name": "Mandatory Auswärtiges Amt warning",
-      "passed": true,
+      "name": "First class upgrade hidden",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Official warning wording",
-      "passed": true,
+      "name": "First class inclusion message",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Warning cannot close with X",
-      "passed": true,
+      "name": "Summary step exists",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Warning cancel closes cleanly",
-      "passed": true,
+      "name": "Summary keeps first class",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Outbound Mexico results",
-      "passed": true,
-      "detail": "3"
-    },
-    {
-      "name": "Result shows San Juan del Río",
-      "passed": true,
+      "name": "Summary keeps selected seat",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Result shows RB leg",
-      "passed": true,
+      "name": "Payment is step 5",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Result shows occupancy",
-      "passed": true,
+      "name": "Back from payment returns summary",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Result shows mandatory transfer",
-      "passed": true,
+      "name": "Card persists after back",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Detailed outbound order",
-      "passed": true,
-      "detail": "Internationale Verbindung\n×\nICE 100 + RB 90\n+2 min\nICE 100\nAuslastung: Gering\n09:15\nGuadalajara Hbf\n10:34\nSan Juan del Río Grenzbahnhof\nSJR\n\nGRENZ- UND MIGRATIONSKONTROLLE\n\nGrenzzentrum San Juan del R"
-    },
-    {
-      "name": "Detail shows 45-minute control",
-      "passed": true,
+      "name": "Ticket created",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Detail shows train composition",
-      "passed": true,
+      "name": "Ticket active tab selected",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Detail repeats advisory",
-      "passed": true,
+      "name": "Ticket valid",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Checkout has cancel",
-      "passed": true,
+      "name": "Ticket management menu",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Checkout has close X",
-      "passed": true,
+      "name": "Change seat action available",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Traveller step explains SJR",
-      "passed": true,
+      "name": "Seat changed on ticket",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Bike extra persists",
-      "passed": true,
+      "name": "PDF download created",
+      "ok": true,
+      "detail": "Galizische-Bahn-GBT-MSF9GM8Q-6600.pdf"
+    },
+    {
+      "name": "Full QR opens",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Passenger document persists",
-      "passed": true,
+      "name": "Full refund preview",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Seat persists",
-      "passed": true,
+      "name": "Cancelled ticket status",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Approved payment issues ticket",
-      "passed": true,
+      "name": "QR invalidated",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Issued ticket is international",
-      "passed": true,
+      "name": "No active ticket after cancellation",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Reverse begins with RB",
-      "passed": true,
-      "detail": "Internationale Verbindung\n×\nICE 100 + RB 90\n+2 min\nRB 90\nAuslastung: Mittel\n09:15\nCiudad de México Buenavista\n10:48\nSan Juan del Río Grenzbahnhof\n\nRB México · Kein ICE fährt direkt"
-    },
-    {
-      "name": "Declined card stays in checkout",
-      "passed": true,
+      "name": "Ticket moved to cancelled",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Pay button re-enabled",
-      "passed": true,
+      "name": "Refund in history",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Cancel confirmation appears",
-      "passed": true,
+      "name": "Favorite route on home",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Continue purchase returns to payment",
-      "passed": true,
+      "name": "Second class offers upgrade",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Discard closes checkout",
-      "passed": true,
+      "name": "Saved purchase resume card",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "All metropolitan networks have schematic maps",
-      "passed": true,
-      "detail": "[]"
-    },
-    {
-      "name": "Urban line detail opens",
-      "passed": true,
+      "name": "Resume returns to extras",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Local ticket payment has cancel",
-      "passed": true,
+      "name": "Auswärtiges Amt warning shown",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Local payment back returns to city",
-      "passed": true,
+      "name": "Mexico results mention San Juan del Río",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "More groups four services",
-      "passed": true,
+      "name": "Mexico results use RB",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Border centre explains both directions",
-      "passed": true,
+      "name": "Station departures board",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Border centre contains RB 90",
-      "passed": true,
+      "name": "Station arrivals tab active",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "National map has one RB Mexico edge",
-      "passed": true,
+      "name": "Station favorite toggles",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "SJR marked as border hub",
-      "passed": true,
+      "name": "City favorite button",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Profile reachable from More",
-      "passed": true,
+      "name": "Urban schematic map remains",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Language selector has three choices",
-      "passed": true,
+      "name": "Spanish applies",
+      "ok": true,
       "detail": ""
     },
     {
-      "name": "Spanish applied globally",
-      "passed": true,
-      "detail": ""
-    },
-    {
-      "name": "Dark theme applied",
-      "passed": true,
+      "name": "Dark theme applies",
+      "ok": true,
       "detail": ""
     },
     {
       "name": "No horizontal overflow at 320px",
-      "passed": true,
-      "detail": "{'sw': 320, 'cw': 320}"
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "No JavaScript console errors",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Declined card displays error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Payment button re-enabled",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Urban ticket issued",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Urban ticket shows no refund",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Urban ticket QR invalid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Subscription becomes active",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse trip warning appears",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse trip starts with RB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse trip uses San Juan del Río",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "All ten urban networks render maps",
+      "ok": true,
+      "detail": "10"
+    },
+    {
+      "name": "English language switches entire More screen",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Notification control exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No horizontal overflow at 320px",
+      "ok": true,
+      "detail": "0"
     },
     {
       "name": "No horizontal overflow at 375px",
-      "passed": true,
-      "detail": "{'sw': 375, 'cw': 375}"
+      "ok": true,
+      "detail": "0"
     },
     {
       "name": "No horizontal overflow at 393px",
-      "passed": true,
-      "detail": "{'sw': 393, 'cw': 393}"
+      "ok": true,
+      "detail": "0"
     },
     {
       "name": "No horizontal overflow at 430px",
-      "passed": true,
-      "detail": "{'sw': 430, 'cw': 430}"
+      "ok": true,
+      "detail": "0"
     },
     {
-      "name": "No JavaScript page errors",
-      "passed": true,
-      "detail": "[]"
-    },
-    {
-      "name": "No console errors",
-      "passed": true,
+      "name": "Regression suite has no JavaScript errors",
+      "ok": true,
       "detail": "[]"
     }
   ],
-  "page_errors": [],
-  "console_errors": []
+  "errors": []
 }

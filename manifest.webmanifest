@@ -1,7 +1,7 @@
 {
   "name": "Galizische Bahn",
   "short_name": "GBahn",
-  "description": "Reisen, Stadtverkehr, Grenzverbindungen über San Juan del Río und digitale Tickets – Version 0.7.0.",
+  "description": "Reisen, Stadtverkehr, Ticketverwaltung, Grenzverbindungen über San Juan del Río und digitale Tickets – Version 0.7.1.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

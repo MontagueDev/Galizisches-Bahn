@@ -1,9 +1,10 @@
 {
   "name": "Galizische Bahn",
-  "version": "0.7.0",
-  "build": "2026.08.04-border1",
+  "version": "0.7.1",
+  "build": "2026.08.04-journey-quality1",
   "type": "static-pwa",
   "payment": "simulation-only",
-  "release": "navigation-border-urban-maps",
-  "border_hub": "San Juan del Río Grenzbahnhof"
+  "release": "quality-journey-ticket-management",
+  "border_hub": "San Juan del Río Grenzbahnhof",
+  "storage_schema": 8
 }

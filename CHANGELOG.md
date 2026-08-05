@@ -1,26 +1,40 @@
 # Changelog
 
-## 0.7.0 — Border & Network Update
+## 0.7.1 — Quality & Journey Update
 
-### Organización
-- Nueva pestaña **Mehr** para red, operación, frontera, perfil y ajustes.
-- Inicio simplificado con búsqueda principal y avisos relevantes.
-- Resultados de conexión con precio, ocupación, duración y transbordos más claros.
+### Compra coherente
+- Nuevo flujo de cinco pasos con resumen antes del pago.
+- Un único estado central conserva conexión, clase, asiento, pasajero, extras y datos de prueba.
+- Las compras incompletas pueden reanudarse o descartarse desde Inicio.
+- Atrás y Cancelar conservan el contexto y evitan duplicar precios.
+- Los extras se filtran dinámicamente según clase y tipo de boleto.
+- Corregido el error que ofrecía un upgrade de Primera Clase a pasajeros que ya habían elegido 1. Klasse.
 
-### México y San Juan del Río
-- San Juan del Río pasa a ser el único enlace ferroviario con México.
-- Viaje Galizia → México: tren nacional hasta San Juan del Río, filtro migratorio y RB a Buenavista.
-- Viaje México → Galizia: RB hasta San Juan del Río, filtro migratorio y cambio al servicio nacional.
-- Eliminados los ICE/IC/EC directos a Ciudad de México.
-- Advertencia del Auswärtiges Amt antes de mostrar conexiones con México.
-- Nuevo centro fronterizo con estado, tiempos y documentos.
+### Gestión de boletos
+- Nuevo menú de acciones para cada boleto.
+- Cancelación con confirmación, QR invalidado y traslado a Cancelados.
+- Reembolso simulado según las condiciones de la tarifa.
+- QR a pantalla completa, compartir, PDF, repetir viaje y detalles.
+- Cambio de asiento disponible únicamente para tarifas modificables.
+- Secciones separadas: Activos, Suscripciones, Cancelados e Historial.
 
-### Mapas y operación
-- Mapas esquemáticos U-Bahn/S-Bahn para todas las redes urbanas.
-- Mapa nacional actualizado con San Juan del Río y RB México.
-- Composición y ocupación simuladas.
+### Viajes y personalización
+- Rutas, estaciones y ciudades favoritas.
+- Paneles de salidas y llegadas en las estaciones.
+- Viaje activo con siguiente parada, tiempo restante, retraso y progreso.
+- Información de tren, coche, sector y ocupación simulada.
+- Perfil con estadísticas locales.
+- Control de notificaciones simuladas.
 
-### Conservado desde 0.6.1
-- Cancelar, atrás y cierre seguro en compras.
-- Persistencia de asiento, extras y campos de prueba.
-- Selector de idioma corregido.
+### PWA y despliegue
+- Caché renovada: `galizische-bahn-v0.7.1-quality1`.
+- Recursos principales con versión 0.7.1.
+- `netlify.toml` evita almacenar versiones antiguas de `index.html`, `sw.js`, `version.json` y el manifiesto.
+- Se conserva la misma clave de almacenamiento para migrar boletos y preferencias existentes.
+
+### Conservado desde 0.7.0
+- Navegación en cinco áreas.
+- Frontera obligatoria en San Juan del Río.
+- RB México en ambos sentidos.
+- Advertencia del Auswärtiges Amt.
+- Mapas urbanos y mapa ferroviario nacional.
