@@ -15,7 +15,7 @@
   <link rel="apple-touch-startup-image" href="./icons/splash-1179x2556.png" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)">
   <link rel="apple-touch-startup-image" href="./icons/splash-1290x2796.png" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)">
   <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
-  <link rel="stylesheet" href="./app.css?v=0.8.2-ui2">
+  <link rel="stylesheet" href="./app.css?v=0.8.4-border-forms1">
   <title>Galizische Bahn</title>
 </head>
 <body>
@@ -33,17 +33,17 @@
     </header>
     <main id="mainView" class="main-view" tabindex="-1"></main>
     <nav class="bottom-nav" aria-label="Hauptnavigation">
-      <button class="nav-button active" data-route="home" type="button"><span class="nav-icon">⌂</span><small data-copy="navHome">Start</small></button>
-      <button class="nav-button" data-route="travel" type="button"><span class="nav-icon">⌕</span><small data-copy="navTravel">Reisen</small></button>
-      <button class="nav-button" data-route="city" type="button"><span class="nav-icon">▦</span><small data-copy="navCity">Stadt</small></button>
-      <button class="nav-button" data-route="tickets" type="button"><span class="nav-icon">▣</span><small data-copy="navTickets">Tickets</small></button>
-      <button class="nav-button" data-route="more" type="button"><span class="nav-icon">•••</span><small data-copy="navMore">Mehr</small></button>
+      <button class="nav-button active" data-route="home" type="button"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.7 12 3.8l8.5 6.9v8.5a1.8 1.8 0 0 1-1.8 1.8H5.3a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M9 21v-6.5h6V21"/></svg></span><small data-copy="navHome">Start</small></button>
+      <button class="nav-button" data-route="travel" type="button"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2.8" width="14" height="15.2" rx="4"/><path d="M8.2 7h7.6M8 13.7h.01M16 13.7h.01M8 18l-2 3M16 18l2 3M8 21h8"/></svg></span><small data-copy="navTravel">Reisen</small></button>
+      <button class="nav-button" data-route="city" type="button"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V9.5h7V21M10 21V3h8v18M18 21v-8h3v8M1.8 21h20.4"/><path d="M6 13h1M6 17h1M13 7h2M13 11h2M13 15h2"/></svg></span><small data-copy="navCity">Stadt</small></button>
+      <button class="nav-button" data-route="tickets" type="button"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v2.2a2.8 2.8 0 0 0 0 5.6V17a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 17v-2.2a2.8 2.8 0 0 0 0-5.6V7A1.5 1.5 0 0 1 4 5.5Z"/><path d="M9 8.5v7M15 8.5v7" stroke-dasharray="1.5 2"/></svg></span><small data-copy="navTickets">Tickets</small></button>
+      <button class="nav-button" data-route="more" type="button"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></span><small data-copy="navMore">Mehr</small></button>
     </nav>
   </div>
   <div id="modalRoot"></div>
   <div id="toastRoot" class="toast-root" aria-live="polite"></div>
   <div id="updateBanner" class="update-banner" hidden></div>
   <noscript>Diese Anwendung benötigt JavaScript.</noscript>
-  <script type="module" src="./app.js?v=0.8.2-ui2"></script>
+  <script type="module" src="./app.js?v=0.8.4-border-forms1"></script>
 </body>
 </html>

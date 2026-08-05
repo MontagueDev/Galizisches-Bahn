@@ -1,5 +1,5 @@
-export const APP_VERSION = '0.8.1';
-export const APP_BUILD = '2026.08.05-liquid-glass1';
+export const APP_VERSION = '0.8.3';
+export const APP_BUILD = '2026.08.05-forms-icons1';
 
 export const STATIONS = [
   {id:'GUA',name:'Guadalajara Hbf',city:'Guadalajara',oldName:'Guadalajara',country:'GL',x:300,y:282,platforms:22,hub:true,amenities:['GB Lounge','U-Bahn','S-Bahn','Restaurants','Einkaufen','Barrierefrei']},

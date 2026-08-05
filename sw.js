@@ -1,7 +1,7 @@
-const CACHE='galizische-bahn-v0.8.2-ui-refinement2';
+const CACHE='galizische-bahn-v0.8.4-border-forms1';
 const CORE=[
-  './','./index.html','./app.css?v=0.8.2-ui2','./app.js?v=0.8.2-ui2','./i18n.js?v=0.8.2-ui2',
-  './data.js?v=0.8.2-ui2','./store.js?v=0.8.2-ui2','./routing.js?v=0.8.2-ui2','./payment.js?v=0.8.2-ui2','./manifest.webmanifest','./version.json',
+  './','./index.html','./app.css?v=0.8.4-border-forms1','./app.js?v=0.8.4-border-forms1','./i18n.js?v=0.8.4-border-forms1',
+  './data.js?v=0.8.4-border-forms1','./store.js?v=0.8.4-border-forms1','./routing.js?v=0.8.4-border-forms1','./payment.js?v=0.8.4-border-forms1','./manifest.webmanifest','./version.json',
   './icons/favicon-32.png','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-icon-512.png'
 ];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));

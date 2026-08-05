@@ -1,14 +1,13 @@
-# Galizische Bahn v0.8.2
+# Galizische Bahn v0.8.4
 
-UI & UX refinement release built on v0.8.1. German remains the canonical source language, with reviewed Spanish and English translations.
+Visual correction release focused on the passenger and international-border purchase step. German remains the canonical source language, with reviewed Spanish and English translations.
 
 ## Main focus
 
-- Cleaner payment and data-entry forms
-- Consistent Liquid Glass materials
-- Predictable modal navigation and actions
-- Harmonised typography, spacing, cards and buttons
-- Accessibility and small-screen improvements
-- Reliable PWA update from v0.8.1
+- Non-overlapping form labels
+- Compact San Juan del Río border information
+- Clear passport and document confirmation fields
+- Unified SVG navigation icons
+- Reliable PWA update from v0.8.3
 
 All live data and payments are simulated. Never enter real banking data.

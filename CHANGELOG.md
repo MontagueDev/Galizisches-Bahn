@@ -1,12 +1,9 @@
 # Changelog
 
-## 0.8.2 — UI & UX Refinement
+## 0.8.4 — Passenger & Border Form Polish
 
-- Redesigned payment fields with labels above inputs and no overlapping surfaces.
-- Replaced CVV with descriptive, localized security-code wording.
-- Unified field spacing, focus, validation and helper text.
-- Standardized Liquid Glass materials, cards, buttons and modal actions.
-- Improved compact layouts from 320 to 430 px.
-- Refined empty states, progress indicators and accessibility behavior.
-- Updated PWA cache and versioned resources.
-- Preserved tickets, subscriptions, favourites and preferences from v0.8.1.
+- Corrected all remaining overlapping labels in the passenger and passport step.
+- Rebuilt the San Juan del Río notice as a compact information card.
+- Aligned the document confirmation control and reduced visual weight.
+- Preserved the unified SVG bottom navigation introduced in v0.8.3.
+- Added a new PWA cache namespace.
