@@ -1,11 +1,11 @@
 import {
   APP_VERSION, APP_BUILD, STATIONS, RAIL_EDGES, URBAN_NETWORKS,
   SUBSCRIPTIONS, FARES, SERVICE_ALERTS, COPY, getStation, getUrbanNetwork
-} from './data.js?v=0.8.6-db-results1';
-import { createStore } from './store.js?v=0.8.6-db-results1';
-import { createJourneys, planUrban, addTime } from './routing.js?v=0.8.6-db-results1';
-import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.8.6-db-results1';
-import { I18N } from './i18n.js?v=0.8.6-db-results1';
+} from './data.js?v=0.9.0-network-expansion1';
+import { createStore } from './store.js?v=0.9.0-network-expansion1';
+import { createJourneys, planUrban, addTime } from './routing.js?v=0.9.0-network-expansion1';
+import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.9.0-network-expansion1';
+import { I18N } from './i18n.js?v=0.9.0-network-expansion1';
 
 const store = createStore();
 const EXTRA_COPY={
@@ -234,9 +234,9 @@ function renderHome(){
     <article class="card home-search-card v08-search-card">
       <div class="search-card-heading"><div><p class="eyebrow">${esc(t('adaptiveHome'))}</p><h2>${esc(t('searchTrip'))}</h2></div><span class="soft-badge">${esc(classLabel(search.travelClass))}</span></div>
       <div class="route-input-stack">
-        <label class="route-input"><span class="route-dot start"></span><small>${esc(t('from'))}</small><select id="homeFrom">${stationOptions(search.fromId)}</select></label>
+        ${stationSearchMarkup('homeFrom',search.fromId,t('from'))}
         <button id="homeSwap" class="swap floating" type="button" aria-label="${esc(t('changes'))}">⇅</button>
-        <label class="route-input"><span class="route-dot end"></span><small>${esc(t('to'))}</small><select id="homeTo">${stationOptions(search.toId)}</select></label>
+        ${stationSearchMarkup('homeTo',search.toId,t('to'))}
       </div>
       <div class="search-options-row">
         <label><span>${esc(t('date'))}</span><input id="homeDate" type="date" value="${esc(search.date)}"></label>
@@ -250,8 +250,9 @@ function renderHome(){
     ${favorites.length?`<section class="section"><div class="section-title"><h2>${esc(t('favorites'))}</h2><button class="link-button" data-nav="travel">${esc(t('startNewSearch'))}</button></div><div class="favorite-routes v08-favorites">${favorites.map(r=>`<button data-favorite-route="${esc(r.id)}"><span>★</span><div><strong>${esc(getStation(r.fromId)?.city)} → ${esc(getStation(r.toId)?.city)}</strong><small>${esc(classLabel(r.travelClass))}</small></div><b>›</b></button>`).join('')}</div></section>`:''}
     <section class="section"><div class="section-title"><div><p class="eyebrow">${esc(t('liveNetwork'))}</p><h2>${esc(t('importantNotices'))}</h2></div><button class="link-button" data-nav="operations">${esc(t('open'))}</button></div><div class="status-ribbon"><span class="status-dot ok"></span><div><strong>${esc(t('serviceNormal'))}</strong><small>${esc(t('lastUpdated'))}: ${new Date().toLocaleTimeString(locale(),{hour:'2-digit',minute:'2-digit'})}</small></div><button data-nav="network">${esc(t('maps'))} ›</button></div>${borderFlowCard()}</section>
     ${sub?`<section class="section"><div class="section-title"><h2>${esc(t('galizienTicket'))}</h2><button class="link-button" data-nav="tickets">${esc(t('open'))}</button></div>${subscriptionCard(sub)}</section>`:''}`;
+  const fromPicker=bindStationAutocomplete('homeFrom'),toPicker=bindStationAutocomplete('homeTo');
   const from=document.getElementById('homeFrom'),to=document.getElementById('homeTo');
-  document.getElementById('homeSwap').addEventListener('click',()=>{[from.value,to.value]=[to.value,from.value]});
+  document.getElementById('homeSwap').addEventListener('click',()=>{const a=from.value,b=to.value;fromPicker.set(b);toPicker.set(a)});
   document.getElementById('homeSearch').addEventListener('click',()=>{const value=readSearchForm('home');store.set(st=>({...st,search:value}));navigate('travel',{autoSearch:true})});
   document.getElementById('homeOptions').addEventListener('click',openQuickSearchOptions);
   document.getElementById('resumePurchase')?.addEventListener('click',()=>{checkout=state().purchaseDraft;resumeCheckout()});
@@ -261,15 +262,35 @@ function renderHome(){
 function alertMini(a){return `<article class="alert-mini ${a.severity}"><span></span><div><strong>${esc(a.title)}</strong><small>${esc(a.text)}</small></div></article>`}
 function subscriptionCard(s){return `<article class="card active-pass"><div><span class="pass-logo">G</span><div><small>${esc(t('activeSubscription'))}</small><h3>${esc(s.name)}</h3><p>${esc(t('validUntil'))}: ${esc(fmtDate(s.validUntil))}</p></div></div><strong>${esc(currency(s.price))}</strong></article>`}
 
-function stationOptions(selected){return STATIONS.map(s=>`<option value="${s.id}" ${s.id===selected?'selected':''}>${esc(s.name)}${s.country==='MX'?' · MX':''}</option>`).join('')}
+function stationTypeName(station){
+  const lang=state()?.language||'de';
+  const maps={
+    de:{Hbf:'Hauptbahnhof',Bahnhof:'Bahnhof',Flughafen:'Flughafen-Fernbahnhof',Hafen:'Hafenbahnhof','U-Bahn':'U-Bahn-Haltestelle','S-Bahn':'S-Bahn-Station',Grenzbahnhof:'Grenzbahnhof',International:'Internationaler Bahnhof'},
+    es:{Hbf:'Estación central',Bahnhof:'Estación ferroviaria',Flughafen:'Estación ferroviaria del aeropuerto',Hafen:'Estación del puerto','U-Bahn':'Estación de U-Bahn','S-Bahn':'Estación de S-Bahn',Grenzbahnhof:'Estación fronteriza',International:'Estación internacional'},
+    en:{Hbf:'Central station',Bahnhof:'Railway station',Flughafen:'Airport long-distance station',Hafen:'Harbour station','U-Bahn':'U-Bahn station','S-Bahn':'S-Bahn station',Grenzbahnhof:'Border station',International:'International station'}
+  };
+  return maps[lang]?.[station?.stationType]||station?.stationType||'';
+}
+function stationSearchMarkup(prefix,selectedId,label){
+  const selected=getStation(selectedId)||STATIONS[0];
+  return `<div class="station-autocomplete" data-station-picker="${prefix}"><label for="${prefix}Text">${esc(label)}</label><div class="station-search-input"><span class="station-type-icon">${selected.longDistance?'GB':selected.stationType==='U-Bahn'?'U':'S'}</span><input id="${prefix}Text" type="search" autocomplete="off" value="${esc(selected.name)}" placeholder="${esc((state().language==='es'?'Estación o parada':state().language==='en'?'Station or stop':'Bahnhof oder Haltestelle'))}" aria-autocomplete="list"><input id="${prefix}" type="hidden" value="${esc(selected.id)}"><button type="button" class="station-clear" aria-label="Löschen">×</button></div><div class="station-suggestions" role="listbox" hidden></div></div>`;
+}
+function bindStationAutocomplete(prefix,onChange){
+  const root=document.querySelector(`[data-station-picker="${prefix}"]`);if(!root)return null;
+  const text=root.querySelector(`#${prefix}Text`),hidden=root.querySelector(`#${prefix}`),list=root.querySelector('.station-suggestions'),clear=root.querySelector('.station-clear');
+  const render=(query='')=>{const q=query.trim().toLocaleLowerCase();let items=STATIONS.filter(s=>!q||`${s.name} ${s.city} ${s.oldName||''} ${stationTypeName(s)}`.toLocaleLowerCase().includes(q));const fav=state().favorites||[];items.sort((a,b)=>(fav.includes(b.id)-fav.includes(a.id))||(b.longDistance-a.longDistance)||a.name.localeCompare(b.name));items=items.slice(0,8);list.innerHTML=items.map(s=>`<button type="button" role="option" data-station-id="${s.id}"><span class="suggestion-icon ${s.longDistance?'long-distance':''}">${s.stationType==='U-Bahn'?'U':s.stationType==='S-Bahn'?'S':s.stationType==='Flughafen'?'✈':'GB'}</span><span><strong>${esc(s.name)}</strong><small>${esc(stationTypeName(s))}${s.oldName&&s.oldName!==s.city?` · ${esc(s.oldName)}`:''}${s.country==='MX'?' · México':''}</small></span>${fav.includes(s.id)?'<b>★</b>':''}</button>`).join('');list.hidden=!items.length;list.querySelectorAll('[data-station-id]').forEach(btn=>btn.addEventListener('click',()=>{const s=getStation(btn.dataset.stationId);hidden.value=s.id;text.value=s.name;root.querySelector('.station-type-icon').textContent=s.longDistance?'GB':s.stationType==='U-Bahn'?'U':'S';list.hidden=true;hidden.dispatchEvent(new Event('change',{bubbles:true}));onChange?.(s)}))};
+  text.addEventListener('focus',()=>render(text.value===getStation(hidden.value)?.name?'':text.value));text.addEventListener('input',()=>{hidden.value='';render(text.value)});text.addEventListener('blur',()=>setTimeout(()=>{list.hidden=true;if(!hidden.value){const exact=STATIONS.find(s=>s.name.toLocaleLowerCase()===text.value.trim().toLocaleLowerCase());const fallback=exact||getStation(state().search[prefix.toLowerCase().includes('from')?'fromId':'toId'])||STATIONS[0];hidden.value=fallback.id;text.value=fallback.name}},180));clear.addEventListener('click',()=>{text.value='';hidden.value='';text.focus();render('')});
+  return{hidden,text,set(id){const s=getStation(id);if(s){hidden.value=s.id;text.value=s.name}},value:()=>hidden.value};
+}
+function stationOptions(selected){return STATIONS.map(s=>`<option value="${s.id}" ${s.id===selected?'selected':''}>${esc(s.name)}</option>`).join('')}
 function renderTravel(opts={}){
   const s=state().search;
   main.innerHTML=`<section class="page-header v08-page-title"><div><p class="eyebrow">${esc(t('longDistance'))}</p><h1>${esc(t('searchTrip'))}</h1><p class="subtitle">${esc(t('appTagline'))}</p></div><button class="round-action" data-nav="network" aria-label="${esc(t('maps'))}">◇</button></section>
   <article class="card search-card v08-search-form">
     <div class="route-input-stack">
-      <label class="route-input"><span class="route-dot start"></span><small>${esc(t('from'))}</small><select id="travelFrom">${stationOptions(s.fromId)}</select></label>
+      ${stationSearchMarkup('travelFrom',s.fromId,t('from'))}
       <button id="swapStations" class="swap floating" type="button">⇅</button>
-      <label class="route-input"><span class="route-dot end"></span><small>${esc(t('to'))}</small><select id="travelTo">${stationOptions(s.toId)}</select></label>
+      ${stationSearchMarkup('travelTo',s.toId,t('to'))}
     </div>
     <div class="search-grid-four">
       <label><span>${esc(t('date'))}</span><input id="travelDate" type="date" value="${esc(s.date)}"></label>
@@ -282,10 +303,11 @@ function renderTravel(opts={}){
   </article>
   <div id="internationalBanner"></div>
   <section id="resultsSection" class="section" hidden><div class="section-title"><div><p class="eyebrow">${esc(t('recommended'))}</p><h2>${esc(t('connections'))}</h2></div><span id="resultCount" class="result-count"></span></div><div id="journeyFilters" class="filter-chips"></div><div id="journeyResults" class="result-list v08-result-list"></div></section>`;
+  const fromPicker=bindStationAutocomplete('travelFrom'),toPicker=bindStationAutocomplete('travelTo');
   const from=document.getElementById('travelFrom'),to=document.getElementById('travelTo');
   const updateBanner=()=>{document.getElementById('internationalBanner').innerHTML=(getStation(from.value)?.country==='MX'||getStation(to.value)?.country==='MX')?borderFlowCard():'';bindNav(document.getElementById('internationalBanner'))};
   from.addEventListener('change',updateBanner);to.addEventListener('change',updateBanner);updateBanner();
-  document.getElementById('swapStations').addEventListener('click',()=>{[from.value,to.value]=[to.value,from.value];updateBanner()});
+  document.getElementById('swapStations').addEventListener('click',()=>{const a=from.value,b=to.value;fromPicker.set(b);toPicker.set(a);updateBanner()});
   document.getElementById('searchJourneys').addEventListener('click',()=>beginTravelSearch());
   if(opts.autoSearch)requestAnimationFrame(()=>beginTravelSearch());
 }

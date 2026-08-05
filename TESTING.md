@@ -1,11 +1,3 @@
-# Testing v0.8.6
+# Testing
 
-Prueba como mínimo:
-- conexión directa;
-- conexión con un transbordo;
-- conexión retrasada;
-- Galizia → México;
-- México → Galizia;
-- apertura de detalles y compra;
-- alemán, español e inglés;
-- anchos de 320, 375, 393 y 430 px.
+Validate: autocomplete, urban-to-long-distance access, Hbf/Ostbahnhof alternatives, ICE/IC/RE/RB variety, Mexico in both directions, purchases, tickets, languages, dark mode and PWA update.

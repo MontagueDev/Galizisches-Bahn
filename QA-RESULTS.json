@@ -1,9 +1,156 @@
 {
-  "version": "0.8.6",
-  "nav_buttons": 5,
-  "home_version_removed": true,
-  "new_cache": true,
-  "index_404_equal": true,
-  "fixed_nav_rule": true,
-  "field_wrapper_reset": true
+  "version": "0.9.0",
+  "passed": 28,
+  "total": 29,
+  "checks": [
+    {
+      "name": "Version is 0.9.0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Expanded station database",
+      "ok": true,
+      "detail": "152"
+    },
+    {
+      "name": "Ten metropolitan networks",
+      "ok": true,
+      "detail": "10"
+    },
+    {
+      "name": "Population-scaled urban lines",
+      "ok": true,
+      "detail": "65"
+    },
+    {
+      "name": "Long-distance stations identified",
+      "ok": true,
+      "detail": "35"
+    },
+    {
+      "name": "Urban stations identified",
+      "ok": true,
+      "detail": "116"
+    },
+    {
+      "name": "Mexico separate country",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "San Juan border station",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Only RB crosses SJR–MEX",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Predictive autocomplete component",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Old station select replaced",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "German, Spanish and English station labels",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Urban access engine",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "ICE alternative profile",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "IC alternative profile",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "RE alternative profile",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "RB alternative profile",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mexico outbound order",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "name": "GB blue identity",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GB logo SVG",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "New PWA cache",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Index and 404 synchronized",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Standalone preview generated",
+      "ok": true,
+      "detail": "391225"
+    },
+    {
+      "name": "data.js syntax",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "routing.js syntax",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "store.js syntax",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "payment.js syntax",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "i18n.js syntax",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "app.js syntax",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "limitations": [
+    "Operational data, fares and payments remain simulated.",
+    "Chromium page rendering was blocked by the execution environment; the standalone HTML is included for Safari validation."
+  ]
 }

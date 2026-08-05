@@ -1,7 +1,7 @@
-const CACHE='galizische-bahn-v0.8.6-db-results1';
+const CACHE='galizische-bahn-v0.9.0-network-expansion1';
 const CORE=[
-  './','./index.html','./app.css?v=0.8.6-db-results1','./app.js?v=0.8.6-db-results1','./i18n.js?v=0.8.6-db-results1',
-  './data.js?v=0.8.6-db-results1','./store.js?v=0.8.6-db-results1','./routing.js?v=0.8.6-db-results1','./payment.js?v=0.8.6-db-results1','./manifest.webmanifest','./version.json',
+  './','./index.html','./app.css?v=0.9.0-network-expansion1','./app.js?v=0.9.0-network-expansion1','./i18n.js?v=0.9.0-network-expansion1',
+  './data.js?v=0.9.0-network-expansion1','./store.js?v=0.9.0-network-expansion1','./routing.js?v=0.9.0-network-expansion1','./payment.js?v=0.9.0-network-expansion1','./manifest.webmanifest','./version.json',
   './icons/favicon-32.png','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-icon-512.png'
 ];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));

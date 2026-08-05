@@ -1,4 +1,4 @@
-import {APP_VERSION} from './data.js?v=0.8.6-db-results1';
+import {APP_VERSION} from './data.js?v=0.9.0-network-expansion1';
 
 // Keep the historic key so v0.6–v0.7.1 data is migrated instead of lost.
 const KEY='gbahn-v060-state';
@@ -6,7 +6,7 @@ const clone=value=>JSON.parse(JSON.stringify(value));
 const today=()=>{const now=new Date();return new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10)};
 
 export const DEFAULT_STATE={
-  schema:9,
+  schema:10,
   appVersion:APP_VERSION,
   route:'home',
   language:'de',
@@ -54,7 +54,7 @@ function sanitize(raw){
     ui:{...base.ui,...(raw.ui||{})},
     migration:{...base.migration,...(raw.migration||{})}
   };
-  state.schema=9;
+  state.schema=10;
   state.appVersion=APP_VERSION;
   state.tickets=Array.isArray(state.tickets)?state.tickets.map(normalizeTicket):[];
   state.subscriptions=Array.isArray(state.subscriptions)?state.subscriptions:[];

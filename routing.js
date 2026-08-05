@@ -1,4 +1,4 @@
-import {STATIONS,RAIL_EDGES,getStation,SERVICE_ALERTS} from './data.js?v=0.8.6-db-results1';
+import {STATIONS,RAIL_EDGES,getStation,getUrbanNetwork,SERVICE_ALERTS} from './data.js?v=0.9.0-network-expansion1';
 
 const adjacency=new Map();
 for(const [a,b,minutes,modes] of RAIL_EDGES){
@@ -52,113 +52,98 @@ function composition(type,occupancy){
 }
 
 function domesticPath(from,to,type){
-  const allowed=type==='ICE'?['ICE','IC','EC']:type==='IC'?['IC','ICE','RE','IR']:['RE','IR','IC','ICE','S'];
-  return shortestPath(from,to,allowed,['MEX'])||shortestPath(from,to,['ICE','IC','RE','IR','S'],['MEX'])||shortestPath(from,to,null,['MEX']);
+  const allowed=type==='ICE'?['ICE','IC']:type==='IC'?['IC','ICE','RE']:type==='RE'?['RE','IR','IC','RB']:['RB','RE','IR'];
+  return shortestPath(from,to,allowed,['MEX'])||shortestPath(from,to,['ICE','IC','RE','IR','RB','S'],['MEX'])||shortestPath(from,to,null,['MEX']);
 }
 
-function createInternationalJourneys(search){
-  const outbound=search.toId==='MEX';
-  const domesticId=outbound?search.fromId:search.toId;
-  const hour=Number(search.time.slice(0,2));
-  const types=['ICE','IC','RE',...(hour>=20||hour<5?['NJ']:[])];
-  const passenger=Math.max(1,Number(search.passengers)||1);
-  const classFactor=String(search.travelClass)==='1'?1.42:1;
-  const results=[];
-
-  types.forEach((type,index)=>{
-    const path=domesticPath(domesticId,'SJR',type);
-    if(!path)return;
-    const spec=typeSpecs[type];
-    const departure=addTime(search.time,index*27);
-    const borderMinutes=45;
-    const transferMinutes=path.ids.length>1?12:0;
-    const rbMinutes=93;
-    const operationalDelay=index===1?14:index===2?5:2;
-    const domesticMinutes=Math.round(path.minutes*spec.speed)+(path.minutes?operationalDelay:0);
-    const rbTrain=trainNumber('RB',index);
-    const domesticTrain=trainNumber(type,index);
-    const occupancy=occupancyFor(`${search.fromId}${search.toId}${departure}`,index);
-    let segments=[];
-    let arrival;
-
-    if(outbound){
-      const domesticArrival=addTime(departure,domesticMinutes);
-      const borderEnd=addTime(domesticArrival,borderMinutes);
-      const rbDeparture=addTime(borderEnd,transferMinutes);
-      arrival=addTime(rbDeparture,rbMinutes);
-      if(path.ids.length>1)segments.push({kind:'train',type,train:domesticTrain,fromId:search.fromId,toId:'SJR',departure,arrival:domesticArrival,path:path.ids,occupancy,composition:composition(type,occupancy)});
-      segments.push({kind:'border',stationId:'SJR',direction:'outbound',start:domesticArrival,end:borderEnd,minutes:borderMinutes});
-      segments.push({kind:'train',type:'RB',train:rbTrain,fromId:'SJR',toId:'MEX',departure:rbDeparture,arrival,path:['SJR','MEX'],occupancy:'medium',composition:composition('RB','medium')});
-    }else{
-      const rbArrival=addTime(departure,rbMinutes);
-      const borderEnd=addTime(rbArrival,borderMinutes);
-      const domesticDeparture=addTime(borderEnd,transferMinutes);
-      arrival=addTime(domesticDeparture,domesticMinutes);
-      segments.push({kind:'train',type:'RB',train:rbTrain,fromId:'MEX',toId:'SJR',departure,arrival:rbArrival,path:['MEX','SJR'],occupancy:'medium',composition:composition('RB','medium')});
-      segments.push({kind:'border',stationId:'SJR',direction:'inbound',start:rbArrival,end:borderEnd,minutes:borderMinutes});
-      if(path.ids.length>1)segments.push({kind:'train',type,train:domesticTrain,fromId:'SJR',toId:search.toId,departure:domesticDeparture,arrival,path:[...path.ids].reverse(),occupancy,composition:composition(type,occupancy)});
-    }
-
-    const totalMinutes=domesticMinutes+rbMinutes+borderMinutes+transferMinutes;
-    const price=Math.max(36,Math.round((path.minutes*spec.price+rbMinutes*.14+18)*classFactor*passenger));
-    const pathIds=outbound?[...path.ids,'MEX']:['MEX',...path.ids.slice().reverse()];
-    const hasDomestic=path.ids.length>1;
-    const connection=operationalDelay>=12?'risk':'safe';
-    results.push({
-      id:`INT-${type}-${search.fromId}-${search.toId}-${departure}`,
-      type:hasDomestic?(outbound?type:'RB'):'RB',train:hasDomestic?(outbound?`${domesticTrain} + ${rbTrain}`:`${rbTrain} + ${domesticTrain}`):rbTrain,
-      fromId:search.fromId,toId:search.toId,from:getStation(search.fromId).name,to:getStation(search.toId).name,
-      date:search.date,departure,arrival,duration:totalMinutes,baseMinutes:path.minutes+rbMinutes,
-      path:pathIds,price,delay:operationalDelay,changes:hasDomestic?1:0,platform:String(2+(index*3)%10),
-      travelClass:String(search.travelClass),passengers:passenger,international:true,borderMinutes,
-      transferMinutes,connection,night:type==='NJ',segments,occupancy,
-      composition:outbound?composition(type,occupancy):composition('RB','medium'),borderStationId:'SJR',mandatoryTransfer:hasDomestic,
-      warningAuthority:'Auswärtiges Amt',borderStatus:'restricted',rbTrain,
-      displayServices:segments.filter(segment=>segment.kind==='train').map(segment=>({type:segment.type,train:segment.train,weight:Math.max(1,segment.path?.length||2)}))
-    });
-  });
-  return results;
+function cityGateways(station){
+  if(!station)return[];
+  return STATIONS.filter(s=>s.country===station.country&&s.city===station.city&&s.longDistance);
 }
-
+function stationUrbanName(station){return station?.urbanStop||station?.name?.replace(`${station.city} `,'').replace(' Fernbahnhof','')}
+function urbanAccess(station,gateway,direction='outbound'){
+  if(!station||!gateway||station.id===gateway.id)return null;
+  const networkId=station.urbanNetworkId||gateway.urbanNetworkId;
+  if(!networkId)return null;
+  const network=getUrbanNetwork(networkId);
+  const from=stationUrbanName(station),to=stationUrbanName(gateway);
+  const plan=planUrban(network,direction==='outbound'?from:to,direction==='outbound'?to:from);
+  if(!plan)return null;
+  return{kind:'urban',mode:plan.steps[0]?.mode||'S',line:plan.steps.map(s=>s.lineId).join(' + '),fromId:direction==='outbound'?station.id:gateway.id,toId:direction==='outbound'?gateway.id:station.id,minutes:plan.minutes,changes:plan.changes,steps:plan.steps};
+}
+function gatewayOptions(station){
+  if(station.longDistance)return[{gateway:station,access:null,score:0}];
+  return cityGateways(station).map(g=>{const access=urbanAccess(station,g,'outbound');return{gateway:g,access,score:access?.minutes??999}}).filter(x=>x.score<999).sort((a,b)=>a.score-b.score).slice(0,3);
+}
+function reverseAccess(station,gateway){return station.id===gateway.id?null:urbanAccess(station,gateway,'inbound')}
+function urbanDisplay(access,index=0){
+  if(!access)return[];
+  return access.steps.map((step,i)=>({type:step.mode,train:step.lineId,weight:Math.max(1,step.stops),urban:true}));
+}
+function accessSegment(access,departure){
+  if(!access)return null;
+  return{kind:'urban',type:access.mode,train:access.line,fromId:access.fromId,toId:access.toId,departure,arrival:addTime(departure,access.minutes),minutes:access.minutes,steps:access.steps};
+}
+function createSameCityJourney(search){
+  const a=getStation(search.fromId),b=getStation(search.toId);if(!a||!b||a.city!==b.city||!a.urbanNetworkId)return[];
+  const network=getUrbanNetwork(a.urbanNetworkId),plan=planUrban(network,stationUrbanName(a),stationUrbanName(b));if(!plan)return[];
+  const departure=search.time,arrival=addTime(departure,plan.minutes),passenger=Math.max(1,Number(search.passengers)||1);
+  return[{id:`CITY-${a.id}-${b.id}-${departure}`,type:plan.steps[0]?.mode||'S',train:plan.steps.map(s=>s.lineId).join(' + '),fromId:a.id,toId:b.id,from:a.name,to:b.name,date:search.date,departure,arrival,duration:plan.minutes,baseMinutes:plan.minutes,path:[a.id,b.id],price:4*passenger,delay:0,changes:plan.changes,platform:'—',travelClass:'2',passengers:passenger,international:false,borderMinutes:0,connection:'safe',night:false,occupancy:'medium',composition:[],segments:[accessSegment({mode:plan.steps[0]?.mode||'S',line:plan.steps.map(s=>s.lineId).join(' + '),fromId:a.id,toId:b.id,minutes:plan.minutes,steps:plan.steps},departure)],displayServices:plan.steps.map(s=>({type:s.mode,train:s.lineId,weight:Math.max(1,s.stops),urban:true}))}];
+}
 function createDomesticJourneys(search){
-  const hour=Number(search.time.slice(0,2));
-  const candidateTypes=['ICE','IC','RE',...(hour>=20||hour<5?['NJ']:[])];
-  const passenger=Math.max(1,Number(search.passengers)||1);
-  const classFactor=String(search.travelClass)==='1'?1.42:1;
+  const same=createSameCityJourney(search);if(same.length)return same;
+  const origin=getStation(search.fromId),destination=getStation(search.toId);if(!origin||!destination)return[];
+  const starts=gatewayOptions(origin),ends=(destination.longDistance?[{gateway:destination,score:0}]:cityGateways(destination).map(g=>({gateway:g,score:reverseAccess(destination,g)?.minutes??999})).filter(x=>x.score<999).sort((a,b)=>a.score-b.score).slice(0,3));
+  const hour=Number(search.time.slice(0,2)),passenger=Math.max(1,Number(search.passengers)||1),classFactor=String(search.travelClass)==='1'?1.42:1;
+  const profiles=[
+    {type:'ICE',offset:0,label:'fast',price:.34},
+    {type:'IC',offset:17,label:'balanced',price:.25},
+    {type:'RE',offset:31,label:'regional',price:.16},
+    {type:'RB',offset:44,label:'cheap',price:.11},
+    ...(hour>=19||hour<5?[{type:'NJ',offset:65,label:'night',price:.38}]:[])
+  ];
   const results=[];
-  candidateTypes.forEach((type,index)=>{
-    let path=domesticPath(search.fromId,search.toId,type);
-    if(!path)return;
-    const spec=typeSpecs[type];
-    const alert=SERVICE_ALERTS.find(a=>a.modes.includes(type));
-    const delay=(alert?alert.delay:((index*3)%7))+(index===2?8:0);
-    const departure=addTime(search.time,index*27);
-    const tripMinutes=Math.round(path.minutes*spec.speed)+delay;
-    const price=Math.max(22,Math.round(path.minutes*spec.price*classFactor*passenger));
-    const changes=Math.max(0,Math.min(2,path.ids.length>5?1:0)+(type==='RE'&&path.ids.length>4?1:0));
-    const connection=changes&&delay>=20?'missed':changes&&delay>=12?'risk':'safe';
-    const occupancy=occupancyFor(`${search.fromId}${search.toId}${departure}`,index);
-    const train=trainNumber(type,index);
-    results.push({
-      id:`${type}-${search.fromId}-${search.toId}-${departure}`,type,train,
-      fromId:search.fromId,toId:search.toId,from:getStation(search.fromId).name,to:getStation(search.toId).name,
-      date:search.date,departure,arrival:addTime(departure,tripMinutes),duration:tripMinutes,baseMinutes:path.minutes,path:path.ids,
-      price,delay,changes,platform:String(2+(index*3)%12),travelClass:String(search.travelClass),passengers:passenger,
-      international:false,borderMinutes:0,connection,night:type==='NJ',occupancy,composition:composition(type,occupancy),
-      segments:[{kind:'train',type,train,fromId:search.fromId,toId:search.toId,departure,arrival:addTime(departure,tripMinutes),path:path.ids,occupancy,composition:composition(type,occupancy)}],
-      displayServices:changes?[
-        {type,train,weight:Math.max(2,path.ids.length-2)},
-        {type:type==='ICE'?'RE':'RB',train:trainNumber(type==='ICE'?'RE':'RB',index+4),weight:2}
-      ]:[{type,train,weight:Math.max(2,path.ids.length)}]
-    });
+  profiles.forEach((profile,index)=>{
+    const start=starts[index%Math.max(1,starts.length)],end=ends[(index+1)%Math.max(1,ends.length)];if(!start||!end)return;
+    const core=domesticPath(start.gateway.id,end.gateway.id,profile.type);if(!core)return;
+    const outAccess=start.access, inAccess=destination.id===end.gateway.id?null:reverseAccess(destination,end.gateway);
+    const departure=addTime(search.time,profile.offset),outMinutes=outAccess?.minutes||0,inMinutes=inAccess?.minutes||0;
+    const buffer=(outAccess?9:0)+(inAccess?7:0),spec=typeSpecs[profile.type]||typeSpecs.RE;
+    let coreMinutes=Math.round(core.minutes*spec.speed);
+    if(profile.type==='RB')coreMinutes=Math.round(core.minutes*1.38);
+    const delay=index===1?4:index===2?9:0,total=outMinutes+buffer+coreMinutes+inMinutes+delay;
+    let cursor=departure,segments=[],display=[];
+    if(outAccess){const seg=accessSegment(outAccess,cursor);segments.push(seg);display.push(...urbanDisplay(outAccess));cursor=addTime(seg.arrival,9)}
+    const coreArrival=addTime(cursor,coreMinutes+delay),train=trainNumber(profile.type,index+1),occupancy=occupancyFor(`${origin.id}${destination.id}${departure}`,index);
+    segments.push({kind:'train',type:profile.type,train,fromId:start.gateway.id,toId:end.gateway.id,departure:cursor,arrival:coreArrival,path:core.ids,occupancy,composition:composition(profile.type,occupancy)});
+    display.push({type:profile.type,train,weight:Math.max(2,core.ids.length)});cursor=coreArrival;
+    if(inAccess){cursor=addTime(cursor,7);const seg=accessSegment(inAccess,cursor);segments.push(seg);display.push(...urbanDisplay(inAccess));cursor=seg.arrival}
+    const changes=Math.max(0,segments.length-1)+(profile.type==='RE'&&core.ids.length>5?1:0)+(profile.type==='RB'&&core.ids.length>4?1:0);
+    const basePrice=Math.max(8,core.minutes*profile.price+outMinutes*.08+inMinutes*.08),price=Math.round(basePrice*classFactor*passenger);
+    results.push({id:`V09-${profile.type}-${origin.id}-${destination.id}-${departure}`,type:segments[0]?.type||profile.type,train:display.map(d=>d.train).join(' + '),fromId:origin.id,toId:destination.id,from:origin.name,to:destination.name,date:search.date,departure,arrival:cursor,duration:total,baseMinutes:core.minutes,path:[origin.id,...core.ids.filter(id=>id!==origin.id&&id!==destination.id),destination.id],price,delay,changes,platform:String(2+(index*3)%12),travelClass:String(search.travelClass),passengers:passenger,international:false,borderMinutes:0,connection:delay>=12?'risk':'safe',night:profile.type==='NJ',occupancy,composition:composition(profile.type,occupancy),segments,displayServices:display,accessGateway:start.gateway.name,egressGateway:end.gateway.name,profile:profile.label});
   });
   return results;
 }
-
+function createInternationalJourneys(search){
+  const outbound=search.toId==='MEX',domesticStation=getStation(outbound?search.fromId:search.toId);if(!domesticStation)return[];
+  const gates=gatewayOptions(domesticStation);const passenger=Math.max(1,Number(search.passengers)||1),classFactor=String(search.travelClass)==='1'?1.42:1;
+  const types=['ICE','IC','RE'];const results=[];
+  types.forEach((type,index)=>{
+    const gate=gates[index%Math.max(1,gates.length)];if(!gate)return;const path=domesticPath(gate.gateway.id,'SJR',type);if(!path)return;
+    const access=gate.access,borderMinutes=45,rbMinutes=93,departure=addTime(search.time,index*28),occupancy=occupancyFor(`${search.fromId}${search.toId}${departure}`,index),domesticTrain=trainNumber(type,index+2),rbTrain=trainNumber('RB',index),segments=[],display=[];
+    let cursor=departure;
+    if(outbound&&access){const seg=accessSegment(access,cursor);segments.push(seg);display.push(...urbanDisplay(access));cursor=addTime(seg.arrival,9)}
+    if(outbound){const domesticArrival=addTime(cursor,Math.round(path.minutes*typeSpecs[type].speed));segments.push({kind:'train',type,train:domesticTrain,fromId:gate.gateway.id,toId:'SJR',departure:cursor,arrival:domesticArrival,path:path.ids,occupancy,composition:composition(type,occupancy)});display.push({type,train:domesticTrain,weight:path.ids.length});const borderEnd=addTime(domesticArrival,borderMinutes);segments.push({kind:'border',stationId:'SJR',direction:'outbound',start:domesticArrival,end:borderEnd,minutes:borderMinutes});cursor=addTime(borderEnd,12);const arrival=addTime(cursor,rbMinutes);segments.push({kind:'train',type:'RB',train:rbTrain,fromId:'SJR',toId:'MEX',departure:cursor,arrival,path:['SJR','MEX'],occupancy:'medium',composition:composition('RB','medium')});display.push({type:'RB',train:rbTrain,weight:2});cursor=arrival}
+    else{const rbArrival=addTime(cursor,rbMinutes);segments.push({kind:'train',type:'RB',train:rbTrain,fromId:'MEX',toId:'SJR',departure:cursor,arrival:rbArrival,path:['MEX','SJR'],occupancy:'medium',composition:composition('RB','medium')});display.push({type:'RB',train:rbTrain,weight:2});const borderEnd=addTime(rbArrival,borderMinutes);segments.push({kind:'border',stationId:'SJR',direction:'inbound',start:rbArrival,end:borderEnd,minutes:borderMinutes});cursor=addTime(borderEnd,12);const domesticArrival=addTime(cursor,Math.round(path.minutes*typeSpecs[type].speed));segments.push({kind:'train',type,train:domesticTrain,fromId:'SJR',toId:gate.gateway.id,departure:cursor,arrival:domesticArrival,path:path.ids.slice().reverse(),occupancy,composition:composition(type,occupancy)});display.push({type,train:domesticTrain,weight:path.ids.length});cursor=domesticArrival;if(access){const inward=reverseAccess(domesticStation,gate.gateway);cursor=addTime(cursor,7);const seg=accessSegment(inward,cursor);segments.push(seg);display.push(...urbanDisplay(inward));cursor=seg.arrival}}
+    const total=segments.reduce((n,s)=>n+(s.minutes||((Date.parse(`1970-01-01T${s.arrival}:00Z`)-Date.parse(`1970-01-01T${s.departure}:00Z`))/60000)||0),0)+45+12;
+    const price=Math.round((path.minutes*(typeSpecs[type]?.price||.2)+36)*classFactor*passenger);
+    results.push({id:`INT09-${type}-${search.fromId}-${search.toId}-${departure}`,type:display[0]?.type||type,train:display.map(x=>x.train).join(' + '),fromId:search.fromId,toId:search.toId,from:getStation(search.fromId).name,to:getStation(search.toId).name,date:search.date,departure,arrival:cursor,duration:Math.max(120,total),baseMinutes:path.minutes+rbMinutes,path:outbound?[search.fromId,...path.ids.slice(1),'MEX']:['MEX',...path.ids.slice().reverse().slice(1),search.toId],price,delay:index===1?8:2,changes:segments.filter(s=>s.kind!=='border').length-1,platform:String(3+index*2),travelClass:String(search.travelClass),passengers:passenger,international:true,borderMinutes,connection:index===1?'risk':'safe',night:false,segments,occupancy,composition:composition(type,occupancy),borderStationId:'SJR',mandatoryTransfer:true,warningAuthority:'Auswärtiges Amt',borderStatus:'restricted',rbTrain,displayServices:display});
+  });
+  return results;
+}
 export function createJourneys(search){
   const intl=getStation(search.toId)?.country==='MX'||getStation(search.fromId)?.country==='MX';
-  const results=intl?createInternationalJourneys(search):createDomesticJourneys(search);
-  return results.sort((a,b)=>a.departure.localeCompare(b.departure));
+  return (intl?createInternationalJourneys(search):createDomesticJourneys(search)).sort((a,b)=>a.departure.localeCompare(b.departure));
 }
 
 export function planUrban(network,from,to){

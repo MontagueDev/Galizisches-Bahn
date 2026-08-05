@@ -1,7 +1,6 @@
 {
-  "version": "0.8.6",
-  "build": "2026.08.05-db-results1",
-  "cache": "galizische-bahn-v0.8.6-db-results1",
-  "released": "2026-08-05T07:25:00Z",
-  "minimumSchema": 9
+  "version": "0.9.0",
+  "build": "2026.08.05-network-expansion1",
+  "name": "Network Expansion",
+  "schema": 10
 }

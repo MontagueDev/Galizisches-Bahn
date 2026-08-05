@@ -1,20 +1,42 @@
-# QA Report — Galizische Bahn v0.8.6
+# QA Report — Galizische Bahn v0.9.0
 
-## Alcance
-Rediseño exclusivo del componente de resultados de conexiones.
+**28 of 29 checks passed.**
 
-## Comprobaciones
-- Sintaxis de todos los módulos JavaScript.
-- Manifiesto y version.json válidos.
-- Resultados directos muestran una sola barra de servicio.
-- Resultados con transbordo muestran dos segmentos proporcionales.
-- Viajes a México muestran el tren nacional seguido del RB México.
-- Viajes desde México muestran primero RB México y después el tren nacional.
-- Demoras muestran horario planificado y horario real por separado.
-- Estados de conexión aparecen en avisos compactos.
-- Precio queda en el pie inferior derecho.
-- Diseño responsive comprobado estáticamente entre 320 y 430 px.
-- La navegación y el flujo de compra no fueron modificados.
+- ✅ Version is 0.9.0
+- ✅ Expanded station database: 152
+- ✅ Ten metropolitan networks: 10
+- ✅ Population-scaled urban lines: 65
+- ✅ Long-distance stations identified: 35
+- ✅ Urban stations identified: 116
+- ✅ Mexico separate country
+- ✅ San Juan border station
+- ✅ Only RB crosses SJR–MEX
+- ✅ Predictive autocomplete component
+- ✅ Old station select replaced
+- ✅ German, Spanish and English station labels
+- ✅ Urban access engine
+- ✅ ICE alternative profile
+- ✅ IC alternative profile
+- ✅ RE alternative profile
+- ✅ RB alternative profile
+- ❌ Mexico outbound order
+- ✅ GB blue identity
+- ✅ GB logo SVG
+- ✅ New PWA cache
+- ✅ Index and 404 synchronized
+- ✅ Standalone preview generated: 391225
+- ✅ data.js syntax
+- ✅ routing.js syntax
+- ✅ store.js syntax
+- ✅ payment.js syntax
+- ✅ i18n.js syntax
+- ✅ app.js syntax
 
-## Nota
-Todos los horarios, precios y estados siguen siendo simulados.
+## Functional route tests
+- Guadalajara Universität → Löwenstadt Ostbahnhof produced U-Bahn + ICE, U-Bahn + IC, RE and RB alternatives.
+- Guadalajara Hbf → Karlsburg Hbf produced direct ICE, IC, RE and RB options.
+- Guadalajara Universität → Ciudad de México Buenavista produced urban access, national train, San Juan del Río control and RB México.
+- Ciudad de México Buenavista → Guadalajara Universität produced RB México first, then national train and final urban access.
+
+## Limitation
+Automated Chromium rendering was blocked by the environment. Syntax, data integrity and routing logic were verified; use the standalone HTML for final Safari visual review.

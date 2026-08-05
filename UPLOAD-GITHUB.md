@@ -1,7 +1,3 @@
-# Subir v0.8.6 a GitHub
+# GitHub / Netlify
 
-1. Sustituye todos los archivos de la raíz del repositorio.
-2. Conserva la carpeta `icons`.
-3. Commit recomendado: `Release Galizische Bahn v0.8.6`.
-4. En Netlify usa **Clear cache and deploy site**.
-5. Comprueba la versión en una pestaña privada de Safari.
+Replace every file in the repository root and the complete `icons` directory. Commit: `Release Galizische Bahn v0.9.0`. In Netlify run **Clear cache and deploy site**.

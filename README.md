@@ -1,12 +1,12 @@
-# Galizische Bahn v0.8.6
+# Galizische Bahn v0.9.0 — Network Expansion
 
-Actualización del listado de conexiones con la jerarquía informativa de DB Navigator y el sistema visual de Galizische Bahn.
+Major release with complete GB blue identity, an expanded national station database, predictive station search and realistic multimodal journeys.
 
-## Principios
-- Hora y duración primero.
-- Trenes y transbordos representados mediante barras proporcionales.
-- Avisos compactos y legibles.
-- Precio integrado al pie de cada resultado.
-- Identidad GB Liquid Glass conservada.
-
-Los datos y pagos son simulados. No introduzcas datos bancarios reales.
+## Highlights
+- More than 200 searchable stations and stops across Galizia.
+- 20 long-distance stations plus regional hubs.
+- Population-scaled U-Bahn and S-Bahn networks in ten metropolitan areas.
+- Automatic U/S-Bahn access to the most convenient long-distance station.
+- Multiple ICE, IC, RE, RB and mixed alternatives.
+- San Juan del Río remains the mandatory border interchange for Mexico.
+- German source language, Spanish and English translations retained.
