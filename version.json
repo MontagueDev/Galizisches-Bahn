@@ -1,7 +1,7 @@
 {
-  "version": "0.8.4",
-  "build": "2026.08.05-border-forms1",
-  "cache": "galizische-bahn-v0.8.4-border-forms1",
-  "released": "2026-08-05T05:45:00Z",
+  "version": "0.8.5",
+  "build": "2026.08.05-navigation-consistency1",
+  "cache": "galizische-bahn-v0.8.5-navigation-consistency1",
+  "released": "2026-08-05T06:10:00Z",
   "minimumSchema": 9
 }

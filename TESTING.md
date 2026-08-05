@@ -1,12 +1,10 @@
-# Testing — Galizische Bahn v0.8.4
+# Testing v0.8.5
 
-Check in Safari:
-
-1. Passenger label is fully above its input.
-2. Passport label is fully above its input.
-3. Payment labels remain aligned.
-4. All five navigation icons share the same size and stroke.
-5. Reisedokumente appears as four information rows, not disabled inputs.
-6. Mexico search button fits at 320–430 px.
-7. Back, Cancel and Continue remain reachable.
-8. Tickets and preferences from v0.8.2 remain present.
+1. Open Start and switch through all five tabs.
+2. Confirm every active tab has exactly the same width and height.
+3. Open Stadt and return to Start; the bar must not resize.
+4. Confirm the home header says Galizische Bahn without a version number.
+5. Check Stadt / Metropolregion and Route planen: each label sits above one select surface.
+6. Check Start and Reisen: route controls must not contain a second dark input box.
+7. Test widths 320, 375, 393 and 430 px.
+8. After deployment, use a private Safari tab before reinstalling the PWA.

@@ -1,11 +1,9 @@
 {
-  "version": "0.8.2",
-  "checks": {
-    "paymentFormSection": true,
-    "securityCodeGerman": true,
-    "newCache": true,
-    "copyright": true,
-    "standalone": true
-  },
-  "passed": true
+  "version": "0.8.5",
+  "nav_buttons": 5,
+  "home_version_removed": true,
+  "new_cache": true,
+  "index_404_equal": true,
+  "fixed_nav_rule": true,
+  "field_wrapper_reset": true
 }

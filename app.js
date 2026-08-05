@@ -1,11 +1,11 @@
 import {
   APP_VERSION, APP_BUILD, STATIONS, RAIL_EDGES, URBAN_NETWORKS,
   SUBSCRIPTIONS, FARES, SERVICE_ALERTS, COPY, getStation, getUrbanNetwork
-} from './data.js?v=0.8.4-border-forms1';
-import { createStore } from './store.js?v=0.8.4-border-forms1';
-import { createJourneys, planUrban, addTime } from './routing.js?v=0.8.4-border-forms1';
-import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.8.4-border-forms1';
-import { I18N } from './i18n.js?v=0.8.4-border-forms1';
+} from './data.js?v=0.8.5-navigation-consistency1';
+import { createStore } from './store.js?v=0.8.5-navigation-consistency1';
+import { createJourneys, planUrban, addTime } from './routing.js?v=0.8.5-navigation-consistency1';
+import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.8.5-navigation-consistency1';
+import { I18N } from './i18n.js?v=0.8.5-navigation-consistency1';
 
 const store = createStore();
 const EXTRA_COPY={
@@ -227,7 +227,7 @@ function renderHome(){
   const unread=s.notificationInbox.filter(item=>!item.read).length;
   main.innerHTML=`
     <section class="page-header home-title v08-hero-title">
-      <div><p class="eyebrow">Galizische Bahn · v${APP_VERSION}</p><h1>${esc(t(greetingKey()))}, ${esc(displayName)}.</h1><p class="subtitle">${esc(t('homeQuestion'))}</p></div>
+      <div><p class="eyebrow">Galizische Bahn</p><h1>${esc(t(greetingKey()))}, ${esc(displayName)}.</h1><p class="subtitle">${esc(t('homeQuestion'))}</p></div>
       <button class="hero-notification ${unread?'has-unread':''}" data-nav="notifications" type="button" aria-label="${esc(t('notifications'))}"><span>◉</span>${unread?`<b>${unread}</b>`:''}</button>
     </section>
     ${draft?`<article class="card resume-purchase v08-resume"><span class="feature-icon">↻</span><div><small>${esc(t('savedPurchase'))}</small><strong>${esc(draft.kind==='journey'?`${draft.journey.from} → ${draft.journey.to}`:draft.product?.name||t('purchase'))}</strong><p>${esc(t('resumeDraftText'))}</p></div><button id="resumePurchase" class="primary" type="button">${esc(t('resumePurchase'))}</button></article>`:''}

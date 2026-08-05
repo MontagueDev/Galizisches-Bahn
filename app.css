@@ -436,3 +436,149 @@ input,select,textarea,.field,.search-field,.quick-options select{
   .traveler-form>.form-field>label{font-size:11px!important}
   .traveler-form>.form-field>input,.traveler-form>.form-field>select{min-height:52px!important;font-size:16px!important}
 }
+
+/* =============================================================
+   Galizische Bahn v0.8.5 — Navigation & Component Consistency
+   ============================================================= */
+/* The field wrapper is layout only. A field may contain exactly one visual control. */
+.field,
+.city-picker,
+.urban-planner .field{
+  display:grid!important;
+  gap:7px!important;
+  margin:0 0 14px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  overflow:visible!important;
+}
+.field>label,
+.city-picker>label,
+.urban-planner .field>label{
+  position:static!important;
+  display:block!important;
+  margin:0 3px!important;
+  padding:0!important;
+  color:var(--muted)!important;
+  font-size:12px!important;
+  line-height:1.25!important;
+  font-weight:720!important;
+}
+.field>input,
+.field>select,
+.city-picker>select,
+.urban-planner .field>select{
+  display:block!important;
+  width:100%!important;
+  min-height:54px!important;
+  margin:0!important;
+  padding:0 16px!important;
+  border:1px solid var(--glass-border)!important;
+  border-radius:18px!important;
+  background:var(--glass-soft)!important;
+  box-shadow:inset 0 1px 0 var(--glass-highlight),0 7px 18px rgba(20,20,28,.045)!important;
+  color:var(--text)!important;
+}
+
+/* Composite search controls are already the surface; their inner controls stay transparent. */
+.route-input select,
+.search-options-row input,
+.search-grid-four input,
+.search-grid-four select,
+.date-field input{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.route-input{overflow:hidden}
+.search-options-row label,
+.search-options-row button,
+.search-grid-four label{overflow:hidden}
+
+/* One immutable five-column navigation layout on every screen and viewport. */
+.bottom-nav{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  column-gap:4px!important;
+  width:min(calc(100% - 22px),680px)!important;
+  min-height:72px!important;
+  padding:6px!important;
+  overflow:hidden!important;
+}
+.bottom-nav>.nav-button{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  display:grid!important;
+  grid-template-rows:27px 16px!important;
+  align-content:center!important;
+  justify-items:center!important;
+  gap:2px!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:58px!important;
+  min-height:58px!important;
+  margin:0!important;
+  padding:5px 1px!important;
+  border:0!important;
+  border-radius:17px!important;
+  overflow:hidden!important;
+  transform:none;
+}
+.bottom-nav>.nav-button:active{transform:scale(.97)!important}
+.bottom-nav>.nav-button.active{
+  width:100%!important;
+  height:58px!important;
+  background:color-mix(in srgb,var(--brandSoft) 58%,transparent)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.24)!important;
+}
+.bottom-nav>.nav-button.active:after{
+  top:3px!important;
+  width:14px!important;
+  height:2px!important;
+}
+.bottom-nav .nav-icon,
+.bottom-nav .nav-icon svg{
+  width:24px!important;
+  height:24px!important;
+  max-width:24px!important;
+  max-height:24px!important;
+}
+.bottom-nav .nav-icon{margin:0!important}
+.bottom-nav .nav-button small{
+  display:block!important;
+  width:100%!important;
+  margin:0!important;
+  overflow:hidden!important;
+  color:inherit;
+  font-size:9px!important;
+  line-height:14px!important;
+  font-weight:720!important;
+  text-align:center!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+
+/* City planner uses the same form grammar as passenger and payment forms. */
+.urban-planner{padding:18px!important}
+.urban-planner h2{margin-bottom:16px!important}
+.urban-planner #urbanSearch{margin-top:2px!important}
+.city-picker{margin-bottom:14px!important}
+
+@media(max-width:390px){
+  .bottom-nav{width:calc(100% - 16px)!important;column-gap:2px!important;padding:5px!important}
+  .bottom-nav>.nav-button{height:56px!important;min-height:56px!important;border-radius:15px!important}
+  .bottom-nav>.nav-button.active{height:56px!important}
+  .bottom-nav .nav-icon,.bottom-nav .nav-icon svg{width:22px!important;height:22px!important}
+  .bottom-nav .nav-button small{font-size:8.5px!important}
+  .field>label,.city-picker>label,.urban-planner .field>label{font-size:11px!important}
+  .field>input,.field>select,.city-picker>select,.urban-planner .field>select{min-height:52px!important;padding:0 14px!important;font-size:16px!important}
+}
