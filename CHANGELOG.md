@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.8.1 — Liquid Glass Refinement
+
+- Nuevo GB Design System 1.1 inspirado en superficies Liquid Glass.
+- Barra inferior flotante con desenfoque, borde especular y selección más discreta.
+- Tarjetas, botones, alertas, hojas inferiores y campos con materiales adaptativos.
+- Jerarquía tipográfica y espaciado revisados para iPhone.
+- Estados vacíos e indicadores de progreso más claros.
+- Pie técnico sustituido por © 2026 Galizische Bahn AG.
+- Nueva caché PWA `galizische-bahn-v0.8.1-liquid-glass1`.
+- Conserva toda la lógica, boletos y preferencias de v0.8.0.
+
 ## 0.8.0 — Redesign & Live Network Update
 
 ### Rediseño integral

@@ -1,10 +1,10 @@
-# Galizische Bahn v0.8.0
+# Galizische Bahn v0.8.1
 
 PWA ferroviaria ficticia para la **Bundesrepublik Galizien**.
 
 ## Redesign & Live Network Update
 
-La v0.8.0 es una actualización mayor que combina un rediseño completo con una reorganización funcional. El alemán es el idioma original de la interfaz; español e inglés se generan a partir del mismo catálogo central de traducciones.
+La v0.8.1 es una actualización mayor que combina un rediseño completo con una reorganización funcional. El alemán es el idioma original de la interfaz; español e inglés se generan a partir del mismo catálogo central de traducciones.
 
 ### Funciones principales
 

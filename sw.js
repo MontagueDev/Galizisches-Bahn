@@ -1,7 +1,7 @@
-const CACHE='galizische-bahn-v0.8.0-redesign3';
+const CACHE='galizische-bahn-v0.8.1-liquid-glass1';
 const CORE=[
-  './','./index.html','./app.css?v=0.8.0-r3','./app.js?v=0.8.0-r3','./i18n.js?v=0.8.0-r3',
-  './data.js?v=0.8.0-r3','./store.js?v=0.8.0-r3','./routing.js?v=0.8.0-r3','./payment.js?v=0.8.0-r3','./manifest.webmanifest','./version.json',
+  './','./index.html','./app.css?v=0.8.1-lg1','./app.js?v=0.8.1-lg1','./i18n.js?v=0.8.1-lg1',
+  './data.js?v=0.8.1-lg1','./store.js?v=0.8.1-lg1','./routing.js?v=0.8.1-lg1','./payment.js?v=0.8.1-lg1','./manifest.webmanifest','./version.json',
   './icons/favicon-32.png','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-icon-512.png'
 ];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));

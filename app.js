@@ -1,11 +1,11 @@
 import {
   APP_VERSION, APP_BUILD, STATIONS, RAIL_EDGES, URBAN_NETWORKS,
   SUBSCRIPTIONS, FARES, SERVICE_ALERTS, COPY, getStation, getUrbanNetwork
-} from './data.js?v=0.8.0-r3';
-import { createStore } from './store.js?v=0.8.0-r3';
-import { createJourneys, planUrban, addTime } from './routing.js?v=0.8.0-r3';
-import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.8.0-r3';
-import { I18N } from './i18n.js?v=0.8.0-r3';
+} from './data.js?v=0.8.1-lg1';
+import { createStore } from './store.js?v=0.8.1-lg1';
+import { createJourneys, planUrban, addTime } from './routing.js?v=0.8.1-lg1';
+import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.8.1-lg1';
+import { I18N } from './i18n.js?v=0.8.1-lg1';
 
 const store = createStore();
 const EXTRA_COPY={
@@ -612,7 +612,7 @@ function renderMore(){
     <button id="installSetting"><span class="setting-icon">⇩</span><div><strong>${esc(t('install'))}</strong><small>${esc(t('pwaStatus'))} · v${APP_VERSION}</small></div><b>›</b></button>
   </article></section>
   <article class="system-card"><div><small>${esc(t('systemStatus'))}</small><strong>${navigator.onLine?esc(t('online')):esc(t('offline'))}</strong></div><div><small>${esc(t('dataLocal'))}</small><strong>${state().tickets.length} ${esc(t('tickets'))}</strong></div><div><small>${esc(t('currentVersion'))}</small><strong>${APP_VERSION}</strong></div></article>
-  <p class="build-note">${esc(t('demoLive'))}<br>v${APP_VERSION} · ${APP_BUILD}</p>`;
+  <footer class="legal-footer"><strong>${esc(t('copyrightLine'))}</strong><small>${esc(t('rightsReserved'))}</small></footer>`;
   document.getElementById('languageSetting').addEventListener('click',openLanguage);
   document.getElementById('themeSetting').addEventListener('click',openTheme);
   document.getElementById('densitySetting').addEventListener('click',openDensity);

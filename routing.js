@@ -1,4 +1,4 @@
-import {STATIONS,RAIL_EDGES,getStation,SERVICE_ALERTS} from './data.js?v=0.8.0-r3';
+import {STATIONS,RAIL_EDGES,getStation,SERVICE_ALERTS} from './data.js?v=0.8.1-lg1';
 
 const adjacency=new Map();
 for(const [a,b,minutes,modes] of RAIL_EDGES){

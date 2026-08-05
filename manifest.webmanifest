@@ -1,24 +1,72 @@
 {
   "name": "Galizische Bahn",
   "short_name": "GBahn",
-  "description": "Redesign, Live-Netz, Stadtverkehr, Ticketverwaltung und Grenzverbindungen über San Juan del Río – Version 0.8.0.",
+  "description": "Liquid-Glass-Redesign, Live-Netz, Stadtverkehr, Ticketverwaltung und Grenzverbindungen über San Juan del Río – Version 0.8.1.",
   "id": "./",
-  "start_url": "./?source=pwa-v080-r3",
+  "start_url": "./?source=pwa-v081-lg1",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#f4f5f8",
-  "theme_color": "#971d3b",
+  "background_color": "#f2f3f7",
+  "theme_color": "#8f1d3e",
   "lang": "de",
-  "categories": ["travel", "navigation"],
+  "categories": [
+    "travel",
+    "navigation"
+  ],
   "icons": [
-    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
-    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
-    {"src":"./icons/maskable-icon-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/maskable-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    {"name":"Verbindung suchen","short_name":"Suchen","url":"./#/travel","icons":[{"src":"./icons/icon-192.png","sizes":"192x192"}]},
-    {"name":"Tickets öffnen","short_name":"Tickets","url":"./#/tickets","icons":[{"src":"./icons/icon-192.png","sizes":"192x192"}]},
-    {"name":"Betriebslage","short_name":"Betrieb","url":"./#/operations","icons":[{"src":"./icons/icon-192.png","sizes":"192x192"}]}
+    {
+      "name": "Verbindung suchen",
+      "short_name": "Suchen",
+      "url": "./#/travel",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Tickets öffnen",
+      "short_name": "Tickets",
+      "url": "./#/tickets",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Betriebslage",
+      "short_name": "Betrieb",
+      "url": "./#/operations",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

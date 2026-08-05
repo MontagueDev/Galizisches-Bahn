@@ -1,8 +1,8 @@
-# Publicación de Galizische Bahn v0.8.0
+# Publicación de Galizische Bahn v0.8.1
 
 ## GitHub Pages
 
-1. Descomprime `Galizische-Bahn-v0.8.0.zip`.
+1. Descomprime `Galizische-Bahn-v0.8.1.zip`.
 2. Sustituye **todos** los archivos de la raíz del repositorio por los de la carpeta descomprimida.
 3. Conserva `.nojekyll` y la carpeta `icons`.
 4. No subas el ZIP dentro del repositorio: sube su contenido.
@@ -12,7 +12,7 @@
 Commit sugerido:
 
 ```text
-Release Galizische Bahn v0.8.0
+Release Galizische Bahn v0.8.1
 ```
 
 ## Netlify conectado a GitHub
@@ -33,8 +33,8 @@ Release Galizische Bahn v0.8.0
 ## Comprobación
 
 - Abre la URL en una pestaña privada.
-- Entra a **Mehr** y verifica `v0.8.0` y el build `redesign-live3`.
+- Entra a **Mehr** y verifica `v0.8.1` y el build `liquid-glass1`.
 - Comprueba la fecha local, el selector de idioma y una búsqueda.
 - Después abre la PWA instalada.
 
-La versión utiliza recursos `0.8.0-r3` y la caché `galizische-bahn-v0.8.0-redesign3` para evitar que Safari o Netlify reutilicen módulos antiguos.
+La versión utiliza recursos `0.8.1-r3` y la caché `galizische-bahn-v0.8.1-liquid-glass1` para evitar que Safari o Netlify reutilicen módulos antiguos.

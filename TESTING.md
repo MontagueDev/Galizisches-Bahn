@@ -1,4 +1,4 @@
-# Testing — Galizische Bahn v0.8.0
+# Testing — Galizische Bahn v0.8.1
 
 ## Tarjetas de prueba
 
@@ -30,6 +30,6 @@ Usa una fecha como `12/30`, CVV `123` y una dirección ficticia. **Nunca introdu
 Después de publicar:
 
 1. Abrir el sitio en una pestaña privada para comprobar la versión nueva.
-2. Revisar que Mehr muestre `v0.8.0 · 2026.08.05-redesign-live3`.
+2. Revisar que Mehr muestre `v0.8.1 · 2026.08.05-liquid-glass1`.
 3. Si una PWA instalada conserva la versión anterior, cerrarla, abrir Safari, recargar el sitio y aceptar la actualización.
 4. Como último recurso, eliminar la PWA de la pantalla de inicio y añadirla de nuevo.

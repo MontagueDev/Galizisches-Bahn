@@ -1,69 +1,30 @@
-# QA Report — Galizische Bahn v0.8.0
+# QA Report — Galizische Bahn v0.8.1
 
-## Resultado final
+## Alcance
 
-- **86/86 comprobaciones automatizadas aprobadas.**
-- Errores de JavaScript o consola detectados en los recorridos: **0**.
-- Viewports comprobados: **320, 375, 393 y 430 px**.
-- Idiomas comprobados en interfaz: alemán, español e inglés.
-- Catálogo de traducción: **461 claves por idioma**, sin ausencias frente al alemán.
-- Recursos declarados por HTML, manifiesto y Service Worker: presentes.
+Refinamiento visual Liquid Glass sobre la v0.8.0, sin retirar funciones ni datos.
 
-## Áreas verificadas
+## Verificación técnica
 
-### Interfaz y arquitectura
-- Nueva navegación de cinco pestañas.
-- Inicio adaptativo y menú Mehr en una columna en iPhone.
-- Fecha calculada con el día local de México, no con UTC.
-- Ausencia de desbordamiento horizontal en las cinco secciones principales.
-- Modales de compra ajustados a todos los anchos probados.
+- Sintaxis JavaScript comprobada en todos los módulos.
+- `manifest.webmanifest` y `version.json` válidos.
+- Recursos PWA versionados con `0.8.1-lg1`.
+- Caché renovada: `galizische-bahn-v0.8.1-liquid-glass1`.
+- Conservación del esquema de datos de v0.8.0.
+- Pie técnico sustituido por el aviso legal de Galizische Bahn AG.
 
-### Compra
-- Primera y Segunda Clase.
-- Upgrade único de 24 GM desde Segunda Clase.
-- Ausencia del upgrade cuando Primera Clase ya está seleccionada.
-- Persistencia de asiento y extras al retroceder.
-- Guardar, reanudar y descartar compras incompletas.
-- Resumen previo al pago.
-- Pago aprobado y tarjeta rechazada.
-- Botón de pago recuperado tras un rechazo.
+## Revisión visual
 
-### Boletos y abonos
-- Emisión de boleto y viaje activo.
-- Asistente Live del viaje.
-- Menú único de acciones del boleto.
-- Generación de PDF.
-- Cancelación, QR inválido, reembolso e historial.
-- Cuatro productos Galizien-Ticket.
-- Compra y cancelación de suscripción.
-- Flujo urbano directo sin pasos ferroviarios innecesarios.
+- Superficies adaptativas en modo claro y oscuro.
+- Barra inferior flotante con material translúcido.
+- Tarjetas, botones, campos, alertas y hojas inferiores unificados.
+- Jerarquía tipográfica revisada.
+- Estados vacíos e indicadores de progreso refinados.
+- Fallback opaco para navegadores sin `backdrop-filter`.
+- Ajustes específicos para 320–430 px.
 
-### México
-- Advertencia exacta: `Das Auswärtige Amt rät von Reisen nach Mexiko ab.`
-- Confirmación explícita antes de continuar.
-- Galizia → tren nacional → San Juan del Río → migración → RB México.
-- Buenavista → RB México → San Juan del Río → migración → tren nacional.
-- Ausencia de ICE directo a Ciudad de México.
+## Limitaciones
 
-### Ciudad, mapas y operación
-- Diez redes metropolitanas y sus mapas.
-- Planificador urbano y detalle de línea.
-- Tres modos del centro de mapas.
-- Estaciones interactivas con tablero, andenes y accesibilidad.
-- Panel operativo sin duplicación al actualizar.
-- Centro de notificaciones y marcado de mensajes como leídos.
-
-### Traducciones
-- Alemán como interfaz inicial.
-- Cambio global a español e inglés.
-- Traducción de elementos del plano de asientos, incluidos Vagón/Mesa.
-- Auditoría estática de todas las claves usadas por `t()`.
-
-## Limitaciones conocidas
-
-- Horarios, velocidades, retrasos, posiciones, incidencias, pagos y reembolsos son simulados.
-- Las notificaciones del sistema dependen del soporte PWA del navegador; la bandeja interna sí funciona.
-- No existe backend, sincronización, Apple Wallet ni pago real.
-- La instalación y actualización final deben comprobarse en un Safari real después del despliegue.
-
-Los resultados detallados están en `QA-RESULTS.json`.
+- Liquid Glass se aproxima mediante CSS; no es el material nativo de UIKit.
+- Pagos, horarios, operación y notificaciones siguen siendo simulados.
+- La instalación y actualización final de la PWA deben comprobarse en Safari real.

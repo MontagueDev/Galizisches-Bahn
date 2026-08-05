@@ -110,3 +110,118 @@ html.reduce-motion *,html.reduce-motion *:before,html.reduce-motion *:after{anim
   .v08-more-grid .more-card.wide{grid-column:auto}
   .v08-more-grid .more-card{min-height:78px}
 }
+
+
+/* =============================================================
+   Galizische Bahn v0.8.1 — GB Design System 1.1 / Liquid Glass
+   ============================================================= */
+:root{
+  --glass:color-mix(in srgb,var(--surface) 72%,transparent);
+  --glass-strong:color-mix(in srgb,var(--surface) 86%,transparent);
+  --glass-soft:color-mix(in srgb,var(--surface2) 58%,transparent);
+  --glass-border:color-mix(in srgb,#fff 56%,var(--line));
+  --glass-highlight:rgba(255,255,255,.58);
+  --glass-shadow:0 18px 52px rgba(25,25,32,.12),inset 0 1px 0 rgba(255,255,255,.62);
+  --glass-shadow-soft:0 9px 28px rgba(25,25,32,.09),inset 0 1px 0 rgba(255,255,255,.48);
+  --ios-blue:#0a84ff;
+  --radius-s:14px;--radius-m:20px;--radius-l:28px;--radius-xl:34px;
+}
+html[data-theme=dark]{
+  --glass:color-mix(in srgb,#242429 75%,transparent);
+  --glass-strong:color-mix(in srgb,#26262c 89%,transparent);
+  --glass-soft:color-mix(in srgb,#34343a 60%,transparent);
+  --glass-border:rgba(255,255,255,.15);
+  --glass-highlight:rgba(255,255,255,.12);
+  --glass-shadow:0 22px 62px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.11);
+  --glass-shadow-soft:0 10px 32px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.09);
+  --ios-blue:#409cff;
+}
+body{
+  background:
+    radial-gradient(circle at 12% -8%,color-mix(in srgb,var(--brand) 17%,transparent),transparent 34%),
+    radial-gradient(circle at 92% 14%,color-mix(in srgb,var(--blue) 10%,transparent),transparent 29%),
+    linear-gradient(180deg,color-mix(in srgb,var(--bg) 96%,#fff),var(--bg));
+  letter-spacing:-.006em;
+}
+.app-header{
+  min-height:calc(72px + var(--safeTop));
+  background:var(--glass-strong);
+  border-bottom:1px solid var(--glass-border);
+  box-shadow:inset 0 -1px 0 color-mix(in srgb,var(--line) 52%,transparent);
+  backdrop-filter:blur(34px) saturate(190%);-webkit-backdrop-filter:blur(34px) saturate(190%);
+}
+.brand-logo,.avatar-button{box-shadow:0 10px 26px color-mix(in srgb,var(--brand) 25%,transparent),inset 0 1px 0 rgba(255,255,255,.32)}
+.circle-button,.avatar-button{
+  border-radius:50%;border:1px solid var(--glass-border);background:var(--glass);
+  box-shadow:var(--glass-shadow-soft);backdrop-filter:blur(24px) saturate(175%);-webkit-backdrop-filter:blur(24px) saturate(175%);
+}
+.avatar-button{background:linear-gradient(145deg,color-mix(in srgb,var(--brand) 84%,#fff),var(--brand2));}
+.main-view{padding-top:24px}
+.bottom-nav{
+  bottom:max(12px,var(--safeBottom));width:min(calc(100% - 24px),660px);padding:7px;
+  border:1px solid var(--glass-border);border-radius:28px;background:var(--glass-strong);
+  box-shadow:0 20px 56px rgba(20,20,26,.18),inset 0 1px 0 var(--glass-highlight);
+  backdrop-filter:blur(38px) saturate(195%);-webkit-backdrop-filter:blur(38px) saturate(195%);
+}
+.nav-button{min-height:51px;border-radius:21px;transition:transform .18s ease,background .22s ease,color .22s ease,box-shadow .22s ease}
+.nav-button:active{transform:scale(.96)}
+.nav-button.active{background:color-mix(in srgb,var(--brandSoft) 72%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.28);color:var(--brand)}
+.nav-button>span{font-size:20px}.nav-button small{font-size:9px;letter-spacing:.005em}
+h1{font-size:clamp(32px,8.8vw,42px);font-weight:760;letter-spacing:-.052em}
+h2{font-weight:720;letter-spacing:-.038em}.subtitle{font-size:15px;line-height:1.38}
+.card,.subscription-option,.ticket-summary,.metric,.notification-item,.alert-mini,.quick{
+  border-color:var(--glass-border);background:var(--glass);box-shadow:var(--glass-shadow-soft);
+  backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);
+}
+.card{border-radius:var(--radius-l)}
+.card:before,.modal-sheet:before,.bottom-nav:before{pointer-events:none}
+.hero-card{
+  border:1px solid rgba(255,255,255,.2);border-radius:32px;
+  background:linear-gradient(145deg,rgba(91,13,35,.96),rgba(164,34,69,.91) 62%,rgba(215,91,118,.82));
+  box-shadow:0 28px 70px rgba(92,13,36,.30),inset 0 1px 0 rgba(255,255,255,.30);
+  backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%);
+}
+.hero-card:before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.22),transparent 24%,transparent 70%,rgba(255,255,255,.07));pointer-events:none}
+.quick{border-radius:20px;transition:transform .18s ease}.quick:active{transform:scale(.965)}
+.quick b{background:color-mix(in srgb,var(--brandSoft) 73%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.28)}
+.primary,.secondary,.danger-button,.ghost-button,.link-button,.map-toolbar button{
+  min-height:46px;border-radius:999px;transition:transform .16s ease,filter .16s ease,box-shadow .18s ease;
+}
+.primary{border:1px solid color-mix(in srgb,#fff 30%,var(--brand));background:linear-gradient(180deg,color-mix(in srgb,var(--brand2) 80%,#fff),var(--brand));box-shadow:0 10px 24px color-mix(in srgb,var(--brand) 24%,transparent),inset 0 1px 0 rgba(255,255,255,.34)}
+.secondary{border:1px solid var(--glass-border);background:var(--glass-soft);box-shadow:inset 0 1px 0 var(--glass-highlight)}
+.danger-button{box-shadow:0 9px 22px color-mix(in srgb,var(--red) 20%,transparent),inset 0 1px 0 rgba(255,255,255,.28)}
+.primary:active,.secondary:active,.danger-button:active,.ghost-button:active{transform:scale(.975);filter:brightness(.97)}
+input,select,textarea,.field,.search-field,.quick-options select{
+  border-color:var(--glass-border)!important;background:var(--glass-soft)!important;border-radius:17px!important;
+  box-shadow:inset 0 1px 0 var(--glass-highlight);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.ticket-segmented,.map-mode-tabs{
+  padding:5px;border:1px solid var(--glass-border);border-radius:22px;background:var(--glass-soft);box-shadow:inset 0 1px 0 var(--glass-highlight);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+}
+.ticket-segmented button,.map-mode-tabs button{border-radius:17px}
+.ticket-segmented button.active,.map-mode-tabs button.active{background:var(--glass-strong);box-shadow:var(--glass-shadow-soft)}
+.v08-ticket-card,.digital-ticket{
+  border-color:var(--glass-border);background:var(--glass);box-shadow:var(--glass-shadow);
+  backdrop-filter:blur(34px) saturate(185%);-webkit-backdrop-filter:blur(34px) saturate(185%);
+}
+.service-badge{box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 5px 12px rgba(0,0,0,.10)}
+.modal-backdrop{background:rgba(8,8,12,.32);backdrop-filter:blur(18px) saturate(135%);-webkit-backdrop-filter:blur(18px) saturate(135%)}
+.modal-sheet{
+  border:1px solid var(--glass-border);border-radius:32px 32px 24px 24px;background:var(--glass-strong);
+  box-shadow:0 34px 95px rgba(0,0,0,.36),inset 0 1px 0 var(--glass-highlight);
+  backdrop-filter:blur(42px) saturate(190%);-webkit-backdrop-filter:blur(42px) saturate(190%);
+}
+.modal-sheet>header{background:color-mix(in srgb,var(--glass-strong) 92%,transparent);border-bottom-color:var(--glass-border);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+.modal-sheet>header button{border:1px solid var(--glass-border);border-radius:50%;background:var(--glass-soft);box-shadow:inset 0 1px 0 var(--glass-highlight)}
+.toast{border:1px solid rgba(255,255,255,.14);border-radius:18px;background:rgba(24,24,29,.78);box-shadow:0 18px 50px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+.empty.refined-empty,.empty{padding:42px 26px}.empty>b{border-radius:50%;background:var(--glass-soft);box-shadow:var(--glass-shadow-soft)}
+.progress{height:7px;background:var(--glass-soft);box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}
+.progress i{background:linear-gradient(90deg,var(--ios-blue),color-mix(in srgb,var(--ios-blue) 55%,#9fe4ff));box-shadow:0 0 10px color-mix(in srgb,var(--ios-blue) 45%,transparent)}
+.settings,.system-card,.more-card{border-color:var(--glass-border)!important;background:var(--glass)!important;box-shadow:var(--glass-shadow-soft)!important;backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%)}
+.settings button>span,.setting-icon{background:var(--glass-soft)!important;box-shadow:inset 0 1px 0 var(--glass-highlight)}
+.legal-footer{display:grid;gap:2px;margin:24px 0 5px;text-align:center;color:var(--muted)}
+.legal-footer strong{font-size:11px;font-weight:650}.legal-footer small{font-size:9px}
+.build-note{display:none!important}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card,.bottom-nav,.modal-sheet,.app-header,.quick,.settings,.system-card,.more-card{background:var(--surface)!important}}
+@media(max-width:360px){.bottom-nav{width:calc(100% - 16px);padding:5px}.nav-button{min-height:48px}.nav-button small{font-size:8px}.modal-sheet{border-radius:27px 27px 20px 20px}}
