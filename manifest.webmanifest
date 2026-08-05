@@ -1,37 +1,24 @@
 {
   "name": "Galizische Bahn",
   "short_name": "GBahn",
-  "description": "Reisen, Stadtverkehr, Ticketverwaltung, Grenzverbindungen über San Juan del Río und digitale Tickets – Version 0.7.1.",
+  "description": "Redesign, Live-Netz, Stadtverkehr, Ticketverwaltung und Grenzverbindungen über San Juan del Río – Version 0.8.0.",
   "id": "./",
-  "start_url": "./",
+  "start_url": "./?source=pwa-v080-r3",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#f3f4f7",
-  "theme_color": "#7e1731",
+  "background_color": "#f4f5f8",
+  "theme_color": "#971d3b",
   "lang": "de",
-  "categories": [
-    "travel",
-    "navigation"
-  ],
+  "categories": ["travel", "navigation"],
   "icons": [
-    {
-      "src": "./icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/maskable-icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"./icons/maskable-icon-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+  ],
+  "shortcuts": [
+    {"name":"Verbindung suchen","short_name":"Suchen","url":"./#/travel","icons":[{"src":"./icons/icon-192.png","sizes":"192x192"}]},
+    {"name":"Tickets öffnen","short_name":"Tickets","url":"./#/tickets","icons":[{"src":"./icons/icon-192.png","sizes":"192x192"}]},
+    {"name":"Betriebslage","short_name":"Betrieb","url":"./#/operations","icons":[{"src":"./icons/icon-192.png","sizes":"192x192"}]}
   ]
 }

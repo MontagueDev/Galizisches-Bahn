@@ -1,32 +1,46 @@
-# Galizische Bahn v0.7.1
+# Galizische Bahn v0.8.0
 
-PWA ferroviaria ficticia para la Bundesrepublik Galizien.
+PWA ferroviaria ficticia para la **Bundesrepublik Galizien**.
 
-## Quality & Journey Update
+## Redesign & Live Network Update
 
-Esta versión estabiliza la experiencia de compra y añade gestión realista de boletos simulados:
+La v0.8.0 es una actualización mayor que combina un rediseño completo con una reorganización funcional. El alemán es el idioma original de la interfaz; español e inglés se generan a partir del mismo catálogo central de traducciones.
 
-- Flujo unificado de cinco pasos: asiento, pasajero, extras, resumen y pago.
-- Estado de compra persistente para volver atrás o reanudar sin perder datos.
-- Extras inteligentes según la clase y el producto elegido.
-- Corrección de Primera Clase: el upgrade no vuelve a ofrecerse cuando el viaje ya es de 1. Klasse.
-- Cancelación de boletos con QR invalidado, historial y reembolso simulado según tarifa.
-- Menú del boleto con QR ampliado, PDF, compartir, repetir viaje y cambio de asiento cuando corresponde.
-- Boletos organizados en activos, suscripciones, cancelados e historial.
-- Favoritos para rutas, estaciones y ciudades.
-- Paneles de salidas y llegadas por estación.
-- Mejoras del viaje activo, información del tren, perfil y notificaciones simuladas.
-- Encabezados de caché para evitar versiones antiguas en Netlify.
+### Funciones principales
 
-## México y frontera
+- Inicio adaptativo con búsqueda, viaje activo, avisos y favoritos.
+- Cinco secciones principales: **Start, Reisen, Stadt, Tickets y Mehr**.
+- Buscador nacional e internacional con tarifas, ocupación y composición del tren.
+- Flujo de compra centralizado: conexión, asiento, pasajero, extras, resumen y pago.
+- Extras contextuales: no se ofrece un upgrade si ya se eligió Primera Clase.
+- Pagos exclusivamente simulados con tarjetas de prueba.
+- Boleto digital, QR, PDF, compartir, repetir viaje, cambiar asiento y cancelar.
+- Reembolsos simulados según las condiciones de la tarifa.
+- Galizien-Ticket en cuatro modalidades y boletos urbanos.
+- Viaje activo con progreso, velocidad, próxima parada y acceso inmediato al boleto.
+- Operación simulada: retrasos, ocupación, andenes, incidencias y notificaciones.
+- Centro de mapas con red nacional, red urbana y viaje actual.
+- Diez redes metropolitanas con mapas U-Bahn/S-Bahn.
+- Fichas de estación con salidas, llegadas, andenes, servicios y accesibilidad.
+- Perfil local, GB Card, preferencias, favoritos y estadísticas.
+- Alemán, español e inglés; modos automático, claro y oscuro.
+- Diseño adaptable entre 320 y 430 px y opciones de accesibilidad.
 
-Se conserva el sistema de la v0.7.0:
+## Viajes a México
 
-- San Juan del Río Grenzbahnhof es el enlace fronterizo obligatorio.
-- Galizia → tren nacional → San Juan del Río → control migratorio → RB México → Buenavista.
-- Buenavista → RB México → San Juan del Río → control migratorio → tren nacional → Galizia.
-- Advertencia del Auswärtiges Amt antes de buscar conexiones con México.
+Todos los viajes ferroviarios internacionales pasan por **San Juan del Río Grenzbahnhof**.
 
-## Importante
+- Galizia → tren nacional → San Juan del Río → migración y aduana → **RB México** → Ciudad de México Buenavista.
+- Ciudad de México Buenavista → **RB México** → San Juan del Río → migración y aduana → tren nacional por Galizia.
+- No existe un ICE directo a Ciudad de México.
+- Antes de mostrar los itinerarios se presenta la advertencia: **„Das Auswärtige Amt rät von Reisen nach Mexiko ab.“**
 
-Los horarios, rutas, posiciones, notificaciones, reembolsos y pagos son simulados. No se deben introducir datos bancarios reales.
+## Datos y privacidad
+
+La app funciona localmente y conserva en el navegador boletos, ajustes y preferencias. No existe backend, cuenta real, pago real ni sincronización entre dispositivos.
+
+**No introduzcas datos bancarios reales.**
+
+## Publicación
+
+El proyecto está preparado para GitHub Pages y Netlify. Consulta `UPLOAD-GITHUB.md` para reemplazar correctamente la versión anterior y limpiar la caché de Netlify.

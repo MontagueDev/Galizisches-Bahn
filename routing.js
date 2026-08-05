@@ -1,4 +1,4 @@
-import {STATIONS,RAIL_EDGES,getStation,SERVICE_ALERTS} from './data.js';
+import {STATIONS,RAIL_EDGES,getStation,SERVICE_ALERTS} from './data.js?v=0.8.0-r3';
 
 const adjacency=new Map();
 for(const [a,b,minutes,modes] of RAIL_EDGES){
@@ -106,13 +106,13 @@ function createInternationalJourneys(search){
     const connection=operationalDelay>=12?'risk':'safe';
     results.push({
       id:`INT-${type}-${search.fromId}-${search.toId}-${departure}`,
-      type:hasDomestic?type:'RB',train:hasDomestic?`${domesticTrain} + ${rbTrain}`:rbTrain,
+      type:hasDomestic?(outbound?type:'RB'):'RB',train:hasDomestic?(outbound?`${domesticTrain} + ${rbTrain}`:`${rbTrain} + ${domesticTrain}`):rbTrain,
       fromId:search.fromId,toId:search.toId,from:getStation(search.fromId).name,to:getStation(search.toId).name,
       date:search.date,departure,arrival,duration:totalMinutes,baseMinutes:path.minutes+rbMinutes,
       path:pathIds,price,delay:operationalDelay,changes:hasDomestic?1:0,platform:String(2+(index*3)%10),
       travelClass:String(search.travelClass),passengers:passenger,international:true,borderMinutes,
       transferMinutes,connection,night:type==='NJ',segments,occupancy,
-      composition:composition(type,occupancy),borderStationId:'SJR',mandatoryTransfer:hasDomestic,
+      composition:outbound?composition(type,occupancy):composition('RB','medium'),borderStationId:'SJR',mandatoryTransfer:hasDomestic,
       warningAuthority:'Auswärtiges Amt',borderStatus:'restricted',rbTrain
     });
   });

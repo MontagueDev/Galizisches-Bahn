@@ -1,71 +1,69 @@
-# QA Report — Galizische Bahn v0.7.1
+# QA Report — Galizische Bahn v0.8.0
 
-## Resultado
+## Resultado final
 
-- **59/59 comprobaciones aprobadas**
-- Suite principal: **42/42**
-- Suite de regresión: **17/17**
-- Errores de JavaScript detectados durante los recorridos: **0**
-- Viewports comprobados: **320, 375, 393 y 430 px**
+- **86/86 comprobaciones automatizadas aprobadas.**
+- Errores de JavaScript o consola detectados en los recorridos: **0**.
+- Viewports comprobados: **320, 375, 393 y 430 px**.
+- Idiomas comprobados en interfaz: alemán, español e inglés.
+- Catálogo de traducción: **461 claves por idioma**, sin ausencias frente al alemán.
+- Recursos declarados por HTML, manifiesto y Service Worker: presentes.
 
-## Compra y Primera Clase
+## Áreas verificadas
 
-- El flujo sigue cinco pasos y añade un resumen antes del pago.
-- La clase, el asiento, los extras y los campos de prueba permanecen al retroceder.
-- Una compra puede guardarse, reanudarse o descartarse.
-- En 1. Klasse se asigna un coche de Primera Clase.
-- El upgrade a Primera Clase no aparece cuando el pasajero ya eligió 1. Klasse.
-- En 2. Klasse el upgrade sí aparece.
-- El precio no se duplica al avanzar y retroceder.
-- Una tarjeta aprobada genera boleto.
-- Una tarjeta rechazada muestra error y vuelve a habilitar el botón de pago.
+### Interfaz y arquitectura
+- Nueva navegación de cinco pestañas.
+- Inicio adaptativo y menú Mehr en una columna en iPhone.
+- Fecha calculada con el día local de México, no con UTC.
+- Ausencia de desbordamiento horizontal en las cinco secciones principales.
+- Modales de compra ajustados a todos los anchos probados.
 
-## Gestión de boletos
+### Compra
+- Primera y Segunda Clase.
+- Upgrade único de 24 GM desde Segunda Clase.
+- Ausencia del upgrade cuando Primera Clase ya está seleccionada.
+- Persistencia de asiento y extras al retroceder.
+- Guardar, reanudar y descartar compras incompletas.
+- Resumen previo al pago.
+- Pago aprobado y tarjeta rechazada.
+- Botón de pago recuperado tras un rechazo.
 
-- Los boletos nuevos aparecen en Activos con QR válido.
-- El menú de gestión abre correctamente.
-- El cambio de asiento actualiza el boleto cuando la tarifa lo permite.
-- El QR puede abrirse a pantalla completa.
-- La descarga genera un archivo PDF local.
-- La cancelación muestra las condiciones y el reembolso correspondiente.
-- Al cancelar, el boleto cambia de estado, invalida el QR y se mueve a Cancelados.
-- El reembolso simulado aparece en Historial.
-- Los boletos urbanos no reembolsables muestran reembolso de 0 GM.
-- Las suscripciones pueden comprarse y aparecen en su sección.
+### Boletos y abonos
+- Emisión de boleto y viaje activo.
+- Asistente Live del viaje.
+- Menú único de acciones del boleto.
+- Generación de PDF.
+- Cancelación, QR inválido, reembolso e historial.
+- Cuatro productos Galizien-Ticket.
+- Compra y cancelación de suscripción.
+- Flujo urbano directo sin pasos ferroviarios innecesarios.
 
-## Favoritos, estaciones y viaje
+### México
+- Advertencia exacta: `Das Auswärtige Amt rät von Reisen nach Mexiko ab.`
+- Confirmación explícita antes de continuar.
+- Galizia → tren nacional → San Juan del Río → migración → RB México.
+- Buenavista → RB México → San Juan del Río → migración → tren nacional.
+- Ausencia de ICE directo a Ciudad de México.
 
-- Las rutas favoritas aparecen en Inicio.
-- Las estaciones pueden guardarse como favoritas.
-- Las ciudades pueden guardarse como favoritas.
-- Los paneles de salidas y llegadas cambian correctamente.
-- El control de notificaciones simuladas está disponible.
+### Ciudad, mapas y operación
+- Diez redes metropolitanas y sus mapas.
+- Planificador urbano y detalle de línea.
+- Tres modos del centro de mapas.
+- Estaciones interactivas con tablero, andenes y accesibilidad.
+- Panel operativo sin duplicación al actualizar.
+- Centro de notificaciones y marcado de mensajes como leídos.
 
-## Frontera y México
+### Traducciones
+- Alemán como interfaz inicial.
+- Cambio global a español e inglés.
+- Traducción de elementos del plano de asientos, incluidos Vagón/Mesa.
+- Auditoría estática de todas las claves usadas por `t()`.
 
-- La advertencia del **Auswärtiges Amt** aparece antes de mostrar resultados hacia o desde México.
-- Galizia → México utiliza tren nacional hasta San Juan del Río y después RB México.
-- México → Galizia comienza en RB México, pasa por San Juan del Río y continúa en tren nacional.
-- No se ofrecen trenes ICE, IC, EC o NightJet directos a Buenavista.
+## Limitaciones conocidas
 
-## Transporte urbano, idiomas y apariencia
+- Horarios, velocidades, retrasos, posiciones, incidencias, pagos y reembolsos son simulados.
+- Las notificaciones del sistema dependen del soporte PWA del navegador; la bandeja interna sí funciona.
+- No existe backend, sincronización, Apple Wallet ni pago real.
+- La instalación y actualización final deben comprobarse en un Safari real después del despliegue.
 
-- Los diez sistemas metropolitanos incluidos generan sus mapas esquemáticos.
-- Alemán, español e inglés cambian las pantallas comprobadas.
-- El modo oscuro se aplica correctamente.
-- No hay desbordamiento horizontal en 320, 375, 393 ni 430 px.
-
-## Validación técnica
-
-- Sintaxis comprobada en `app.js`, `data.js`, `routing.js`, `store.js`, `payment.js` y `sw.js`.
-- `manifest.webmanifest` y `version.json` son JSON válidos.
-- Todos los recursos declarados en el Service Worker existen.
-- Caché: `galizische-bahn-v0.7.1-quality1`.
-- `netlify.toml` desactiva la caché persistente de los archivos críticos.
-- Se conserva la clave local anterior para migrar boletos y preferencias.
-
-## Limitaciones
-
-- Horarios, ocupación, posición, incidencias, notificaciones, reembolsos y pagos son simulados.
-- No deben utilizarse datos bancarios reales.
-- La instalación y actualización final de la PWA debe comprobarse también en Safari real después del despliegue.
+Los resultados detallados están en `QA-RESULTS.json`.

@@ -1,25 +1,40 @@
-# Publicación de Galizische Bahn v0.7.1
+# Publicación de Galizische Bahn v0.8.0
 
 ## GitHub Pages
 
-1. Descomprime el ZIP.
-2. Sustituye todos los archivos de la raíz del repositorio por los de esta carpeta.
+1. Descomprime `Galizische-Bahn-v0.8.0.zip`.
+2. Sustituye **todos** los archivos de la raíz del repositorio por los de la carpeta descomprimida.
 3. Conserva `.nojekyll` y la carpeta `icons`.
-4. Haz commit en `main`.
-5. Espera a que GitHub Pages termine el despliegue.
-6. Abre `version.json` desde el sitio publicado y confirma que muestra `0.7.1`.
-7. Cierra y vuelve a abrir la PWA para cargar la caché nueva.
+4. No subas el ZIP dentro del repositorio: sube su contenido.
+5. Haz commit en `main`.
+6. Espera a que GitHub Actions termine la publicación.
 
 Commit sugerido:
 
-`Release Galizische Bahn v0.7.1`
+```text
+Release Galizische Bahn v0.8.0
+```
 
-## Netlify
+## Netlify conectado a GitHub
 
-El proyecto incluye `netlify.toml` para impedir que el navegador conserve archivos críticos antiguos.
+1. Confirma que el repositorio conectado apunta a `main`.
+2. Publica el commit anterior.
+3. En Netlify abre **Deploys**.
+4. Selecciona **Trigger deploy → Clear cache and deploy site**.
+5. Comprueba que el deploy nuevo aparece como **Published**.
 
-1. Publica la carpeta raíz completa, no una carpeta contenedora adicional.
-2. En **Deploys**, ejecuta un despliegue limpio sin caché si la versión antigua continúa visible.
-3. Confirma que el deploy aparece como **Published**.
-4. Abre `version.json` en el dominio de Netlify y verifica `0.7.1`.
-5. En Safari, cierra la pestaña y la PWA instalada antes de volver a abrirlas.
+## Netlify con subida manual
+
+1. Descomprime el ZIP.
+2. Sube la carpeta completa o todos sus archivos al área de deploy manual.
+3. No subas únicamente `index.html`; los módulos, iconos, manifiesto y Service Worker también son necesarios.
+4. Ejecuta un despliegue con caché limpia.
+
+## Comprobación
+
+- Abre la URL en una pestaña privada.
+- Entra a **Mehr** y verifica `v0.8.0` y el build `redesign-live3`.
+- Comprueba la fecha local, el selector de idioma y una búsqueda.
+- Después abre la PWA instalada.
+
+La versión utiliza recursos `0.8.0-r3` y la caché `galizische-bahn-v0.8.0-redesign3` para evitar que Safari o Netlify reutilicen módulos antiguos.
