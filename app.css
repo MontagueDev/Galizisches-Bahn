@@ -608,3 +608,26 @@ body{background:radial-gradient(circle at 12% -8%,color-mix(in srgb,var(--brand)
 .gb-network-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.gb-network-summary>div{padding:12px;border-radius:15px;background:var(--surface2);text-align:center}.gb-network-summary strong,.gb-network-summary small{display:block}.gb-network-summary strong{color:var(--brand);font-size:20px}
 .journey-card .service-segment.ICE,.service-strip-segment.ICE{background:linear-gradient(135deg,var(--gbNavy),var(--brand))}.journey-card .service-segment.IC,.service-strip-segment.IC{background:#31597c}.journey-card .service-segment.RE,.service-strip-segment.RE{background:#2878a8}.journey-card .service-segment.RB,.service-strip-segment.RB{background:#3d91be}.journey-card .service-segment.S,.journey-card .service-segment.U{background:#168c78}
 @media(max-width:360px){.station-suggestions{max-height:260px}.station-search-input{grid-template-columns:30px minmax(0,1fr) 30px}.station-search-input input[type=search]{font-size:12px}}
+/* v0.9.1 Rail Operations */
+.official-service-row{grid-template-columns:52px auto minmax(0,1fr) auto}
+.official-service-row small{display:block;white-space:normal}
+.official-segment-card .segment-head>div:first-child{display:grid;gap:5px;min-width:0}
+.corridor-name{color:var(--text-secondary);font-weight:650;line-height:1.25}
+.segment-platforms{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.segment-platforms span{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;border-radius:12px;background:color-mix(in srgb,var(--surface-2) 86%,transparent);border:1px solid var(--hairline)}
+.segment-platforms small{color:var(--text-secondary)}
+.segment-platforms strong{font-size:1.05rem;color:var(--gb-blue,#0057a8)}
+.segment-operating-facts{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.segment-operating-facts span{padding:6px 9px;border-radius:999px;background:color-mix(in srgb,var(--gb-blue,#0057a8) 10%,transparent);color:var(--text-secondary);font-size:.78rem;font-weight:700}
+.rail-operations-panel{margin-top:18px}
+.rail-service-groups{display:grid;gap:10px}
+.rail-service-groups details{border:1px solid var(--hairline);border-radius:16px;background:color-mix(in srgb,var(--surface) 86%,transparent);overflow:hidden}
+.rail-service-groups summary{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;list-style:none}
+.rail-service-groups summary::-webkit-details-marker{display:none}
+.rail-service-groups summary strong{margin-left:auto;color:var(--text-secondary)}
+.rail-service-list{display:grid;border-top:1px solid var(--hairline)}
+.rail-service-list article{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-bottom:1px solid var(--hairline)}
+.rail-service-list article:last-child{border-bottom:0}
+.rail-service-list article>div{display:grid;gap:3px;min-width:0}
+.rail-service-list small{color:var(--text-secondary);line-height:1.35}
+.rail-service-list article>span{margin-left:auto;white-space:nowrap;font-size:.76rem;font-weight:750;color:var(--gb-blue,#0057a8)}

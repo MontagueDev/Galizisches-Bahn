@@ -1,4 +1,5 @@
-import {STATIONS,RAIL_EDGES,getStation,getUrbanNetwork,SERVICE_ALERTS} from './data.js?v=0.9.0-network-expansion1';
+import {STATIONS,RAIL_EDGES,getStation,getUrbanNetwork,SERVICE_ALERTS} from './data.js?v=0.9.1-rail-operations1';
+import {directServiceOptions,oneTransferServiceOptions,nextRun,minutesOf,clockOf,SERVICE_BY_ID} from './rail-services.js?v=0.9.1-rail-operations1';
 
 const adjacency=new Map();
 for(const [a,b,minutes,modes] of RAIL_EDGES){
@@ -68,12 +69,20 @@ function urbanAccess(station,gateway,direction='outbound'){
   const network=getUrbanNetwork(networkId);
   const from=stationUrbanName(station),to=stationUrbanName(gateway);
   const plan=planUrban(network,direction==='outbound'?from:to,direction==='outbound'?to:from);
-  if(!plan)return null;
+  if(!plan){
+    const mode=station.stationType==='U-Bahn'?'U':'S',minutes=12+(Math.abs([...station.id+gateway.id].reduce((n,c)=>n+c.charCodeAt(0),0))%11),line=`${mode} Zubringer`;
+    return{kind:'urban',mode,line,fromId:direction==='outbound'?station.id:gateway.id,toId:direction==='outbound'?gateway.id:station.id,minutes,changes:0,steps:[{lineId:line,mode,from:direction==='outbound'?from:to,to:direction==='outbound'?to:from,stops:Math.max(2,Math.round(minutes/4)),minutes}]};
+  }
   return{kind:'urban',mode:plan.steps[0]?.mode||'S',line:plan.steps.map(s=>s.lineId).join(' + '),fromId:direction==='outbound'?station.id:gateway.id,toId:direction==='outbound'?gateway.id:station.id,minutes:plan.minutes,changes:plan.changes,steps:plan.steps};
 }
 function gatewayOptions(station){
-  if(station.longDistance)return[{gateway:station,access:null,score:0}];
-  return cityGateways(station).map(g=>{const access=urbanAccess(station,g,'outbound');return{gateway:g,access,score:access?.minutes??999}}).filter(x=>x.score<999).sort((a,b)=>a.score-b.score).slice(0,3);
+  const options=[];
+  if(station.longDistance)options.push({gateway:station,access:null,score:0});
+  for(const g of cityGateways(station)){
+    if(g.id===station.id)continue;
+    const access=urbanAccess(station,g,'outbound');if(access)options.push({gateway:g,access,score:access.minutes});
+  }
+  return options.sort((a,b)=>a.score-b.score).slice(0,4);
 }
 function reverseAccess(station,gateway){return station.id===gateway.id?null:urbanAccess(station,gateway,'inbound')}
 function urbanDisplay(access,index=0){
@@ -90,39 +99,95 @@ function createSameCityJourney(search){
   const departure=search.time,arrival=addTime(departure,plan.minutes),passenger=Math.max(1,Number(search.passengers)||1);
   return[{id:`CITY-${a.id}-${b.id}-${departure}`,type:plan.steps[0]?.mode||'S',train:plan.steps.map(s=>s.lineId).join(' + '),fromId:a.id,toId:b.id,from:a.name,to:b.name,date:search.date,departure,arrival,duration:plan.minutes,baseMinutes:plan.minutes,path:[a.id,b.id],price:4*passenger,delay:0,changes:plan.changes,platform:'—',travelClass:'2',passengers:passenger,international:false,borderMinutes:0,connection:'safe',night:false,occupancy:'medium',composition:[],segments:[accessSegment({mode:plan.steps[0]?.mode||'S',line:plan.steps.map(s=>s.lineId).join(' + '),fromId:a.id,toId:b.id,minutes:plan.minutes,steps:plan.steps},departure)],displayServices:plan.steps.map(s=>({type:s.mode,train:s.lineId,weight:Math.max(1,s.stops),urban:true}))}];
 }
+function minutesForward(from,to){
+  let value=minutesOf(to)-minutesOf(from);if(value<0)value+=1440;return value;
+}
+function pathForOfficialStops(stops){
+  let ids=[],minutes=0;
+  for(let i=0;i<stops.length-1;i++){
+    const part=shortestPath(stops[i],stops[i+1],null,['MEX']);if(!part)return null;
+    minutes+=part.minutes;
+    ids.push(...(i?part.ids.slice(1):part.ids));
+  }
+  return{ids,minutes};
+}
+function officialLeg(option,readyTime,seed=0){
+  const {service,direction,stations}=option,run=nextRun(service,readyTime,direction),path=pathForOfficialStops(stations);if(!path)return null;
+  const spec=typeSpecs[service.product]||typeSpecs.RE;
+  const running=Math.max(8,Math.round(path.minutes*spec.speed)+(stations.length-2)*3);
+  const arrival=addTime(run.departure,running),occupancy=occupancyFor(`${service.id}${run.train}${readyTime}`,seed);
+  return{kind:'train',type:service.product,train:run.train,corridorId:service.id,corridorName:service.name,rollingStock:service.rollingStock,frequency:service.frequency,fromId:stations[0],toId:stations.at(-1),departure:run.departure,arrival,minutes:running,path:path.ids,officialStops:stations,occupancy,composition:composition(service.product,occupancy),platformDeparture:String(1+(service.trainBase+seed*3)%16),platformArrival:String(1+(service.trainBase+seed*5+2)%16),priceFactor:service.priceFactor,night:service.night};
+}
+function officialCoreCandidates(fromId,toId,readyTime){
+  const productSets=[['ICE'],['IC'],['RE'],['RB'],['NJ'],['ICE','IC','RE'],['IC','RE','RB']];
+  const candidates=[];
+  for(const products of productSets){
+    for(const option of directServiceOptions(fromId,toId,products)){
+      const leg=officialLeg(option,readyTime,candidates.length);if(leg)candidates.push({legs:[leg],official:true,signature:option.service.id,product:option.service.product});
+    }
+  }
+  {
+    const transfers=oneTransferServiceOptions(fromId,toId,['ICE','IC','RE','RB']).filter(item=>item.legs[0].service.id!==item.legs[1].service.id).sort((a,b)=>{const score=x=>x.legs.reduce((n,l)=>n+({ICE:1,IC:2,RE:3,RB:4}[l.service.product]||5),0);return score(a)-score(b)}).slice(0,30);
+    for(const transfer of transfers){
+      const first=officialLeg(transfer.legs[0],readyTime,candidates.length);if(!first)continue;
+      const second=officialLeg(transfer.legs[1],addTime(first.arrival,12),candidates.length+1);if(!second)continue;
+      candidates.push({legs:[first,second],official:true,signature:`${transfer.legs[0].service.id}+${transfer.legs[1].service.id}`,product:first.type,transfer:transfer.transfer});
+    }
+  }
+  return candidates.sort((a,b)=>{
+    const aEnd=a.legs.at(-1).arrival,bEnd=b.legs.at(-1).arrival;
+    return minutesForward(readyTime,aEnd)-minutesForward(readyTime,bEnd);
+  });
+}
 function createDomesticJourneys(search){
   const same=createSameCityJourney(search);if(same.length)return same;
   const origin=getStation(search.fromId),destination=getStation(search.toId);if(!origin||!destination)return[];
-  const starts=gatewayOptions(origin),ends=(destination.longDistance?[{gateway:destination,score:0}]:cityGateways(destination).map(g=>({gateway:g,score:reverseAccess(destination,g)?.minutes??999})).filter(x=>x.score<999).sort((a,b)=>a.score-b.score).slice(0,3));
-  const hour=Number(search.time.slice(0,2)),passenger=Math.max(1,Number(search.passengers)||1),classFactor=String(search.travelClass)==='1'?1.42:1;
-  const profiles=[
-    {type:'ICE',offset:0,label:'fast',price:.34},
-    {type:'IC',offset:17,label:'balanced',price:.25},
-    {type:'RE',offset:31,label:'regional',price:.16},
-    {type:'RB',offset:44,label:'cheap',price:.11},
-    ...(hour>=19||hour<5?[{type:'NJ',offset:65,label:'night',price:.38}]:[])
-  ];
-  const results=[];
-  profiles.forEach((profile,index)=>{
-    const start=starts[index%Math.max(1,starts.length)],end=ends[(index+1)%Math.max(1,ends.length)];if(!start||!end)return;
-    const core=domesticPath(start.gateway.id,end.gateway.id,profile.type);if(!core)return;
-    const outAccess=start.access, inAccess=destination.id===end.gateway.id?null:reverseAccess(destination,end.gateway);
-    const departure=addTime(search.time,profile.offset),outMinutes=outAccess?.minutes||0,inMinutes=inAccess?.minutes||0;
-    const buffer=(outAccess?9:0)+(inAccess?7:0),spec=typeSpecs[profile.type]||typeSpecs.RE;
-    let coreMinutes=Math.round(core.minutes*spec.speed);
-    if(profile.type==='RB')coreMinutes=Math.round(core.minutes*1.38);
-    const delay=index===1?4:index===2?9:0,total=outMinutes+buffer+coreMinutes+inMinutes+delay;
-    let cursor=departure,segments=[],display=[];
-    if(outAccess){const seg=accessSegment(outAccess,cursor);segments.push(seg);display.push(...urbanDisplay(outAccess));cursor=addTime(seg.arrival,9)}
-    const coreArrival=addTime(cursor,coreMinutes+delay),train=trainNumber(profile.type,index+1),occupancy=occupancyFor(`${origin.id}${destination.id}${departure}`,index);
-    segments.push({kind:'train',type:profile.type,train,fromId:start.gateway.id,toId:end.gateway.id,departure:cursor,arrival:coreArrival,path:core.ids,occupancy,composition:composition(profile.type,occupancy)});
-    display.push({type:profile.type,train,weight:Math.max(2,core.ids.length)});cursor=coreArrival;
-    if(inAccess){cursor=addTime(cursor,7);const seg=accessSegment(inAccess,cursor);segments.push(seg);display.push(...urbanDisplay(inAccess));cursor=seg.arrival}
-    const changes=Math.max(0,segments.length-1)+(profile.type==='RE'&&core.ids.length>5?1:0)+(profile.type==='RB'&&core.ids.length>4?1:0);
-    const basePrice=Math.max(8,core.minutes*profile.price+outMinutes*.08+inMinutes*.08),price=Math.round(basePrice*classFactor*passenger);
-    results.push({id:`V09-${profile.type}-${origin.id}-${destination.id}-${departure}`,type:segments[0]?.type||profile.type,train:display.map(d=>d.train).join(' + '),fromId:origin.id,toId:destination.id,from:origin.name,to:destination.name,date:search.date,departure,arrival:cursor,duration:total,baseMinutes:core.minutes,path:[origin.id,...core.ids.filter(id=>id!==origin.id&&id!==destination.id),destination.id],price,delay,changes,platform:String(2+(index*3)%12),travelClass:String(search.travelClass),passengers:passenger,international:false,borderMinutes:0,connection:delay>=12?'risk':'safe',night:profile.type==='NJ',occupancy,composition:composition(profile.type,occupancy),segments,displayServices:display,accessGateway:start.gateway.name,egressGateway:end.gateway.name,profile:profile.label});
-  });
-  return results;
+  const starts=gatewayOptions(origin),ends=gatewayOptions(destination).map(item=>({gateway:item.gateway,score:item.score,access:item.gateway.id===destination.id?null:reverseAccess(destination,item.gateway)})).filter(item=>item.gateway.id===destination.id||item.access).slice(0,4);
+  const passenger=Math.max(1,Number(search.passengers)||1),classFactor=String(search.travelClass)==='1'?1.42:1;
+  const all=[];
+  for(const start of starts){for(const end of ends){
+    const outAccess=start.access,inAccess=end.access||null;
+    let ready=search.time;
+    if(outAccess)ready=addTime(ready,outAccess.minutes+9);
+    const cores=officialCoreCandidates(start.gateway.id,end.gateway.id,ready);
+    for(const core of cores){
+      let cursor=search.time,segments=[],display=[];
+      if(outAccess){const seg=accessSegment(outAccess,cursor);segments.push(seg);display.push(...urbanDisplay(outAccess));cursor=addTime(seg.arrival,9)}
+      let waiting=0;
+      for(let i=0;i<core.legs.length;i++){
+        const original=core.legs[i],leg={...original};
+        if(i===0){waiting=minutesForward(cursor,leg.departure)}else{
+          const minReady=addTime(cursor,12),next=nextRun(SERVICE_BY_ID.get(leg.corridorId),minReady,leg.officialStops[0]===SERVICE_BY_ID.get(leg.corridorId).stations[0]?1:-1);
+          waiting+=minutesForward(cursor,next.departure);leg.departure=next.departure;leg.train=next.train;leg.arrival=addTime(next.departure,leg.minutes);
+        }
+        segments.push(leg);display.push({type:leg.type,train:leg.train,weight:Math.max(2,leg.officialStops.length),corridorId:leg.corridorId});cursor=leg.arrival;
+        if(i<core.legs.length-1)cursor=addTime(cursor,12);
+      }
+      if(inAccess){cursor=addTime(cursor,7);const seg=accessSegment(inAccess,cursor);segments.push(seg);display.push(...urbanDisplay(inAccess));cursor=seg.arrival}
+      const trainSegments=segments.filter(s=>s.kind==='train'),changes=Math.max(0,segments.filter(s=>s.kind!=='border').length-1);
+      const weighted=trainSegments.reduce((n,leg)=>n+leg.minutes*(leg.priceFactor||.5),0),urbanMinutes=(outAccess?.minutes||0)+(inAccess?.minutes||0);
+      const price=Math.max(7,Math.round((weighted*.42+urbanMinutes*.07)*classFactor*passenger));
+      const overallDeparture=segments[0]?.departure||search.time,duration=minutesForward(overallDeparture,cursor),delay=(core.signature.charCodeAt(0)+duration)%11===0?7:0,occupancy=trainSegments[0]?.occupancy||'medium';
+      all.push({id:`V091-${core.signature}-${origin.id}-${destination.id}-${overallDeparture}`,type:segments[0]?.type||trainSegments[0]?.type,train:display.map(d=>d.train).join(' + '),fromId:origin.id,toId:destination.id,from:origin.name,to:destination.name,date:search.date,departure:overallDeparture,arrival:cursor,duration,baseMinutes:trainSegments.reduce((n,s)=>n+s.minutes,0),path:[origin.id,...trainSegments.flatMap(s=>s.path).filter((id,i,a)=>i===0||id!==a[i-1]),destination.id],price,delay,changes,platform:trainSegments[0]?.platformDeparture||'—',arrivalPlatform:trainSegments.at(-1)?.platformArrival||'—',travelClass:String(search.travelClass),passengers:passenger,international:false,borderMinutes:0,connection:waiting>30?'risk':'safe',night:trainSegments.some(s=>s.night),occupancy,composition:trainSegments[0]?.composition||[],segments,displayServices:display,accessGateway:start.gateway.name,egressGateway:end.gateway.name,profile:core.product.toLowerCase(),officialService:true,corridors:trainSegments.map(s=>s.corridorId),waitingMinutes:waiting});
+    }
+  }}
+  const unique=[];const seen=new Set();
+  const addUnique=item=>{if(item&&!seen.has(item.train)){seen.add(item.train);unique.push(item)}};
+  const direct=all.filter(item=>item.segments.filter(seg=>seg.kind==='train').length===1).sort((a,b)=>a.duration-b.duration);
+  addUnique(direct[0]);
+  const requestedHour=Number(search.time.slice(0,2));const productOrder=(requestedHour>=18||requestedHour<5)?['ICE','IC','RE','RB','NJ']:['ICE','IC','RE','RB'];
+  for(const product of productOrder){
+    const directProduct=direct.filter(x=>x.segments.some(seg=>seg.kind==='train'&&seg.type===product))[0];
+    const anyProduct=all.filter(x=>x.segments.some(seg=>seg.kind==='train'&&seg.type===product)).sort((a,b)=>a.duration-b.duration)[0];
+    addUnique(directProduct||anyProduct);
+  }
+  addUnique(all.sort((a,b)=>a.duration-b.duration)[0]);
+  for(const item of all.sort((a,b)=>a.duration-b.duration)){if(unique.length>=6)break;if(item.night&&!(requestedHour>=18||requestedHour<5))continue;addUnique(item)}
+  if(unique.length)return unique.sort((a,b)=>a.departure.localeCompare(b.departure)||a.duration-b.duration);
+  // Graph fallback only when no official operating corridor can serve the selected gateways.
+  const fallback=domesticPath(starts[0]?.gateway.id,ends[0]?.gateway.id,'RE');if(!fallback)return[];
+  const departure=search.time,arrival=addTime(departure,Math.round(fallback.minutes*1.15));
+  return[{id:`FALLBACK-${origin.id}-${destination.id}-${departure}`,type:'RE',train:'RE Ersatzverkehr',fromId:origin.id,toId:destination.id,from:origin.name,to:destination.name,date:search.date,departure,arrival,duration:minutesForward(departure,arrival),baseMinutes:fallback.minutes,path:fallback.ids,price:Math.max(8,Math.round(fallback.minutes*.16*passenger)),delay:0,changes:0,platform:'—',travelClass:String(search.travelClass),passengers:passenger,international:false,borderMinutes:0,connection:'safe',night:false,occupancy:'medium',composition:composition('RE','medium'),segments:[],displayServices:[{type:'RE',train:'RE Ersatzverkehr',weight:fallback.ids.length}],officialService:false}];
 }
 function createInternationalJourneys(search){
   const outbound=search.toId==='MEX',domesticStation=getStation(outbound?search.fromId:search.toId);if(!domesticStation)return[];
@@ -130,11 +195,11 @@ function createInternationalJourneys(search){
   const types=['ICE','IC','RE'];const results=[];
   types.forEach((type,index)=>{
     const gate=gates[index%Math.max(1,gates.length)];if(!gate)return;const path=domesticPath(gate.gateway.id,'SJR',type);if(!path)return;
-    const access=gate.access,borderMinutes=45,rbMinutes=93,departure=addTime(search.time,index*28),occupancy=occupancyFor(`${search.fromId}${search.toId}${departure}`,index),domesticTrain=trainNumber(type,index+2),rbTrain=trainNumber('RB',index),segments=[],display=[];
+    const access=gate.access,borderMinutes=45,rbMinutes=93,departure=addTime(search.time,index*28),occupancy=occupancyFor(`${search.fromId}${search.toId}${departure}`,index),officialOption=directServiceOptions(gate.gateway.id,'SJR',[type])[0],officialRun=officialOption?nextRun(officialOption.service,departure,officialOption.direction):null,domesticTrain=officialRun?.train||trainNumber(type,index+2),borderService=SERVICE_BY_ID.get('RBM90'),borderRun=nextRun(borderService,departure,outbound?1:-1),rbTrain=borderRun.train,segments=[],display=[];
     let cursor=departure;
     if(outbound&&access){const seg=accessSegment(access,cursor);segments.push(seg);display.push(...urbanDisplay(access));cursor=addTime(seg.arrival,9)}
-    if(outbound){const domesticArrival=addTime(cursor,Math.round(path.minutes*typeSpecs[type].speed));segments.push({kind:'train',type,train:domesticTrain,fromId:gate.gateway.id,toId:'SJR',departure:cursor,arrival:domesticArrival,path:path.ids,occupancy,composition:composition(type,occupancy)});display.push({type,train:domesticTrain,weight:path.ids.length});const borderEnd=addTime(domesticArrival,borderMinutes);segments.push({kind:'border',stationId:'SJR',direction:'outbound',start:domesticArrival,end:borderEnd,minutes:borderMinutes});cursor=addTime(borderEnd,12);const arrival=addTime(cursor,rbMinutes);segments.push({kind:'train',type:'RB',train:rbTrain,fromId:'SJR',toId:'MEX',departure:cursor,arrival,path:['SJR','MEX'],occupancy:'medium',composition:composition('RB','medium')});display.push({type:'RB',train:rbTrain,weight:2});cursor=arrival}
-    else{const rbArrival=addTime(cursor,rbMinutes);segments.push({kind:'train',type:'RB',train:rbTrain,fromId:'MEX',toId:'SJR',departure:cursor,arrival:rbArrival,path:['MEX','SJR'],occupancy:'medium',composition:composition('RB','medium')});display.push({type:'RB',train:rbTrain,weight:2});const borderEnd=addTime(rbArrival,borderMinutes);segments.push({kind:'border',stationId:'SJR',direction:'inbound',start:rbArrival,end:borderEnd,minutes:borderMinutes});cursor=addTime(borderEnd,12);const domesticArrival=addTime(cursor,Math.round(path.minutes*typeSpecs[type].speed));segments.push({kind:'train',type,train:domesticTrain,fromId:'SJR',toId:gate.gateway.id,departure:cursor,arrival:domesticArrival,path:path.ids.slice().reverse(),occupancy,composition:composition(type,occupancy)});display.push({type,train:domesticTrain,weight:path.ids.length});cursor=domesticArrival;if(access){const inward=reverseAccess(domesticStation,gate.gateway);cursor=addTime(cursor,7);const seg=accessSegment(inward,cursor);segments.push(seg);display.push(...urbanDisplay(inward));cursor=seg.arrival}}
+    if(outbound){const domesticArrival=addTime(cursor,Math.round(path.minutes*typeSpecs[type].speed));segments.push({kind:'train',type,train:domesticTrain,corridorId:officialOption?.service.id||null,corridorName:officialOption?.service.name||null,rollingStock:officialOption?.service.rollingStock||type,fromId:gate.gateway.id,toId:'SJR',departure:cursor,arrival:domesticArrival,path:path.ids,occupancy,composition:composition(type,occupancy),platformDeparture:String(3+index*2),platformArrival:'7'});display.push({type,train:domesticTrain,weight:path.ids.length});const borderEnd=addTime(domesticArrival,borderMinutes);segments.push({kind:'border',stationId:'SJR',direction:'outbound',start:domesticArrival,end:borderEnd,minutes:borderMinutes});cursor=addTime(borderEnd,12);const arrival=addTime(cursor,rbMinutes);segments.push({kind:'train',type:'RB',train:rbTrain,corridorId:'RBM90',corridorName:'RB México',rollingStock:borderService.rollingStock,fromId:'SJR',toId:'MEX',departure:cursor,arrival,path:['SJR','MEX'],occupancy:'medium',composition:composition('RB','medium'),platformDeparture:'4',platformArrival:'2'});display.push({type:'RB',train:rbTrain,weight:2});cursor=arrival}
+    else{const rbArrival=addTime(cursor,rbMinutes);segments.push({kind:'train',type:'RB',train:rbTrain,corridorId:'RBM90',corridorName:'RB México',rollingStock:borderService.rollingStock,fromId:'MEX',toId:'SJR',departure:cursor,arrival:rbArrival,path:['MEX','SJR'],occupancy:'medium',composition:composition('RB','medium'),platformDeparture:'2',platformArrival:'4'});display.push({type:'RB',train:rbTrain,weight:2});const borderEnd=addTime(rbArrival,borderMinutes);segments.push({kind:'border',stationId:'SJR',direction:'inbound',start:rbArrival,end:borderEnd,minutes:borderMinutes});cursor=addTime(borderEnd,12);const domesticArrival=addTime(cursor,Math.round(path.minutes*typeSpecs[type].speed));segments.push({kind:'train',type,train:domesticTrain,corridorId:officialOption?.service.id||null,corridorName:officialOption?.service.name||null,rollingStock:officialOption?.service.rollingStock||type,fromId:'SJR',toId:gate.gateway.id,departure:cursor,arrival:domesticArrival,path:path.ids.slice().reverse(),occupancy,composition:composition(type,occupancy),platformDeparture:'7',platformArrival:String(3+index*2)});display.push({type,train:domesticTrain,weight:path.ids.length});cursor=domesticArrival;if(access){const inward=reverseAccess(domesticStation,gate.gateway);cursor=addTime(cursor,7);const seg=accessSegment(inward,cursor);segments.push(seg);display.push(...urbanDisplay(inward));cursor=seg.arrival}}
     const total=segments.reduce((n,s)=>n+(s.minutes||((Date.parse(`1970-01-01T${s.arrival}:00Z`)-Date.parse(`1970-01-01T${s.departure}:00Z`))/60000)||0),0)+45+12;
     const price=Math.round((path.minutes*(typeSpecs[type]?.price||.2)+36)*classFactor*passenger);
     results.push({id:`INT09-${type}-${search.fromId}-${search.toId}-${departure}`,type:display[0]?.type||type,train:display.map(x=>x.train).join(' + '),fromId:search.fromId,toId:search.toId,from:getStation(search.fromId).name,to:getStation(search.toId).name,date:search.date,departure,arrival:cursor,duration:Math.max(120,total),baseMinutes:path.minutes+rbMinutes,path:outbound?[search.fromId,...path.ids.slice(1),'MEX']:['MEX',...path.ids.slice().reverse().slice(1),search.toId],price,delay:index===1?8:2,changes:segments.filter(s=>s.kind!=='border').length-1,platform:String(3+index*2),travelClass:String(search.travelClass),passengers:passenger,international:true,borderMinutes,connection:index===1?'risk':'safe',night:false,segments,occupancy,composition:composition(type,occupancy),borderStationId:'SJR',mandatoryTransfer:true,warningAuthority:'Auswärtiges Amt',borderStatus:'restricted',rbTrain,displayServices:display});

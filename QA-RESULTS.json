@@ -1,156 +1,257 @@
 {
-  "version": "0.9.0",
-  "passed": 28,
-  "total": 29,
+  "version": "0.9.1",
+  "build": "2026.08.05-rail-operations1",
+  "generatedAt": "2026-08-05T19:33:05.809Z",
+  "summary": {
+    "passed": 49,
+    "failed": 0,
+    "total": 49
+  },
   "checks": [
     {
-      "name": "Version is 0.9.0",
-      "ok": true,
-      "detail": ""
+      "name": "Version is 0.9.1",
+      "pass": true,
+      "detail": "0.9.1"
     },
     {
-      "name": "Expanded station database",
-      "ok": true,
+      "name": "Build is rail operations",
+      "pass": true,
+      "detail": "2026.08.05-rail-operations1"
+    },
+    {
+      "name": "Station database retained",
+      "pass": true,
       "detail": "152"
     },
     {
-      "name": "Ten metropolitan networks",
-      "ok": true,
+      "name": "Ten metropolitan networks retained",
+      "pass": true,
       "detail": "10"
     },
     {
-      "name": "Population-scaled urban lines",
-      "ok": true,
-      "detail": "65"
+      "name": "Official service catalogue has at least 40 lines",
+      "pass": true,
+      "detail": "46"
     },
     {
-      "name": "Long-distance stations identified",
-      "ok": true,
-      "detail": "35"
+      "name": "ICE network exists",
+      "pass": true,
+      "detail": "6"
     },
     {
-      "name": "Urban stations identified",
-      "ok": true,
-      "detail": "116"
+      "name": "IC network exists",
+      "pass": true,
+      "detail": "6"
     },
     {
-      "name": "Mexico separate country",
-      "ok": true,
+      "name": "RE network exists",
+      "pass": true,
+      "detail": "18"
+    },
+    {
+      "name": "RB network exists",
+      "pass": true,
+      "detail": "13"
+    },
+    {
+      "name": "NJ network exists",
+      "pass": true,
+      "detail": "3"
+    },
+    {
+      "name": "ICE 1 starts in Puerto Vallarta",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "San Juan border station",
-      "ok": true,
+      "name": "ICE 1 reaches the border",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "Only RB crosses SJR–MEX",
-      "ok": true,
+      "name": "RB México is separate",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "Predictive autocomplete component",
-      "ok": true,
+      "name": "Every corridor station exists",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "Old station select replaced",
-      "ok": true,
+      "name": "Guadalajara board uses official services",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "German, Spanish and English station labels",
-      "ok": true,
+      "name": "Puerto Vallarta to border returns journeys",
+      "pass": true,
+      "detail": "6"
+    },
+    {
+      "name": "Puerto Vallarta to border has valid times",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "Urban access engine",
-      "ok": true,
+      "name": "Puerto Vallarta to border has positive price",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "ICE alternative profile",
-      "ok": true,
+      "name": "Urban access to long-distance returns journeys",
+      "pass": true,
+      "detail": "6"
+    },
+    {
+      "name": "Urban access to long-distance has valid times",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "IC alternative profile",
-      "ok": true,
+      "name": "Urban access to long-distance has positive price",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "RE alternative profile",
-      "ok": true,
+      "name": "Major hub variety returns journeys",
+      "pass": true,
+      "detail": "6"
+    },
+    {
+      "name": "Major hub variety has valid times",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "RB alternative profile",
-      "ok": true,
+      "name": "Major hub variety has positive price",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "Mexico outbound order",
-      "ok": false,
+      "name": "South to financial coast returns journeys",
+      "pass": true,
+      "detail": "6"
+    },
+    {
+      "name": "South to financial coast has valid times",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "GB blue identity",
-      "ok": true,
+      "name": "South to financial coast has positive price",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "GB logo SVG",
-      "ok": true,
+      "name": "Regional transfer returns journeys",
+      "pass": true,
+      "detail": "6"
+    },
+    {
+      "name": "Regional transfer has valid times",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "New PWA cache",
-      "ok": true,
+      "name": "Regional transfer has positive price",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "Index and 404 synchronized",
-      "ok": true,
+      "name": "Outbound Mexico returns journeys",
+      "pass": true,
+      "detail": "3"
+    },
+    {
+      "name": "Outbound Mexico has valid times",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "Standalone preview generated",
-      "ok": true,
-      "detail": "391225"
-    },
-    {
-      "name": "data.js syntax",
-      "ok": true,
+      "name": "Outbound Mexico has positive price",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "routing.js syntax",
-      "ok": true,
+      "name": "Inbound Mexico returns journeys",
+      "pass": true,
+      "detail": "3"
+    },
+    {
+      "name": "Inbound Mexico has valid times",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "store.js syntax",
-      "ok": true,
+      "name": "Inbound Mexico has positive price",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "payment.js syntax",
-      "ok": true,
+      "name": "Urban origin receives U/S access",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "i18n.js syntax",
-      "ok": true,
+      "name": "Urban destination receives U/S egress",
+      "pass": true,
       "detail": ""
     },
     {
-      "name": "app.js syntax",
-      "ok": true,
+      "name": "Major route includes ICE option",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Major route includes IC option",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mexico outbound ends with RB México",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mexico inbound starts with RB México",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Route matrix has no empty results",
+      "pass": true,
+      "detail": "172 tested; 0 empty"
+    },
+    {
+      "name": "index and 404 are synchronized",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Service worker caches rail service model",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Application imports service catalogue",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Station board uses operating plan",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "PDF uses A4 media box",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "PDF includes GB corporate blue",
+      "pass": true,
       "detail": ""
     }
-  ],
-  "limitations": [
-    "Operational data, fares and payments remain simulated.",
-    "Chromium page rendering was blocked by the execution environment; the standalone HTML is included for Safari validation."
   ]
 }

@@ -1,4 +1,4 @@
-import {APP_VERSION} from './data.js?v=0.9.0-network-expansion1';
+import {APP_VERSION} from './data.js?v=0.9.1-rail-operations1';
 
 // Keep the historic key so v0.6–v0.7.1 data is migrated instead of lost.
 const KEY='gbahn-v060-state';

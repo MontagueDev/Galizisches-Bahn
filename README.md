@@ -1,12 +1,16 @@
-# Galizische Bahn v0.9.0 — Network Expansion
+# Galizische Bahn v0.9.1 — Rail Operations Update
 
-Major release with complete GB blue identity, an expanded national station database, predictive station search and realistic multimodal journeys.
+This release turns the expanded v0.9 network into a structured railway operation. German remains the canonical interface language, with reviewed Spanish and English translations.
 
-## Highlights
-- More than 200 searchable stations and stops across Galizia.
-- 20 long-distance stations plus regional hubs.
-- Population-scaled U-Bahn and S-Bahn networks in ten metropolitan areas.
-- Automatic U/S-Bahn access to the most convenient long-distance station.
-- Multiple ICE, IC, RE, RB and mixed alternatives.
-- San Juan del Río remains the mandatory border interchange for Mexico.
-- German source language, Spanish and English translations retained.
+## Main additions
+
+- 46 official railway corridors across ICE, IC, RE, RB, NightJet and RB México
+- Stable frequencies, stopping patterns, train numbers and rolling-stock assignments
+- Corridor-aware journey planning with direct and one-transfer alternatives
+- Automatic U-Bahn/S-Bahn access to and from long-distance stations
+- Official departure and arrival boards
+- Platforms, train composition and corridor information in journey details
+- A4 GB online-ticket PDF
+- Puerto Vallarta integrated as the western financial and logistics hub on ICE 1
+
+All payments, live data and operational incidents are simulated. Never enter real banking information.
