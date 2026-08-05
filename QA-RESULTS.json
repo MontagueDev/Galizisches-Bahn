@@ -1,39 +1,11 @@
 {
-  "version": "0.8.1",
-  "build": "2026.08.05-liquid-glass1",
-  "checks": [
-    {
-      "name": "JavaScript syntax",
-      "status": "pass"
-    },
-    {
-      "name": "Manifest JSON",
-      "status": "pass"
-    },
-    {
-      "name": "Version JSON",
-      "status": "pass"
-    },
-    {
-      "name": "PWA resources exist",
-      "status": "pass"
-    },
-    {
-      "name": "German/Spanish/English copyright keys",
-      "status": "pass"
-    },
-    {
-      "name": "Old development footer removed",
-      "status": "pass"
-    },
-    {
-      "name": "Liquid Glass fallback included",
-      "status": "pass"
-    },
-    {
-      "name": "Responsive rules 320–430 px included",
-      "status": "pass"
-    }
-  ],
-  "browser_note": "Chromium visual automation was unavailable in this runtime because its graphics process could not initialize; final Safari rendering remains to be checked on-device."
+  "version": "0.8.2",
+  "checks": {
+    "paymentFormSection": true,
+    "securityCodeGerman": true,
+    "newCache": true,
+    "copyright": true,
+    "standalone": true
+  },
+  "passed": true
 }

@@ -1,7 +1,7 @@
 {
-  "version": "0.8.1",
-  "build": "2026.08.05-liquid-glass1",
-  "cache": "galizische-bahn-v0.8.1-liquid-glass1",
-  "released": "2026-08-05T03:00:00Z",
+  "version": "0.8.2",
+  "build": "2026.08.05-ui-refinement2",
+  "cache": "galizische-bahn-v0.8.2-ui-refinement2",
+  "released": "2026-08-05T04:00:00Z",
   "minimumSchema": 9
 }

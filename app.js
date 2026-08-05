@@ -1,11 +1,11 @@
 import {
   APP_VERSION, APP_BUILD, STATIONS, RAIL_EDGES, URBAN_NETWORKS,
   SUBSCRIPTIONS, FARES, SERVICE_ALERTS, COPY, getStation, getUrbanNetwork
-} from './data.js?v=0.8.1-lg1';
-import { createStore } from './store.js?v=0.8.1-lg1';
-import { createJourneys, planUrban, addTime } from './routing.js?v=0.8.1-lg1';
-import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.8.1-lg1';
-import { I18N } from './i18n.js?v=0.8.1-lg1';
+} from './data.js?v=0.8.2-ui2';
+import { createStore } from './store.js?v=0.8.2-ui2';
+import { createJourneys, planUrban, addTime } from './routing.js?v=0.8.2-ui2';
+import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.8.2-ui2';
+import { I18N } from './i18n.js?v=0.8.2-ui2';
 
 const store = createStore();
 const EXTRA_COPY={
@@ -436,7 +436,23 @@ function finalizeLocalTicket(result){
 
 function paymentForm(price){
   const f=checkout?.paymentFields||{};
-  return `<article class="demo-payment"><strong>DEMO</strong><p>${esc(t('demoPayment'))}</p></article><div class="order-total"><span>${esc(t('payment'))}</span><strong>${esc(currency(price))}</strong></div><div class="field"><label for="payHolder">${esc(t('cardholder'))}</label><input id="payHolder" autocomplete="off" value="${esc(f.holder||'David J. Martínez')}"></div><div class="field"><label for="payNumber">${esc(t('cardNumber'))}</label><input id="payNumber" inputmode="numeric" autocomplete="off" placeholder="4242 4242 4242 4242" value="${esc(f.number||'')}"><small>${esc(t('cardHelp'))}</small></div><div class="field-grid"><div class="field"><label for="payExpiry">${esc(t('expiry'))}</label><input id="payExpiry" inputmode="numeric" placeholder="12/30" value="${esc(f.expiry||'')}"></div><div class="field"><label for="payCvv">${esc(t('cvv'))}</label><input id="payCvv" inputmode="numeric" placeholder="123" maxlength="4" value="${esc(f.cvv||'')}"></div></div><div class="field"><label for="payAddress">${esc(t('billingAddress'))}</label><input id="payAddress" value="${esc(f.address||'Musterstraße 12, Guadalajara')}"></div><div class="field"><label for="payCountry">${esc(t('country'))}</label><select id="payCountry"><option value="GL" ${(f.country||'GL')==='GL'?'selected':''}>${esc(t('countryGalizia'))}</option><option value="MX" ${f.country==='MX'?'selected':''}>${esc(t('countryMexico'))}</option><option value="DE" ${f.country==='DE'?'selected':''}>${esc(t('countryGermany'))}</option></select></div><label class="check-row"><input id="savePay" type="checkbox" ${f.save?'checked':''}><span>${esc(t('saveTestCard'))}</span></label><div id="paymentProgress" class="payment-progress" hidden aria-live="polite"></div>`;
+  const language=state().language||'de';
+  const securityHelp=language==='de'?'3 oder 4 Ziffern auf der Kartenrückseite.':language==='es'?'3 o 4 dígitos del reverso de la tarjeta.':'3 or 4 digits on the back of the card.';
+  const expiryHelp=language==='de'?'Format MM/JJ':language==='es'?'Formato MM/AA':'Format MM/YY';
+  return `<article class="demo-payment compact-demo"><strong>DEMO</strong><p>${esc(t('demoPayment'))}</p></article>
+  <div class="order-total refined-total"><span>${esc(language==='de'?'Gesamtbetrag':language==='es'?'Total a pagar':'Total due')}</span><strong>${esc(currency(price))}</strong></div>
+  <section class="payment-form-section" aria-label="${esc(t('payment'))}">
+    <div class="field form-field"><label for="payHolder">${esc(t('cardholder'))}</label><input id="payHolder" autocomplete="cc-name" value="${esc(f.holder||'David J. Martínez')}"></div>
+    <div class="field form-field"><label for="payNumber">${esc(t('cardNumber'))}</label><input id="payNumber" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" value="${esc(f.number||'')}"><small>${esc(t('cardHelp'))}</small></div>
+    <div class="field-grid payment-field-grid">
+      <div class="field form-field"><label for="payExpiry">${esc(t('expiry'))}</label><input id="payExpiry" inputmode="numeric" autocomplete="cc-exp" placeholder="12/30" value="${esc(f.expiry||'')}"><small>${esc(expiryHelp)}</small></div>
+      <div class="field form-field"><label for="payCvv">${esc(t('cvv'))}</label><input id="payCvv" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4" value="${esc(f.cvv||'')}"><small>${esc(securityHelp)}</small></div>
+    </div>
+    <div class="field form-field"><label for="payAddress">${esc(t('billingAddress'))}</label><input id="payAddress" autocomplete="street-address" value="${esc(f.address||'Musterstraße 12, Guadalajara')}"></div>
+    <div class="field form-field"><label for="payCountry">${esc(t('country'))}</label><select id="payCountry" autocomplete="country"><option value="GL" ${(f.country||'GL')==='GL'?'selected':''}>${esc(t('countryGalizia'))}</option><option value="MX" ${f.country==='MX'?'selected':''}>${esc(t('countryMexico'))}</option><option value="DE" ${f.country==='DE'?'selected':''}>${esc(t('countryGermany'))}</option></select></div>
+  </section>
+  <label class="check-row refined-check"><input id="savePay" type="checkbox" ${f.save?'checked':''}><span>${esc(t('saveTestCard'))}</span></label>
+  <div id="paymentProgress" class="payment-progress" hidden aria-live="polite"></div>`;
 }
 function bindPaymentForm(onSuccess){
   const number=document.getElementById('payNumber');
