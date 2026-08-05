@@ -1,4 +1,4 @@
-import {STATIONS,RAIL_EDGES,getStation,SERVICE_ALERTS} from './data.js?v=0.8.5-navigation-consistency1';
+import {STATIONS,RAIL_EDGES,getStation,SERVICE_ALERTS} from './data.js?v=0.8.6-db-results1';
 
 const adjacency=new Map();
 for(const [a,b,minutes,modes] of RAIL_EDGES){
@@ -113,7 +113,8 @@ function createInternationalJourneys(search){
       travelClass:String(search.travelClass),passengers:passenger,international:true,borderMinutes,
       transferMinutes,connection,night:type==='NJ',segments,occupancy,
       composition:outbound?composition(type,occupancy):composition('RB','medium'),borderStationId:'SJR',mandatoryTransfer:hasDomestic,
-      warningAuthority:'Auswärtiges Amt',borderStatus:'restricted',rbTrain
+      warningAuthority:'Auswärtiges Amt',borderStatus:'restricted',rbTrain,
+      displayServices:segments.filter(segment=>segment.kind==='train').map(segment=>({type:segment.type,train:segment.train,weight:Math.max(1,segment.path?.length||2)}))
     });
   });
   return results;
@@ -144,7 +145,11 @@ function createDomesticJourneys(search){
       date:search.date,departure,arrival:addTime(departure,tripMinutes),duration:tripMinutes,baseMinutes:path.minutes,path:path.ids,
       price,delay,changes,platform:String(2+(index*3)%12),travelClass:String(search.travelClass),passengers:passenger,
       international:false,borderMinutes:0,connection,night:type==='NJ',occupancy,composition:composition(type,occupancy),
-      segments:[{kind:'train',type,train,fromId:search.fromId,toId:search.toId,departure,arrival:addTime(departure,tripMinutes),path:path.ids,occupancy,composition:composition(type,occupancy)}]
+      segments:[{kind:'train',type,train,fromId:search.fromId,toId:search.toId,departure,arrival:addTime(departure,tripMinutes),path:path.ids,occupancy,composition:composition(type,occupancy)}],
+      displayServices:changes?[
+        {type,train,weight:Math.max(2,path.ids.length-2)},
+        {type:type==='ICE'?'RE':'RB',train:trainNumber(type==='ICE'?'RE':'RB',index+4),weight:2}
+      ]:[{type,train,weight:Math.max(2,path.ids.length)}]
     });
   });
   return results;

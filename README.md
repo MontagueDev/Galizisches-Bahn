@@ -1,14 +1,12 @@
-# Galizische Bahn v0.8.5
+# Galizische Bahn v0.8.6
 
-Consistency patch built on v0.8.4.
+Actualización del listado de conexiones con la jerarquía informativa de DB Navigator y el sistema visual de Galizische Bahn.
 
-## Main fixes
+## Principios
+- Hora y duración primero.
+- Trenes y transbordos representados mediante barras proporcionales.
+- Avisos compactos y legibles.
+- Precio integrado al pie de cada resultado.
+- Identidad GB Liquid Glass conservada.
 
-- Stable five-column bottom navigation
-- Uniform SVG icon geometry
-- No expanding active tab
-- Cleaner Start and Stadt form controls
-- No version label on the home screen
-- Isolated PWA cache for reliable updates
-
-All railway data and payments are simulated. Never enter real banking data.
+Los datos y pagos son simulados. No introduzcas datos bancarios reales.

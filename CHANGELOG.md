@@ -1,11 +1,12 @@
 # Changelog
 
-## 0.8.5 — Navigation & Component Consistency
+## 0.8.6 — Connection Results Redesign
 
-- Fixed the bottom navigation so every tab always occupies exactly one fifth of the bar.
-- Prevented the active tab from expanding or changing height between screens.
-- Standardised SVG icon size, alignment and label spacing.
-- Removed the version number from the home screen; it remains available under More.
-- Removed double-surface rendering from generic, city-planner and search form controls.
-- Unified Stadt planner labels and select controls with the canonical form component.
-- Added a new PWA cache and resource version to prevent mixed CSS/HTML releases.
+- Resultados reorganizados con la arquitectura informativa de DB Navigator y el diseño visual de Galizische Bahn.
+- Horarios y duración como primera jerarquía.
+- Horarios reales separados cuando existe demora.
+- Barra proporcional para uno o varios trenes.
+- Avisos operativos compactos.
+- Precio y estado en un pie estable.
+- Flujo internacional ICE/IC/RE → San Juan del Río → RB México claramente visible.
+- Sin cambios en el motor de compra ni en los boletos existentes.

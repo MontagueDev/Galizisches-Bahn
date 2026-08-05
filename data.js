@@ -1,4 +1,4 @@
-export const APP_VERSION = '0.8.5';
+export const APP_VERSION = '0.8.6';
 export const APP_BUILD = '2026.08.05-navigation-consistency1';
 
 export const STATIONS = [

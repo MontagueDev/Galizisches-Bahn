@@ -1,9 +1,7 @@
-# Upload v0.8.5
+# Subir v0.8.6 a GitHub
 
-Replace every file in the repository root with this release, including `index.html`, `404.html`, `app.css`, `app.js`, `sw.js`, `version.json` and the JavaScript modules.
-
-Recommended commit:
-
-`Release Galizische Bahn v0.8.5`
-
-For Netlify use **Clear cache and deploy site**. For an installed iOS PWA, verify the web version first in a private Safari tab.
+1. Sustituye todos los archivos de la raíz del repositorio.
+2. Conserva la carpeta `icons`.
+3. Commit recomendado: `Release Galizische Bahn v0.8.6`.
+4. En Netlify usa **Clear cache and deploy site**.
+5. Comprueba la versión en una pestaña privada de Safari.

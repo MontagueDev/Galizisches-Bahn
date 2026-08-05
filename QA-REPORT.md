@@ -1,23 +1,20 @@
-# QA Report — Galizische Bahn v0.8.5
+# QA Report — Galizische Bahn v0.8.6
 
-## Corrected areas
+## Alcance
+Rediseño exclusivo del componente de resultados de conexiones.
 
-- Bottom navigation geometry and active state.
-- SVG icon sizing and alignment.
-- Home-screen version label.
-- Generic form wrappers.
-- Home and long-distance composite search fields.
-- Stadt city picker and route planner.
-- PWA asset versioning and cache isolation.
+## Comprobaciones
+- Sintaxis de todos los módulos JavaScript.
+- Manifiesto y version.json válidos.
+- Resultados directos muestran una sola barra de servicio.
+- Resultados con transbordo muestran dos segmentos proporcionales.
+- Viajes a México muestran el tren nacional seguido del RB México.
+- Viajes desde México muestran primero RB México y después el tren nacional.
+- Demoras muestran horario planificado y horario real por separado.
+- Estados de conexión aparecen en avisos compactos.
+- Precio queda en el pie inferior derecho.
+- Diseño responsive comprobado estáticamente entre 320 y 430 px.
+- La navegación y el flujo de compra no fueron modificados.
 
-## Static verification
-
-- `index.html` and `404.html` are synchronised.
-- Every bottom-navigation button uses the same SVG view box and a fixed grid cell.
-- The active button cannot exceed its grid column.
-- Generic `.field` wrappers no longer render as an additional visual surface.
-- Resource query strings and Service Worker cache use v0.8.5.
-
-## Device verification still recommended
-
-Open the standalone preview in Safari and check Start and Stadt at the device's normal page zoom. If an installed PWA still shows an older bar, remove it once and reinstall after the new deployment finishes.
+## Nota
+Todos los horarios, precios y estados siguen siendo simulados.

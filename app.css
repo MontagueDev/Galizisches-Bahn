@@ -438,7 +438,7 @@ input,select,textarea,.field,.search-field,.quick-options select{
 }
 
 /* =============================================================
-   Galizische Bahn v0.8.5 — Navigation & Component Consistency
+   Galizische Bahn v0.8.6 — Navigation & Component Consistency
    ============================================================= */
 /* The field wrapper is layout only. A field may contain exactly one visual control. */
 .field,
@@ -582,3 +582,13 @@ input,select,textarea,.field,.search-field,.quick-options select{
   .field>label,.city-picker>label,.urban-planner .field>label{font-size:11px!important}
   .field>input,.field>select,.city-picker>select,.urban-planner .field>select{min-height:52px!important;padding:0 14px!important;font-size:16px!important}
 }
+
+
+/* v0.8.6 — DB information architecture with Galizische Bahn visual language */
+.v08-result-list{display:grid;gap:12px}.gb-connection-result{position:relative;width:100%;overflow:hidden;padding:17px 16px 15px;border:1px solid var(--line);border-radius:21px;background:color-mix(in srgb,var(--surface) 93%,transparent);box-shadow:0 10px 28px rgba(0,0,0,.055);text-align:left;backdrop-filter:blur(18px) saturate(135%);-webkit-backdrop-filter:blur(18px) saturate(135%)}
+.gb-result-topline{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.gb-result-times{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 11px;min-width:0}.gb-result-times strong{font-size:19px;line-height:1.1;letter-spacing:-.025em}.gb-result-times>span{color:var(--muted);font-size:11px;white-space:nowrap}.gb-result-topline .occupancy{flex:none;margin-top:1px;padding:0;background:none}.gb-result-topline .occupancy span{display:none}
+.gb-result-live-times{display:grid;grid-template-columns:auto 1fr;gap:12px;margin-top:6px;color:var(--red);font-size:15px;font-weight:800}.gb-result-live-times span:last-child{justify-self:start}
+.gb-service-strip{display:flex;gap:3px;width:100%;height:43px;margin-top:13px}.gb-service-segment{display:grid;place-items:center;flex:var(--segment) 1 0;min-width:58px;overflow:hidden;border-radius:7px;background:#272a33;color:#fff}.gb-service-segment i{overflow:hidden;padding:0 9px;font-size:12px;font-style:normal;font-weight:900;text-overflow:ellipsis;white-space:nowrap}.gb-service-segment.ICE{box-shadow:inset 3px 0 0 var(--brand)}.gb-service-segment.IC,.gb-service-segment.EC{box-shadow:inset 3px 0 0 #8991a1}.gb-service-segment.RE,.gb-service-segment.RB,.gb-service-segment.IR{box-shadow:inset 3px 0 0 #4a8ecf}.gb-service-segment.NJ{box-shadow:inset 3px 0 0 #8d5cc6}
+.gb-result-origin{margin-top:8px;color:var(--muted);font-size:10px}.gb-result-alert{display:grid;grid-template-columns:26px minmax(0,1fr);align-items:center;gap:9px;margin:11px -16px 0;padding:10px 16px;background:var(--surface2)}.gb-result-alert span{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:9px;font-weight:950}.gb-result-alert p{margin:0;font-size:11px;font-weight:700}.gb-result-alert.danger{color:var(--red)}.gb-result-alert.danger span{background:var(--red);color:#fff}.gb-result-alert.warning{color:var(--orange)}.gb-result-alert.warning span{background:var(--orange);color:#fff}.gb-result-alert.border{color:#1b5d87}.gb-result-alert.border span{border-radius:7px;background:#1b5d87;color:#fff}
+.gb-result-footer{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:13px -16px -15px;padding:11px 16px 13px;border-top:1px solid var(--line);background:color-mix(in srgb,var(--surface2) 75%,transparent)}.gb-result-footer>span{font-size:9px;font-weight:800}.gb-result-state.on-time{color:var(--green)}.gb-result-state.delayed{color:var(--red)}.gb-result-footer strong{display:flex;align-items:baseline;gap:6px;font-size:21px;letter-spacing:-.025em}.gb-result-footer strong small{color:var(--muted);font-size:9px;font-weight:600}.gb-result-footer strong b{color:var(--muted);font-size:18px}.gb-recommended-mark{position:absolute;top:0;right:0;padding:4px 9px;border-radius:0 20px 0 10px;background:var(--brandSoft);color:var(--brand);font-size:7px;font-style:normal;font-weight:900;text-transform:uppercase}
+@media(max-width:380px){.gb-connection-result{padding-left:13px;padding-right:13px}.gb-result-alert,.gb-result-footer{margin-left:-13px;margin-right:-13px;padding-left:13px;padding-right:13px}.gb-result-times strong{font-size:17px}.gb-result-times>span{font-size:10px}.gb-service-strip{height:40px}.gb-service-segment i{font-size:11px}.gb-result-footer strong{font-size:19px}}
