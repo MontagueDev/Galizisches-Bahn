@@ -1,5 +1,5 @@
-import {STATIONS,RAIL_EDGES,getStation,getUrbanNetwork,SERVICE_ALERTS} from './data.js?v=0.9.2-gb-konto-live1';
-import {directServiceOptions,oneTransferServiceOptions,nextRun,minutesOf,clockOf,SERVICE_BY_ID} from './rail-services.js?v=0.9.2-gb-konto-live1';
+import {STATIONS,RAIL_EDGES,getStation,getUrbanNetwork,SERVICE_ALERTS} from './data.js?v=0.9.1-rail-operations1';
+import {directServiceOptions,oneTransferServiceOptions,nextRun,minutesOf,clockOf,SERVICE_BY_ID} from './rail-services.js?v=0.9.1-rail-operations1';
 
 const adjacency=new Map();
 for(const [a,b,minutes,modes] of RAIL_EDGES){

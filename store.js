@@ -1,4 +1,4 @@
-import {APP_VERSION} from './data.js?v=0.9.2-gb-konto-live1';
+import {APP_VERSION} from './data.js?v=0.9.1-rail-operations1';
 
 // Keep the historic key so v0.6–v0.7.1 data is migrated instead of lost.
 const KEY='gbahn-v060-state';
@@ -6,7 +6,7 @@ const clone=value=>JSON.parse(JSON.stringify(value));
 const today=()=>{const now=new Date();return new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10)};
 
 export const DEFAULT_STATE={
-  schema:12,
+  schema:10,
   appVersion:APP_VERSION,
   route:'home',
   language:'de',
@@ -14,10 +14,7 @@ export const DEFAULT_STATE={
   notifications:false,
   reduceMotion:false,
   density:'comfortable',
-  account:{name:'David J. Martínez',initials:'DJ',tier:'GB Card Gold',email:'',authenticated:false,authMode:'local',accountId:null,createdAt:null,seatPreference:'window',quietPreference:true},
-  auth:{session:null,localCredential:null},
-  developer:{timeOffsetMinutes:0},
-  liveOverrides:{},
+  account:{name:'David J. Martínez',initials:'DJ',tier:'GB Card Gold',seatPreference:'window',quietPreference:true},
   favorites:['GUA','LOW','KAR'],
   favoriteCities:['GDL'],
   favoriteRoutes:[],
@@ -52,14 +49,12 @@ function sanitize(raw){
     ...base,
     ...raw,
     account:{...base.account,...(raw.account||{})},
-    auth:{...base.auth,...(raw.auth||{})},
-    developer:{...base.developer,...(raw.developer||{})},
     search:{...base.search,...(raw.search||{})},
     urban:{...base.urban,...(raw.urban||{})},
     ui:{...base.ui,...(raw.ui||{})},
     migration:{...base.migration,...(raw.migration||{})}
   };
-  state.schema=12;
+  state.schema=10;
   state.appVersion=APP_VERSION;
   state.tickets=Array.isArray(state.tickets)?state.tickets.map(normalizeTicket):[];
   state.subscriptions=Array.isArray(state.subscriptions)?state.subscriptions:[];
@@ -69,9 +64,6 @@ function sanitize(raw){
   state.favoriteCities=Array.isArray(state.favoriteCities)?state.favoriteCities:[];
   state.frequentPassengers=Array.isArray(state.frequentPassengers)&&state.frequentPassengers.length?state.frequentPassengers:[state.account.name];
   state.notificationInbox=Array.isArray(state.notificationInbox)?state.notificationInbox:[];
-  state.liveOverrides=state.liveOverrides&&typeof state.liveOverrides==='object'?state.liveOverrides:{};
-  state.developer.timeOffsetMinutes=Number.isFinite(Number(state.developer.timeOffsetMinutes))?Number(state.developer.timeOffsetMinutes):0;
-  if(!state.account.authenticated){state.auth.session=null;}
   if(!['de','es','en'].includes(state.language))state.language='de';
   if(!['system','light','dark'].includes(state.theme))state.theme='system';
   if(!['compact','comfortable'].includes(state.density))state.density='comfortable';
