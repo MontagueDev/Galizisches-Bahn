@@ -1,5 +1,5 @@
 /**
- * Galizische Bahn operating plan 0.9.1.
+ * Galizische Bahn operating plan 0.9.2.
  * German is the source language for all public service names.
  */
 export const RAIL_SERVICE_VERSION = '2026.08.05-operations1';

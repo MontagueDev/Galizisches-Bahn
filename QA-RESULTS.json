@@ -1,22 +1,18 @@
 {
-  "version": "0.9.1",
-  "build": "2026.08.05-rail-operations1",
-  "generatedAt": "2026-08-05T19:33:05.809Z",
-  "summary": {
-    "passed": 49,
-    "failed": 0,
-    "total": 49
-  },
+  "version": "0.9.2",
+  "build": "2026.08.08-gb-konto-live1",
+  "passed": 55,
+  "total": 55,
   "checks": [
     {
-      "name": "Version is 0.9.1",
+      "name": "Version is 0.9.2",
       "pass": true,
-      "detail": "0.9.1"
+      "detail": "0.9.2"
     },
     {
-      "name": "Build is rail operations",
+      "name": "Build is GB Konto Live",
       "pass": true,
-      "detail": "2026.08.05-rail-operations1"
+      "detail": "2026.08.08-gb-konto-live1"
     },
     {
       "name": "Station database retained",
@@ -29,184 +25,124 @@
       "detail": "10"
     },
     {
-      "name": "Official service catalogue has at least 40 lines",
+      "name": "Official service catalogue retained",
       "pass": true,
       "detail": "46"
     },
     {
-      "name": "ICE network exists",
+      "name": "ICE 1 still begins at Puerto Vallarta",
+      "pass": true,
+      "detail": "PVR → PAZ → GUA → LOW → KAR → SJR"
+    },
+    {
+      "name": "ICE 1 still reaches border",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Email normalized",
+      "pass": true,
+      "detail": "test.user@gb.example"
+    },
+    {
+      "name": "Credential verifies correct password",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Credential rejects wrong password",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Credential does not store plaintext password",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Password policy rejects weak password",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "09:00 is scheduled",
+      "pass": true,
+      "detail": "scheduled"
+    },
+    {
+      "name": "09:50 is boarding",
+      "pass": true,
+      "detail": "boarding"
+    },
+    {
+      "name": "10:30 is underway",
+      "pass": true,
+      "detail": "underway"
+    },
+    {
+      "name": "11:00 reaches intermediate station",
+      "pass": true,
+      "detail": "atStation"
+    },
+    {
+      "name": "12:01 is completed",
+      "pass": true,
+      "detail": "completed"
+    },
+    {
+      "name": "Underway position has progress",
+      "pass": true,
+      "detail": "0.25"
+    },
+    {
+      "name": "Completed journey progress is 100%",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "name": "Developer jump advances to future timeline item",
+      "pass": true,
+      "detail": "31"
+    },
+    {
+      "name": "Delay override propagates",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Platform override propagates",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mexico timeline enters border-control state",
+      "pass": true,
+      "detail": "borderControl"
+    },
+    {
+      "name": "Mexico timeline includes border item",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Urban origin to long-distance returns journeys",
       "pass": true,
       "detail": "6"
     },
     {
-      "name": "IC network exists",
+      "name": "Urban access is included",
       "pass": true,
-      "detail": "6"
+      "detail": ""
     },
     {
-      "name": "RE network exists",
+      "name": "Official ICE option remains",
       "pass": true,
-      "detail": "18"
+      "detail": ""
     },
     {
-      "name": "RB network exists",
-      "pass": true,
-      "detail": "13"
-    },
-    {
-      "name": "NJ network exists",
+      "name": "Mexico outbound returns journeys",
       "pass": true,
       "detail": "3"
-    },
-    {
-      "name": "ICE 1 starts in Puerto Vallarta",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "ICE 1 reaches the border",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "RB México is separate",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Every corridor station exists",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Guadalajara board uses official services",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Puerto Vallarta to border returns journeys",
-      "pass": true,
-      "detail": "6"
-    },
-    {
-      "name": "Puerto Vallarta to border has valid times",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Puerto Vallarta to border has positive price",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Urban access to long-distance returns journeys",
-      "pass": true,
-      "detail": "6"
-    },
-    {
-      "name": "Urban access to long-distance has valid times",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Urban access to long-distance has positive price",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Major hub variety returns journeys",
-      "pass": true,
-      "detail": "6"
-    },
-    {
-      "name": "Major hub variety has valid times",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Major hub variety has positive price",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "South to financial coast returns journeys",
-      "pass": true,
-      "detail": "6"
-    },
-    {
-      "name": "South to financial coast has valid times",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "South to financial coast has positive price",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Regional transfer returns journeys",
-      "pass": true,
-      "detail": "6"
-    },
-    {
-      "name": "Regional transfer has valid times",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Regional transfer has positive price",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Outbound Mexico returns journeys",
-      "pass": true,
-      "detail": "3"
-    },
-    {
-      "name": "Outbound Mexico has valid times",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Outbound Mexico has positive price",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Inbound Mexico returns journeys",
-      "pass": true,
-      "detail": "3"
-    },
-    {
-      "name": "Inbound Mexico has valid times",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Inbound Mexico has positive price",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Urban origin receives U/S access",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Urban destination receives U/S egress",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Major route includes ICE option",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "Major route includes IC option",
-      "pass": true,
-      "detail": ""
     },
     {
       "name": "Mexico outbound ends with RB México",
@@ -219,39 +155,129 @@
       "detail": ""
     },
     {
-      "name": "Route matrix has no empty results",
+      "name": "Required file exists: index.html",
       "pass": true,
-      "detail": "172 tested; 0 empty"
+      "detail": "index.html"
     },
     {
-      "name": "index and 404 are synchronized",
+      "name": "Required file exists: 404.html",
+      "pass": true,
+      "detail": "404.html"
+    },
+    {
+      "name": "Required file exists: app.js",
+      "pass": true,
+      "detail": "app.js"
+    },
+    {
+      "name": "Required file exists: app.css",
+      "pass": true,
+      "detail": "app.css"
+    },
+    {
+      "name": "Required file exists: data.js",
+      "pass": true,
+      "detail": "data.js"
+    },
+    {
+      "name": "Required file exists: rail-services.js",
+      "pass": true,
+      "detail": "rail-services.js"
+    },
+    {
+      "name": "Required file exists: routing.js",
+      "pass": true,
+      "detail": "routing.js"
+    },
+    {
+      "name": "Required file exists: store.js",
+      "pass": true,
+      "detail": "store.js"
+    },
+    {
+      "name": "Required file exists: payment.js",
+      "pass": true,
+      "detail": "payment.js"
+    },
+    {
+      "name": "Required file exists: i18n.js",
+      "pass": true,
+      "detail": "i18n.js"
+    },
+    {
+      "name": "Required file exists: auth.js",
+      "pass": true,
+      "detail": "auth.js"
+    },
+    {
+      "name": "Required file exists: live.js",
+      "pass": true,
+      "detail": "live.js"
+    },
+    {
+      "name": "Required file exists: sw.js",
+      "pass": true,
+      "detail": "sw.js"
+    },
+    {
+      "name": "Required file exists: manifest.webmanifest",
+      "pass": true,
+      "detail": "manifest.webmanifest"
+    },
+    {
+      "name": "Required file exists: version.json",
+      "pass": true,
+      "detail": "version.json"
+    },
+    {
+      "name": "index and 404 synchronized",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Service worker caches rail service model",
+      "name": "Service worker caches auth module",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Application imports service catalogue",
+      "name": "Service worker caches live module",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Station board uses operating plan",
+      "name": "App imports GB Konto module",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "PDF uses A4 media box",
+      "name": "App imports live chronology module",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "PDF includes GB corporate blue",
+      "name": "App has developer clock controls",
       "pass": true,
       "detail": ""
+    },
+    {
+      "name": "App has journey groups",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "App refreshes clock-sensitive surfaces while open",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Authentication flow hides bottom navigation",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "v0.9.2 German/Spanish/English translation keys match",
+      "pass": true,
+      "detail": "76/76/76"
     }
   ]
 }
