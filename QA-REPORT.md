@@ -1,64 +1,34 @@
-# QA Report — Galizische Bahn v0.9.1
+# QA Report — Galizische Bahn v0.9.2.1
 
-**Result: 49 / 49 checks passed**
+**Automated logic/static result: 60 / 60 passed**  
+**Regression browser smoke result: 20 / 20 passed**  
+**Targeted built-in Testkonto browser result: 5 / 5 passed**  
+**Executed assertions: 85 / 85 passed**
 
-## Coverage
+## Patch-specific coverage
 
-- ✅ Version is 0.9.1 — 0.9.1
-- ✅ Build is rail operations — 2026.08.05-rail-operations1
-- ✅ Station database retained — 152
-- ✅ Ten metropolitan networks retained — 10
-- ✅ Official service catalogue has at least 40 lines — 46
-- ✅ ICE network exists — 6
-- ✅ IC network exists — 6
-- ✅ RE network exists — 18
-- ✅ RB network exists — 13
-- ✅ NJ network exists — 3
-- ✅ ICE 1 starts in Puerto Vallarta
-- ✅ ICE 1 reaches the border
-- ✅ RB México is separate
-- ✅ Every corridor station exists
-- ✅ Guadalajara board uses official services
-- ✅ Puerto Vallarta to border returns journeys — 6
-- ✅ Puerto Vallarta to border has valid times
-- ✅ Puerto Vallarta to border has positive price
-- ✅ Urban access to long-distance returns journeys — 6
-- ✅ Urban access to long-distance has valid times
-- ✅ Urban access to long-distance has positive price
-- ✅ Major hub variety returns journeys — 6
-- ✅ Major hub variety has valid times
-- ✅ Major hub variety has positive price
-- ✅ South to financial coast returns journeys — 6
-- ✅ South to financial coast has valid times
-- ✅ South to financial coast has positive price
-- ✅ Regional transfer returns journeys — 6
-- ✅ Regional transfer has valid times
-- ✅ Regional transfer has positive price
-- ✅ Outbound Mexico returns journeys — 3
-- ✅ Outbound Mexico has valid times
-- ✅ Outbound Mexico has positive price
-- ✅ Inbound Mexico returns journeys — 3
-- ✅ Inbound Mexico has valid times
-- ✅ Inbound Mexico has positive price
-- ✅ Urban origin receives U/S access
-- ✅ Urban destination receives U/S egress
-- ✅ Major route includes ICE option
-- ✅ Major route includes IC option
-- ✅ Mexico outbound ends with RB México
-- ✅ Mexico inbound starts with RB México
-- ✅ Route matrix has no empty results — 172 tested; 0 empty
-- ✅ index and 404 are synchronized
-- ✅ Service worker caches rail service model
-- ✅ Application imports service catalogue
-- ✅ Station board uses operating plan
-- ✅ PDF uses A4 media box
-- ✅ PDF includes GB corporate blue
+- ✅ Built-in Testkonto is always available without registration.
+- ✅ Test email is `test@galizischebahn.de`.
+- ✅ Test password is `GBTest092!`.
+- ✅ `Testkonto einsetzen` fills both login fields.
+- ✅ Testkonto signs in successfully on a fresh app state.
+- ✅ A user-created local PBKDF2 account can still coexist with the built-in Testkonto.
+- ✅ Testkonto password reset is blocked intentionally.
+- ✅ New v0.9.2.1 service-worker/cache identifiers are present.
+- ✅ German, Spanish and English patch keys remain synchronized.
 
-## Browser smoke test
+## Regression coverage retained
 
-- Chromium loaded the standalone build with zero console or page errors.
-- Puerto Vallarta Hbf → San Juan del Río returned six connections.
-- The first direct ICE result displayed matching list and detail times.
-- Corridor, platform, rolling-stock and frequency elements rendered in the detail sheet.
+The 20-check Chromium regression run exercised home rendering, GB Konto registration/sign-in/sign-out, persisted test state, Live Journey chronology, developer time controls, completed-journey grouping, the San Juan del Río border-control stage, responsive widths at 320/375/393/430 px, and console/page-error monitoring.
 
-Safari remains the final reference browser for the Liquid Glass presentation.
+The 60-check Node/static suite additionally covers the station and metropolitan catalogues, all official rail-service data, ICE 1 continuity from Puerto Vallarta to San Juan del Río, PBKDF2 credential behavior, timetable lifecycle states, delays/platform overrides, Mexico RB ordering, required PWA files and cache references.
+
+## Browser-environment note
+
+The sandbox blocks normal Chromium navigation to localhost and `file://`. The autonomous HTML was therefore exercised with Chromium `set_content`; the established regression harness uses in-memory Web Storage/WebCrypto substitutes. The PBKDF2 credential implementation itself is separately executed with Node Web Crypto in the logic suite. The built-in Testkonto does not depend on stored credentials, which is why it remains available on a fresh app state.
+
+## Manual Safari checks recommended
+
+Safari on iPhone remains the final visual reference for PWA safe areas, blur/material effects, keyboard behavior, actual storage persistence and service-worker update behavior.
+
+All railway Live data, payments and the built-in Testkonto are simulated/testing features. Do not enter real banking credentials or reuse a real password in the demo.

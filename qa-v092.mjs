@@ -3,15 +3,15 @@ import path from 'node:path';
 import {APP_VERSION,APP_BUILD,STATIONS,URBAN_NETWORKS,getStation} from './data.js';
 import {RAIL_SERVICES} from './rail-services.js';
 import {createJourneys} from './routing.js';
-import {createLocalCredential,verifyLocalCredential,normalizeEmail,validatePassword} from './auth.js';
+import {createLocalCredential,verifyLocalCredential,normalizeEmail,validatePassword,TEST_ACCOUNT,verifyTestAccount} from './auth.js';
 import {buildJourneyTimeline,journeyStatusKey,nextDeveloperJumpMinutes} from './live.js';
 
 const root=process.cwd();
 const checks=[];
 const check=(name,condition,detail='')=>checks.push({name,pass:Boolean(condition),detail:String(detail??'')});
 
-check('Version is 0.9.2',APP_VERSION==='0.9.2',APP_VERSION);
-check('Build is GB Konto Live',APP_BUILD==='2026.08.08-gb-konto-live1',APP_BUILD);
+check('Version is 0.9.2.1',APP_VERSION==='0.9.2.1',APP_VERSION);
+check('Build is testkonto patch',APP_BUILD==='2026.08.08-testkonto1',APP_BUILD);
 check('Station database retained',STATIONS.length>=150,STATIONS.length);
 check('Ten metropolitan networks retained',URBAN_NETWORKS.length===10,URBAN_NETWORKS.length);
 check('Official service catalogue retained',RAIL_SERVICES.length>=46,RAIL_SERVICES.length);
@@ -24,6 +24,9 @@ check('Credential verifies correct password',await verifyLocalCredential(cred,'t
 check('Credential rejects wrong password',!(await verifyLocalCredential(cred,'test.user@gb.example','Wrong2026')));
 check('Credential does not store plaintext password',!JSON.stringify(cred).includes('Bahn2026!'));
 check('Password policy rejects weak password',!validatePassword('123').ok);
+check('Built-in test account email is stable',TEST_ACCOUNT.email==='test@galizischebahn.de',TEST_ACCOUNT.email);
+check('Built-in test account accepts test password',verifyTestAccount('TEST@GalizischeBahn.de','GBTest092!'));
+check('Built-in test account rejects wrong password',!verifyTestAccount(TEST_ACCOUNT.email,'Wrong092!'));
 
 const baseTicket={id:'TEST-LIVE',kind:'journey',status:'active',date:'2026-08-08',departure:'10:00',arrival:'12:00',delay:0,type:'ICE',train:'ICE 804',fromId:'GUA',toId:'KAR',from:'Guadalajara Hbf',to:'Karlsburg Hbf',path:['GUA','LOW','KAR'],segments:[{kind:'train',type:'ICE',train:'ICE 804',fromId:'GUA',toId:'KAR',departure:'10:00',arrival:'12:00',path:['GUA','LOW','KAR'],platformDeparture:'7',platformArrival:'3'}]};
 const at=time=>buildJourneyTimeline(baseTicket,{now:new Date(`2026-08-08T${time}:00`)});
@@ -57,19 +60,21 @@ const files=['index.html','404.html','app.js','app.css','data.js','rail-services
 for(const file of files)check(`Required file exists: ${file}`,fs.existsSync(path.join(root,file)),file);
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8'),fallback=fs.readFileSync(path.join(root,'404.html'),'utf8'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8'),app=fs.readFileSync(path.join(root,'app.js'),'utf8');
 check('index and 404 synchronized',index===fallback);
-check('Service worker caches auth module',sw.includes('auth.js?v=0.9.2-gb-konto-live1'));
-check('Service worker caches live module',sw.includes('live.js?v=0.9.2-gb-konto-live1'));
-check('App imports GB Konto module',app.includes("from './auth.js?v=0.9.2-gb-konto-live1'"));
-check('App imports live chronology module',app.includes("from './live.js?v=0.9.2-gb-konto-live1'"));
+check('Service worker caches auth module',sw.includes('auth.js?v=0.9.2.1-testkonto1'));
+check('Service worker caches live module',sw.includes('live.js?v=0.9.2.1-testkonto1'));
+check('App imports GB Konto module',app.includes("from './auth.js?v=0.9.2.1-testkonto1'"));
+check('App imports live chronology module',app.includes("from './live.js?v=0.9.2.1-testkonto1'"));
 check('App has developer clock controls',app.includes('nextDeveloperJumpMinutes')&&app.includes('developerOptions'));
 check('App has journey groups',app.includes("renderMyJourneys")&&app.includes("journeyGroups()"));
 check('App refreshes clock-sensitive surfaces while open',app.includes('refreshClockSurfaces')&&app.includes('setInterval(refreshClockSurfaces,15000)'));
 const css=fs.readFileSync(path.join(root,'app.css'),'utf8');
 check('Authentication flow hides bottom navigation',css.includes('.auth-mode .bottom-nav{display:none!important}'));
+check('Login contains test-account helper',app.includes('useTestAccount')&&app.includes('TEST_ACCOUNT.password'));
+check('Test-account card styling exists',css.includes('.test-account-card'));
 const v092Block=app.split('const V092_COPY=',2)[1]?.split('\n};\n\nconst main',1)[0];
 let v092Copy={};try{v092Copy=Function(`"use strict";return (${v092Block}})`)()}catch{}
 const deKeys=Object.keys(v092Copy.de||{}).sort(),esKeys=Object.keys(v092Copy.es||{}).sort(),enKeys=Object.keys(v092Copy.en||{}).sort();
-check('v0.9.2 German/Spanish/English translation keys match',JSON.stringify(deKeys)===JSON.stringify(esKeys)&&JSON.stringify(deKeys)===JSON.stringify(enKeys),`${deKeys.length}/${esKeys.length}/${enKeys.length}`);
+check('v0.9.2.1 German/Spanish/English translation keys match',JSON.stringify(deKeys)===JSON.stringify(esKeys)&&JSON.stringify(deKeys)===JSON.stringify(enKeys),`${deKeys.length}/${esKeys.length}/${enKeys.length}`);
 
 const passed=checks.filter(x=>x.pass).length;
 const output={version:APP_VERSION,build:APP_BUILD,passed,total:checks.length,checks};

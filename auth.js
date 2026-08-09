@@ -17,6 +17,18 @@ export function validatePassword(value){
   const password=String(value||'');
   return {ok:password.length>=8&&/[A-Za-zÄÖÜäöüß]/.test(password)&&/\d/.test(password),length:password.length>=8,letter:/[A-Za-zÄÖÜäöüß]/.test(password),number:/\d/.test(password)};
 }
+
+export const TEST_ACCOUNT=Object.freeze({
+  email:'test@galizischebahn.de',
+  password:'GBTest092!',
+  name:'GB Testkonto',
+  initials:'GT',
+  tier:'GB Testkonto',
+  accountId:'GBK-TEST-0921'
+});
+export function verifyTestAccount(email,password){
+  return normalizeEmail(email)===TEST_ACCOUNT.email&&String(password||'')===TEST_ACCOUNT.password;
+}
 async function derive(password,salt,iterations=120000){
   const key=await crypto.subtle.importKey('raw',encoder.encode(password),'PBKDF2',false,['deriveBits']);
   const bits=await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt,iterations},key,256);
