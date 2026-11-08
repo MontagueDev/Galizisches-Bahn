@@ -1,3 +1,12 @@
+## v0.9.3.1 — iPhone Duo Adaptive & HIG Audit
+
+- Viewport-responsive navigation: five tabs at the bottom in tall compact windows; five-item vertical rail in wide or short windows.
+- Content resizes without a page reload, using CSS media queries and safe-area insets.
+- Increased focus visibility and minimum text-entry font size for iOS zoom avoidance.
+- Desktop/foldable content width and modal sizing refined; no hardware user-agent detection.
+- App shell cache bumped, existing schema 13 and account/ticket data unchanged.
+- See HIG-AUDIT.md for evidence and limitations.
+
 # Changelog
 
 ## v0.9.3 — Major Refresh & Core Optimization

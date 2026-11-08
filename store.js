@@ -1,5 +1,5 @@
-import {APP_VERSION} from './data.js?v=0.9.3-major-refresh1';
-import {loadPersistentSnapshot,schedulePersistentSnapshot,clearPersistentSnapshot} from './persistence.js?v=0.9.3-major-refresh1';
+import {APP_VERSION} from './data.js?v=0.9.3.1-duo-adaptive1';
+import {loadPersistentSnapshot,schedulePersistentSnapshot,clearPersistentSnapshot} from './persistence.js?v=0.9.3.1-duo-adaptive1';
 
 // Historic key retained so every previous GB release migrates without losing tickets.
 const KEY='gbahn-v060-state';

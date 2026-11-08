@@ -1,4 +1,4 @@
-const VERSION='0.9.3-major-refresh1';
+const VERSION='0.9.3.1-duo-adaptive1';
 const PREFIX='galizische-bahn-';
 const CORE_CACHE=`${PREFIX}core-${VERSION}`;
 const DATA_CACHE=`${PREFIX}data-${VERSION}`;
@@ -6,14 +6,14 @@ const RUNTIME_CACHE=`${PREFIX}runtime-${VERSION}`;
 
 const CORE=[
   './','./index.html','./404.html',
-  './app.css?v=0.9.3-major-refresh1','./app.js?v=0.9.3-major-refresh1','./i18n.js?v=0.9.3-major-refresh1',
-  './core.js?v=0.9.3-major-refresh1','./selectors.js?v=0.9.3-major-refresh1','./persistence.js?v=0.9.3-major-refresh1',
-  './store.js?v=0.9.3-major-refresh1','./payment.js?v=0.9.3-major-refresh1','./auth.js?v=0.9.3-major-refresh1','./live.js?v=0.9.3-major-refresh1',
+  './app.css?v=0.9.3.1-duo-adaptive1','./app.js?v=0.9.3.1-duo-adaptive1','./i18n.js?v=0.9.3.1-duo-adaptive1',
+  './core.js?v=0.9.3.1-duo-adaptive1','./selectors.js?v=0.9.3.1-duo-adaptive1','./persistence.js?v=0.9.3.1-duo-adaptive1',
+  './store.js?v=0.9.3.1-duo-adaptive1','./payment.js?v=0.9.3.1-duo-adaptive1','./auth.js?v=0.9.3.1-duo-adaptive1','./live.js?v=0.9.3.1-duo-adaptive1',
   './manifest.webmanifest','./version.json',
   './icons/favicon-32.png','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-icon-512.png','./icons/gb-logo.svg'
 ];
 const DATA=[
-  './data.js?v=0.9.3-major-refresh1','./rail-services.js?v=0.9.3-major-refresh1','./routing.js?v=0.9.3-major-refresh1'
+  './data.js?v=0.9.3.1-duo-adaptive1','./rail-services.js?v=0.9.3.1-duo-adaptive1','./routing.js?v=0.9.3.1-duo-adaptive1'
 ];
 
 self.addEventListener('install',event=>{

@@ -1,16 +1,16 @@
 import {
   APP_VERSION, APP_BUILD, STATIONS, RAIL_EDGES, URBAN_NETWORKS,
   SUBSCRIPTIONS, FARES, SERVICE_ALERTS, COPY, getStation, getUrbanNetwork
-} from './data.js?v=0.9.3-major-refresh1';
-import { createStore } from './store.js?v=0.9.3-major-refresh1';
-import { createJourneys, planUrban, addTime } from './routing.js?v=0.9.3-major-refresh1';
-import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.9.3-major-refresh1';
-import { I18N } from './i18n.js?v=0.9.3-major-refresh1';
-import { stationBoardServices, SERVICE_BY_ID, RAIL_SERVICES } from './rail-services.js?v=0.9.3-major-refresh1';
-import { createLocalCredential, verifyLocalCredential, createLocalSession, normalizeEmail, validateEmail, validatePassword, authBackendStatus, TEST_ACCOUNT, verifyTestAccount } from './auth.js?v=0.9.3-major-refresh1';
-import { buildJourneyTimeline, journeyStatusKey, connectionRisk, nextDeveloperJumpMinutes, effectiveNow } from './live.js?v=0.9.3-major-refresh1';
-import { createStationSearchIndex, searchStationIndex, debounce, rafThrottle, focusFirst, trapFocus } from './core.js?v=0.9.3-major-refresh1';
-import { selectActiveTicket, selectJourneyGroups, selectUnreadCount, selectFavoriteStation } from './selectors.js?v=0.9.3-major-refresh1';
+} from './data.js?v=0.9.3.1-duo-adaptive1';
+import { createStore } from './store.js?v=0.9.3.1-duo-adaptive1';
+import { createJourneys, planUrban, addTime } from './routing.js?v=0.9.3.1-duo-adaptive1';
+import { TEST_CARDS, validatePayment, simulatePayment } from './payment.js?v=0.9.3.1-duo-adaptive1';
+import { I18N } from './i18n.js?v=0.9.3.1-duo-adaptive1';
+import { stationBoardServices, SERVICE_BY_ID, RAIL_SERVICES } from './rail-services.js?v=0.9.3.1-duo-adaptive1';
+import { createLocalCredential, verifyLocalCredential, createLocalSession, normalizeEmail, validateEmail, validatePassword, authBackendStatus, TEST_ACCOUNT, verifyTestAccount } from './auth.js?v=0.9.3.1-duo-adaptive1';
+import { buildJourneyTimeline, journeyStatusKey, connectionRisk, nextDeveloperJumpMinutes, effectiveNow } from './live.js?v=0.9.3.1-duo-adaptive1';
+import { createStationSearchIndex, searchStationIndex, debounce, rafThrottle, focusFirst, trapFocus } from './core.js?v=0.9.3.1-duo-adaptive1';
+import { selectActiveTicket, selectJourneyGroups, selectUnreadCount, selectFavoriteStation } from './selectors.js?v=0.9.3.1-duo-adaptive1';
 
 const store = createStore();
 const STATION_SEARCH_INDEX = createStationSearchIndex(STATIONS);

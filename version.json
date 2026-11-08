@@ -1,6 +1,6 @@
 {
-  "version": "0.9.3",
-  "build": "2026.11.07-major-refresh1",
-  "name": "Major Refresh & Core Optimization",
+  "version": "0.9.3.1",
+  "build": "2026.11.07-duo-adaptive1",
+  "name": "iPhone Duo Adaptive & HIG Audit",
   "schema": 13
 }
