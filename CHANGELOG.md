@@ -1,29 +1,49 @@
 # Changelog
 
-## 0.9.2.1 — Testkonto Patch
-- Added a built-in test account that is always available, even after clearing local app data.
-- Test credentials: `test@galizischebahn.de` / `GBTest092!`.
-- Added a one-tap **Testkonto einsetzen** helper on the login screen.
-- Test account coexists with a user-created local account and does not replace its PBKDF2 credential.
-- Test-account password reset is intentionally disabled.
-- Bumped PWA cache/build identifiers to avoid stale Netlify/Safari assets.
+## v0.9.3 — Major Refresh & Core Optimization
 
-## 0.9.2 — GB Konto & Live Journey Update
+### Arquitectura
+- Añadidos `core.js`, `selectors.js` y `persistence.js`.
+- Estado derivado eliminado de las pantallas y concentrado en selectores puros.
+- Persistencia local con espejo en IndexedDB.
+- Esquema de datos actualizado a 13 con migración automática.
+- Tabla de traducciones unificada en tiempo de ejecución.
+- Error boundary para evitar pantallas en blanco.
 
-- Added integrated GB Konto authentication screens with the blue GB identity.
-- Added local registration, sign-in, sign-out and password reset.
-- Added PBKDF2-SHA-256 credential verification with random salt; no plaintext password storage.
-- Added persistent local account sessions and authenticated profile state.
-- Added `auth.js` as the dedicated authentication/security module.
-- Added `live.js` as the timetable chronology engine.
-- Added real-clock journey lifecycle states: planned, boarding, underway, at station, border control, completed and cancelled.
-- Added timetable-derived journey position, progress, next stop, time remaining and estimated speed.
-- Added dynamic delay, platform-change and connection-risk propagation.
-- Added Bevorstehend / Aktuell / Abgeschlossen journey groups.
-- Completed journeys now move out of the active-ticket view and are shown in history.
-- Added San Juan del Río border control as a timed stage in Mexico journeys.
-- Added developer controls for +15 min, +1 hour, next stop, finish journey, +5 min delay, platform change and clock reset.
-- Added an explicit “Keine GPS-Ortung” disclosure to Live Journey views.
-- Removed the bottom navigation from the authentication flow so it no longer covers account content.
-- Retained the v0.9.1 official ICE, IC, RE, RB, NightJet and RB México operating plan.
-- Updated PWA cache, schema, build metadata and standalone test build.
+### Búsqueda
+- Nuevo índice fuzzy de estaciones.
+- Coincidencias sin diacríticos y sinónimos DE/ES/EN.
+- Ranking por favoritos, recientes, Hbf y Fernverkehr.
+- Autocompletado con debounce, ARIA y teclado.
+- Historial de estaciones utilizadas recientemente.
+
+### Inicio y navegación
+- Inicio reorganizado para priorizar viaje activo, búsqueda y recientes.
+- Scroll conservado por sección.
+- Renderizado parcial de la tarjeta Live.
+- Tabs estables en anchos de 320–430 px.
+- Modales con focus trap y restauración del foco.
+
+### Cuenta
+- Credenciales de prueba rellenadas automáticamente.
+- Login y perfil permanecen locales en esta edición.
+- La barra inferior se oculta durante autenticación.
+
+### Operación Live
+- Actualizaciones limitadas a pantallas sensibles al reloj.
+- Pausa automática al ocultar la página o abrir un modal.
+- Nuevos controles de simulación: +15, +60 y +360 min; retrasos +5/+15/+30; cambio de andén; cancelación; finalización y reset.
+- Estado fronterizo configurable: abierto, restringido o cerrado.
+
+### PWA
+- Nueva estrategia de caché en tres niveles.
+- Navegación network-first.
+- Datos ferroviarios stale-while-revalidate.
+- Recursos gráficos cache-first.
+- Nueva caché `0.9.3-major-refresh1`.
+
+### Correcciones
+- La búsqueda inicial ya usa una hora futura redondeada, evitando tickets recién comprados que aparecían como finalizados.
+- El login de pruebas ya no necesita un botón para completar campos.
+- Se añadieron recuperaciones ante IndexedDB no disponible.
+- `index.html` y `404.html` se mantienen sincronizados.

@@ -1,0 +1,126 @@
+{
+  "checks": [
+    {
+      "name": "320px no overflow",
+      "pass": true,
+      "detail": "320/320"
+    },
+    {
+      "name": "320px no runtime error",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "375px no overflow",
+      "pass": true,
+      "detail": "375/375"
+    },
+    {
+      "name": "375px no runtime error",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "393px no overflow",
+      "pass": true,
+      "detail": "393/393"
+    },
+    {
+      "name": "393px no runtime error",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "430px no overflow",
+      "pass": true,
+      "detail": "430/430"
+    },
+    {
+      "name": "430px no runtime error",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Home renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Five nav tabs",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Login opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Email prefilled",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Bottom nav hidden during authentication",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Password prefilled",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Test account authenticates",
+      "pass": true,
+      "detail": "‹ Zurück\n\nGB KONTO\n\nProfil\n\ntest@galizischebahn.de\n\n✎\nGT\nGB Testkonto\n\nGB Testkonto\n\nGALIZISCHE BAHN\nGB CARD GOLD\n2048 8361 0917\n124\nReisen\n36.000\nkm\n8.420\nPunkte\n◷\nMeine Reisen\nAktuell: 0 · Bevorsteh"
+    },
+    {
+      "name": "Travel has two station inputs",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Spanish alias suggestions",
+      "pass": true,
+      "detail": "['SBadenquellen UniversitätS-Bahn-Station · Aguascalientes', 'SGolfhafen UniversitätS-Bahn-Station · Tampico']"
+    },
+    {
+      "name": "Fuzzy destination works",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Journey results render",
+      "pass": true,
+      "detail": "6"
+    },
+    {
+      "name": "Results show service variety",
+      "pass": true,
+      "detail": "FERNVERKEHR\n\nReise suchen\n\nEinfach reisen. Sicher ankommen.\n\n◇\nVon\nS\n×\n⇅\nNach\nGB\n×\nDatum\nZeit\nReisende\n1\n2\n3\n4\n5\n6\nKlasse\n2. Klasse\n1. Klasse\n\nNicht verfügbare oder bereits enthaltene Leistungen werden automatisch ausgeblendet.\n\nVerbindungen suchen\n→\n\nEMPFOHLEN\n\nVerbindungen\n6\nEmpfohlen\nSchnellste\nG"
+    },
+    {
+      "name": "Developer setting exists",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Developer has +6h control",
+      "pass": true,
+      "detail": "Entwickleroptionen\n×\nDemo-Zeit\n07.11.2026, 18:14\n\nNur für Tests. Die planmäßigen Fahrzeiten werden nicht verändert.\n\nDerzeit keine aktive Reise\n\nZeitversatz\n+15 Minuten\n+1 Stunde\n+6 Stunden\nZum nächsten Halt\nSimulierte Live-Lage\n+5 min\nVerspätung +15"
+    },
+    {
+      "name": "Developer has border state",
+      "pass": true,
+      "detail": "Entwickleroptionen\n×\nDemo-Zeit\n07.11.2026, 18:14\n\nNur für Tests. Die planmäßigen Fahrzeiten werden nicht verändert.\n\nDerzeit keine aktive Reise\n\nZeitversatz\n+15 Minuten\n+1 Stunde\n+6 Stunden\nZum nächsten Halt\nSimulierte Live-Lage\n+5 min\nVerspätung +15"
+    },
+    {
+      "name": "No console errors",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "passed": 24,
+  "total": 24
+}

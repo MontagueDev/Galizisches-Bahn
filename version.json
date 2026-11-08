@@ -1,6 +1,6 @@
 {
-  "version": "0.9.2.1",
-  "build": "2026.08.08-testkonto1",
-  "name": "GB Konto & Live Journey Update",
-  "schema": 12
+  "version": "0.9.3",
+  "build": "2026.11.07-major-refresh1",
+  "name": "Major Refresh & Core Optimization",
+  "schema": 13
 }

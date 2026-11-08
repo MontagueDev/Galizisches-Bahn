@@ -1,18 +1,37 @@
-# Upload to GitHub / Netlify — v0.9.2.1
+# Publicar v0.9.3 en GitHub Pages / Netlify
 
-Replace **every file** in the repository root and the complete `icons` directory with this release.
+## GitHub
 
-This patch changes `auth.js`, `app.js`, `app.css`, version metadata and the service-worker cache key. The new cache identifier is intentionally different so Safari/Netlify do not keep the older v0.9.2 scripts.
+Reemplaza todos los archivos del repositorio, incluida la carpeta `icons` y los nuevos módulos:
 
-Recommended commit:
+- `core.js`
+- `selectors.js`
+- `persistence.js`
 
-`Patch Galizische Bahn v0.9.2.1 Testkonto`
+Commit recomendado:
 
-After the GitHub commit finishes, in Netlify use **Clear cache and deploy site**. Then fully close and reopen an installed Safari PWA so the new service worker can take control.
+```text
+Release Galizische Bahn v0.9.3 Major Refresh
+```
 
-Built-in QA credentials:
+GitHub Pages seguirá publicando desde `main / (root)`.
 
-- `test@galizischebahn.de`
-- `GBTest092!`
+## Netlify
 
-These credentials are intentionally public test credentials and must never be reused for a real account.
+La configuración ya está incluida en `netlify.toml`.
+
+1. Sube el commit a GitHub.
+2. Abre Netlify → Deploys.
+3. Ejecuta `Clear cache and deploy site` una vez al pasar desde 0.9.2.x.
+4. En versiones posteriores, el Service Worker debería actualizarse sin limpieza manual gracias a los recursos versionados.
+
+## Safari / PWA
+
+Después del primer deploy:
+
+1. Abre la URL con `?v=093`.
+2. Cierra por completo la PWA instalada.
+3. Vuelve a abrirla para que el nuevo Service Worker tome control.
+4. Comprueba en Mehr que figure `v0.9.3`.
+
+No subas el ZIP como un único archivo: sube su contenido descomprimido a la raíz.

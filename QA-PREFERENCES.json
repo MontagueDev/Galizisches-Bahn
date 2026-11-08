@@ -1,0 +1,31 @@
+{
+  "checks": [
+    {
+      "name": "Spanish option available",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Spanish applies globally",
+      "pass": true,
+      "detail": "GALIZISCHE BAHN\n\nMás\n\nGB Konto y viaje en vivo\n\nv0.9.3\n◇\nCentro de mapas\nRed nacional y regional · Red urbana\n›\n◷\nEstado de operación\nOperación simulada en vivo\n›\n◉\nCentro de notificaciones\nNo hay notificaciones nuevas\n›\nSJR\nCentro fronterizo de San Juan del Río\nFrontera y viajes internacionales\n›\nG"
+    },
+    {
+      "name": "Dark theme option available",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Dark theme applied",
+      "pass": true,
+      "detail": "dark"
+    },
+    {
+      "name": "No runtime errors",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "passed": 5,
+  "total": 5
+}

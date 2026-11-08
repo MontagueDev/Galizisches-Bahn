@@ -1,25 +1,75 @@
-const CACHE='galizische-bahn-v0.9.2.1-testkonto1';
+const VERSION='0.9.3-major-refresh1';
+const PREFIX='galizische-bahn-';
+const CORE_CACHE=`${PREFIX}core-${VERSION}`;
+const DATA_CACHE=`${PREFIX}data-${VERSION}`;
+const RUNTIME_CACHE=`${PREFIX}runtime-${VERSION}`;
+
 const CORE=[
-  './','./index.html','./app.css?v=0.9.2.1-testkonto1','./app.js?v=0.9.2.1-testkonto1','./i18n.js?v=0.9.2.1-testkonto1',
-  './data.js?v=0.9.2.1-testkonto1','./rail-services.js?v=0.9.2.1-testkonto1','./auth.js?v=0.9.2.1-testkonto1','./live.js?v=0.9.2.1-testkonto1','./store.js?v=0.9.2.1-testkonto1','./routing.js?v=0.9.2.1-testkonto1','./payment.js?v=0.9.2.1-testkonto1','./manifest.webmanifest','./version.json',
-  './icons/favicon-32.png','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-icon-512.png'
+  './','./index.html','./404.html',
+  './app.css?v=0.9.3-major-refresh1','./app.js?v=0.9.3-major-refresh1','./i18n.js?v=0.9.3-major-refresh1',
+  './core.js?v=0.9.3-major-refresh1','./selectors.js?v=0.9.3-major-refresh1','./persistence.js?v=0.9.3-major-refresh1',
+  './store.js?v=0.9.3-major-refresh1','./payment.js?v=0.9.3-major-refresh1','./auth.js?v=0.9.3-major-refresh1','./live.js?v=0.9.3-major-refresh1',
+  './manifest.webmanifest','./version.json',
+  './icons/favicon-32.png','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-icon-512.png','./icons/gb-logo.svg'
 ];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',event=>{
-  if(event.request.method!=='GET')return;
-  const url=new URL(event.request.url);
-  if(url.origin!==location.origin)return;
-  if(url.pathname.endsWith('/sw.js')||url.pathname.endsWith('/version.json')||url.pathname.endsWith('/index.html')||event.request.mode==='navigate'){
-    event.respondWith(fetch(event.request,{cache:'no-store'}).then(response=>{
-      if(response.ok)caches.open(CACHE).then(cache=>cache.put(event.request.mode==='navigate'?'./index.html':event.request,response.clone()));
-      return response;
-    }).catch(()=>caches.match(event.request.mode==='navigate'?'./index.html':event.request)));
-    return;
-  }
-  event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).then(response=>{
-    if(response&&response.ok&&response.type!=='opaque')caches.open(CACHE).then(cache=>cache.put(event.request,response.clone()));
-    return response;
-  })));
+const DATA=[
+  './data.js?v=0.9.3-major-refresh1','./rail-services.js?v=0.9.3-major-refresh1','./routing.js?v=0.9.3-major-refresh1'
+];
+
+self.addEventListener('install',event=>{
+  event.waitUntil(Promise.all([
+    caches.open(CORE_CACHE).then(cache=>cache.addAll(CORE)),
+    caches.open(DATA_CACHE).then(cache=>cache.addAll(DATA))
+  ]).then(()=>self.skipWaiting()));
 });
-self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting()});
+
+self.addEventListener('activate',event=>{
+  event.waitUntil(caches.keys().then(keys=>Promise.all(
+    keys.filter(key=>key.startsWith(PREFIX)&&![CORE_CACHE,DATA_CACHE,RUNTIME_CACHE].includes(key)).map(key=>caches.delete(key))
+  )).then(()=>self.clients.claim()));
+});
+
+async function networkFirst(request,fallback='./index.html'){
+  try{
+    const response=await fetch(request,{cache:'no-store'});
+    if(response.ok){const cache=await caches.open(CORE_CACHE);cache.put(fallback,response.clone())}
+    return response;
+  }catch{
+    return (await caches.match(fallback))||(await caches.match(request));
+  }
+}
+
+async function staleWhileRevalidate(request,cacheName){
+  const cache=await caches.open(cacheName);
+  const cached=await cache.match(request);
+  const update=fetch(request).then(response=>{
+    if(response?.ok&&response.type!=='opaque')cache.put(request,response.clone());
+    return response;
+  }).catch(()=>null);
+  return cached||update||new Response('',{status:503,statusText:'Offline'});
+}
+
+async function cacheFirst(request){
+  const cached=await caches.match(request);if(cached)return cached;
+  try{
+    const response=await fetch(request);
+    if(response?.ok&&response.type!=='opaque'){const cache=await caches.open(RUNTIME_CACHE);cache.put(request,response.clone())}
+    return response;
+  }catch{return new Response('',{status:503,statusText:'Offline'})}
+}
+
+self.addEventListener('fetch',event=>{
+  const request=event.request;if(request.method!=='GET')return;
+  const url=new URL(request.url);if(url.origin!==self.location.origin)return;
+  if(request.mode==='navigate'){event.respondWith(networkFirst(request));return}
+  if(url.pathname.endsWith('/sw.js')||url.pathname.endsWith('/version.json')){event.respondWith(fetch(request,{cache:'no-store'}).catch(()=>caches.match(request)));return}
+  if(/\.(?:png|svg|jpg|jpeg|webp|ico)$/i.test(url.pathname)){event.respondWith(cacheFirst(request));return}
+  if(url.pathname.endsWith('/data.js')||url.pathname.endsWith('/rail-services.js')||url.pathname.endsWith('/routing.js')){event.respondWith(staleWhileRevalidate(request,DATA_CACHE));return}
+  if(/\.(?:js|css|webmanifest)$/i.test(url.pathname)){event.respondWith(staleWhileRevalidate(request,CORE_CACHE));return}
+  event.respondWith(cacheFirst(request));
+});
+
+self.addEventListener('message',event=>{
+  if(event.data?.type==='SKIP_WAITING')self.skipWaiting();
+  if(event.data?.type==='GET_VERSION')event.source?.postMessage?.({type:'GB_VERSION',version:VERSION});
+});

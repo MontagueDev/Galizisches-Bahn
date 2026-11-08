@@ -1,0 +1,31 @@
+{
+  "checks": [
+    {
+      "name": "Default search time generated",
+      "pass": true,
+      "detail": "18:30"
+    },
+    {
+      "name": "ICE result exists",
+      "pass": true,
+      "detail": "2"
+    },
+    {
+      "name": "Ticket appears as active",
+      "pass": true,
+      "detail": "GB WALLET\n\nMeine Tickets\n\nTicketübersicht\n\n1\nAktiv\n1\nAbos\n0\nStorniert\n0\nVerlauf\nICE 828\nGeplant\nGuadalajara Hbf → Löwenstadt Hbf\n\nSa., 07. Nov. · 18:40–19:55 · 2. Klasse\n\nWagen und Platz\nWagen 5 · Sitzplatz 11A\n23 GM\nSuper Sparpreis\n›"
+    },
+    {
+      "name": "Ticket card visible",
+      "pass": true,
+      "detail": "GB WALLET\n\nMeine Tickets\n\nTicketübersicht\n\n1\nAktiv\n1\nAbos\n0\nStorniert\n0\nVerlauf\nICE 828\nGeplant\nGuadalajara Hbf → Löwenstadt Hbf\n\nSa., 07. Nov. · 18:40–19:55 · 2. Klasse\n\nWagen und Platz\nWagen 5 · Sitzplatz 11A\n23 GM\nSuper Sparpreis\n›"
+    },
+    {
+      "name": "No runtime errors",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "passed": 5,
+  "total": 5
+}

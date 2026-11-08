@@ -1,18 +1,18 @@
 {
-  "version": "0.9.2.1",
-  "build": "2026.08.08-testkonto1",
-  "passed": 60,
-  "total": 60,
+  "version": "0.9.3",
+  "build": "2026.11.07-major-refresh1",
+  "passed": 84,
+  "total": 84,
   "checks": [
     {
-      "name": "Version is 0.9.2.1",
+      "name": "Version is 0.9.3",
       "pass": true,
-      "detail": "0.9.2.1"
+      "detail": "0.9.3"
     },
     {
-      "name": "Build is testkonto patch",
+      "name": "Build is major refresh",
       "pass": true,
-      "detail": "2026.08.08-testkonto1"
+      "detail": "2026.11.07-major-refresh1"
     },
     {
       "name": "Station database retained",
@@ -30,19 +30,54 @@
       "detail": "46"
     },
     {
-      "name": "ICE 1 still begins at Puerto Vallarta",
+      "name": "ICE 1 begins at Puerto Vallarta",
       "pass": true,
       "detail": "PVR → PAZ → GUA → LOW → KAR → SJR"
     },
     {
-      "name": "ICE 1 still reaches border",
+      "name": "ICE 1 reaches San Juan del Río",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Email normalized",
+      "name": "Station index mirrors database",
       "pass": true,
-      "detail": "test.user@gb.example"
+      "detail": "152"
+    },
+    {
+      "name": "Umlaut search finds Löwenstadt",
+      "pass": true,
+      "detail": "Löwenstadt Hbf"
+    },
+    {
+      "name": "Spanish university alias works",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "English airport alias works",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Spanish border alias works",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Hbf alias works",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Favourites rank empty-query suggestions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Text normalization transliterates German",
+      "pass": true,
+      "detail": "loewenstrasse"
     },
     {
       "name": "Credential verifies correct password",
@@ -55,67 +90,52 @@
       "detail": ""
     },
     {
-      "name": "Credential does not store plaintext password",
+      "name": "Credential omits plaintext password",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Password policy rejects weak password",
+      "name": "Built-in test account remains stable",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Built-in test account email is stable",
-      "pass": true,
-      "detail": "test@galizischebahn.de"
-    },
-    {
-      "name": "Built-in test account accepts test password",
+      "name": "Built-in test account verifies",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Built-in test account rejects wrong password",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "09:00 is scheduled",
+      "name": "Journey is scheduled before boarding",
       "pass": true,
       "detail": "scheduled"
     },
     {
-      "name": "09:50 is boarding",
+      "name": "Journey enters boarding",
       "pass": true,
       "detail": "boarding"
     },
     {
-      "name": "10:30 is underway",
+      "name": "Journey enters underway state",
       "pass": true,
       "detail": "underway"
     },
     {
-      "name": "11:00 reaches intermediate station",
+      "name": "Journey reaches intermediate station",
       "pass": true,
       "detail": "atStation"
     },
     {
-      "name": "12:01 is completed",
+      "name": "Journey completes after arrival",
       "pass": true,
       "detail": "completed"
     },
     {
-      "name": "Underway position has progress",
+      "name": "Underway progress is bounded",
       "pass": true,
       "detail": "0.25"
     },
     {
-      "name": "Completed journey progress is 100%",
-      "pass": true,
-      "detail": "1"
-    },
-    {
-      "name": "Developer jump advances to future timeline item",
+      "name": "Developer jump advances time",
       "pass": true,
       "detail": "31"
     },
@@ -130,17 +150,17 @@
       "detail": ""
     },
     {
-      "name": "Mexico timeline enters border-control state",
+      "name": "Mexico journey enters border control",
       "pass": true,
       "detail": "borderControl"
     },
     {
-      "name": "Mexico timeline includes border item",
+      "name": "Mexico timeline contains border item",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Urban origin to long-distance returns journeys",
+      "name": "Urban-origin search returns alternatives",
       "pass": true,
       "detail": "6"
     },
@@ -150,22 +170,47 @@
       "detail": ""
     },
     {
-      "name": "Official ICE option remains",
+      "name": "Official ICE alternative is included",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Mexico outbound returns journeys",
+      "name": "Regional alternative is included",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mexico outbound returns alternatives",
       "pass": true,
       "detail": "3"
     },
     {
-      "name": "Mexico outbound ends with RB México",
+      "name": "Every outbound journey ends with RB México",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Mexico inbound starts with RB México",
+      "name": "Every inbound journey starts with RB México",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Unread selector works",
+      "pass": true,
+      "detail": "2"
+    },
+    {
+      "name": "Active-ticket selector uses global state",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Journey grouping works",
+      "pass": true,
+      "detail": "1/1"
+    },
+    {
+      "name": "Favourite-station selector works",
       "pass": true,
       "detail": ""
     },
@@ -230,6 +275,21 @@
       "detail": "live.js"
     },
     {
+      "name": "Required file exists: core.js",
+      "pass": true,
+      "detail": "core.js"
+    },
+    {
+      "name": "Required file exists: selectors.js",
+      "pass": true,
+      "detail": "selectors.js"
+    },
+    {
+      "name": "Required file exists: persistence.js",
+      "pass": true,
+      "detail": "persistence.js"
+    },
+    {
       "name": "Required file exists: sw.js",
       "pass": true,
       "detail": "sw.js"
@@ -245,64 +305,124 @@
       "detail": "version.json"
     },
     {
-      "name": "index and 404 synchronized",
+      "name": "index and 404 are synchronized",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Service worker caches auth module",
+      "name": "Index is not empty",
+      "pass": true,
+      "detail": "4390"
+    },
+    {
+      "name": "Service worker uses new release cache",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Service worker caches live module",
+      "name": "Service worker includes core.js",
+      "pass": true,
+      "detail": "core.js"
+    },
+    {
+      "name": "Service worker includes selectors.js",
+      "pass": true,
+      "detail": "selectors.js"
+    },
+    {
+      "name": "Service worker includes persistence.js",
+      "pass": true,
+      "detail": "persistence.js"
+    },
+    {
+      "name": "Service worker includes auth.js",
+      "pass": true,
+      "detail": "auth.js"
+    },
+    {
+      "name": "Service worker includes live.js",
+      "pass": true,
+      "detail": "live.js"
+    },
+    {
+      "name": "Service worker includes rail-services.js",
+      "pass": true,
+      "detail": "rail-services.js"
+    },
+    {
+      "name": "App uses indexed search",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "App imports GB Konto module",
+      "name": "App uses pure selectors",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "App imports live chronology module",
+      "name": "App has render error boundary",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "App has developer clock controls",
+      "name": "App preserves route scroll positions",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "App has journey groups",
+      "name": "Login is prefilled with test credentials",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "App refreshes clock-sensitive surfaces while open",
+      "name": "Developer controls include border states",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Authentication flow hides bottom navigation",
+      "name": "Clock refresh pauses when hidden",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Login contains test-account helper",
+      "name": "Bottom navigation has five tabs",
+      "pass": true,
+      "detail": "5"
+    },
+    {
+      "name": "Skip link is available",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "Test-account card styling exists",
+      "name": "Reduced motion is supported",
       "pass": true,
       "detail": ""
     },
     {
-      "name": "v0.9.2.1 German/Spanish/English translation keys match",
+      "name": "Major refresh design tokens exist",
       "pass": true,
-      "detail": "80/80/80"
+      "detail": ""
+    },
+    {
+      "name": "No old test-account fill button remains",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Manifest carries v0.9.3 identity",
+      "pass": true,
+      "detail": "./?app=galizische-bahn-v0.9.3 ./?v=0.9.3"
+    },
+    {
+      "name": "Version metadata schema is 13",
+      "pass": true,
+      "detail": "{\"version\":\"0.9.3\",\"build\":\"2026.11.07-major-refresh1\",\"name\":\"Major Refresh & Core Optimization\",\"schema\":13}"
+    },
+    {
+      "name": "v0.9.3 translation keys match",
+      "pass": true,
+      "detail": "30/30/30"
     }
   ]
 }

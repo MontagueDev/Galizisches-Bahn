@@ -1,36 +1,56 @@
-# Testing — v0.9.2.1
+# Testing — Galizische Bahn v0.9.3
 
-## Built-in Testkonto
-
-Use this account for repeated QA without registering a new account:
+## Credenciales QA
 
 - E-mail: `test@galizischebahn.de`
-- Password: `GBTest092!`
+- Passwort: `GBTest092!`
 
-On the login screen, **Testkonto einsetzen** fills both fields. The account is compiled into the development client, so it is available again on a fresh local state. It is not a production credential.
+Los campos aparecen ya rellenados en la pantalla de login.
 
-## Automated QA
+## Suite estática/lógica
 
-Run from the release root:
+Desde la raíz:
 
 ```bash
-node qa-v092.mjs
+node qa-v093.mjs
 ```
 
-Final internal results for this patch:
+Resultado verificado: **84/84**.
 
-- **60 / 60** logic/static checks
-- **20 / 20** full regression browser checks
-- **5 / 5** targeted built-in-Testkonto browser checks
+Cubre estaciones, búsqueda fuzzy, sinónimos, autenticación local, cronología Live, frontera, rutas, selectores, archivos, Service Worker, manifiesto y traducciones nuevas.
 
-The regression coverage includes GB Konto registration/sign-in, password verifier behavior, Live Journey lifecycle states, developer clock controls, San Juan del Río border chronology, official rail routing and responsive widths from 320 to 430 px.
+## Pruebas de navegador
 
-## Manual Safari checks recommended before deployment
+Ejecutadas en Chromium móvil mediante el HTML autónomo:
 
-1. Open GB Konto and use **Testkonto einsetzen**.
-2. Sign in, sign out, then sign in again with the same test account.
-3. Clear website/PWA data and confirm the built-in Testkonto is still offered after reopening the fresh build.
-4. Create a separate local account and confirm both the local account and built-in Testkonto remain usable.
-5. Verify German, Spanish and English text, dark mode, keyboard behavior and PWA update behavior.
+- **24/24** navegación, login, búsqueda, resultados, desarrollador y anchos 320/375/393/430 px.
+- **5/5** compra completa con tarjeta de prueba y ticket activo.
+- **5/5** idioma español y modo oscuro.
 
-All railway status and payment data are simulated. Do not use real banking data or a real personal password in the demo.
+Resultado agregado: **118/118**.
+
+Archivos:
+
+- `QA-RESULTS.json`
+- `QA-BROWSER.json`
+- `QA-PURCHASE.json`
+- `QA-PREFERENCES.json`
+
+## Tarjeta de prueba
+
+```text
+4242 4242 4242 4242
+12/30
+123
+```
+
+No uses datos reales.
+
+## Revisión manual recomendada en Safari
+
+1. Instalación desde pantalla de inicio.
+2. Safe areas y teclado del iPhone.
+3. Persistencia después de cerrar la PWA.
+4. Actualización desde una versión anterior.
+5. Modo offline con un ticket guardado.
+6. Desenfoque y materiales en modo claro/oscuro.
